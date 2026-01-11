@@ -1,0 +1,6 @@
+[
+  { "slug": "react", "name": "React", "color": "sky" },
+  { "slug": "ts", "name": "TypeScript", "color": "blue" },
+  { "slug": "js", "name": "JavaScript", "color": "yellow" },
+  { "slug": "nodejs", "name": "Node.js", "color": "green" }
+]
