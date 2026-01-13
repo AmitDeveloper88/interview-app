@@ -2,5 +2,9 @@
   { "slug": "react", "name": "React", "color": "sky" },
   { "slug": "ts", "name": "TypeScript", "color": "blue" },
   { "slug": "js", "name": "JavaScript", "color": "yellow" },
-  { "slug": "nodejs", "name": "Node.js", "color": "green" }
+  { "slug": "nodejs", "name": "Node.js", "color": "green" },
+  { "slug": "express", "name": "Express.js", "color": "orange" },
+  { "slug": "js-output", "name": "JS Output Q&A", "color": "purple" },
+  { "slug": "coding-round", "name": "Coding Round", "color": "rose" },
+  { "slug": "managerial", "name": "Managerial Round", "color": "indigo" }
 ]

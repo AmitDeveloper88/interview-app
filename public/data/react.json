@@ -1,0 +1,522 @@
+{
+  "slug": "react",
+  "questions": [
+    {
+      "id": "react-01",
+      "q": "What is React?",
+      "a": "React is a **JavaScript library for building user interfaces**, primarily maintained by Facebook (Meta). It follows a **component-based architecture** and uses a **Virtual DOM** to optimize rendering performance. It allows developers to create reusable UI components and manage the state of applications efficiently.",
+      "difficulty": "Easy",
+      "tags": [
+        "basics",
+        "intro"
+      ]
+    },
+    {
+      "id": "react-02",
+      "q": "What is the Virtual DOM?",
+      "a": "The Virtual DOM is a lightweight copy of the real DOM in memory. When state changes, React updates the Virtual DOM first, compares it with the previous version (a process called **diffing**), and then efficiently updates only the changed elements in the real DOM (a process called **reconciliation**). This minimizes expensive direct DOM manipulations.",
+      "difficulty": "Medium",
+      "tags": [
+        "virtual-dom",
+        "architecture"
+      ]
+    },
+    {
+      "id": "react-03",
+      "q": "What is JSX?",
+      "a": "JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like markup within JavaScript code. React compiles JSX into `React.createElement()` calls, which eventually become JavaScript objects describing the UI.",
+      "difficulty": "Easy",
+      "tags": [
+        "jsx",
+        "syntax"
+      ]
+    },
+    {
+      "id": "react-04",
+      "q": "What is the difference between Element and Component?",
+      "a": "**Element**: An immutable object describing what you want to see on the screen (e.g., `<div />`). It is a plain object.\n**Component**: A function or class that accepts inputs (props) and returns a React element. Components are the building blocks of a React application.",
+      "difficulty": "Easy",
+      "tags": [
+        "basics",
+        "components"
+      ]
+    },
+    {
+      "id": "react-05",
+      "q": "What are Props?",
+      "a": "**Props** (short for properties) are read-only inputs passed from a parent component to a child component. They make components reusable and dynamic. Props are immutable within the receiving component.",
+      "difficulty": "Easy",
+      "tags": [
+        "props",
+        "basics"
+      ]
+    },
+    {
+      "id": "react-06",
+      "q": "What is State in React?",
+      "a": "**State** is a built-in object that a component uses to store data that may change over time. Unlike props, state is managed **internally** by the component. When state changes, the component re-renders.",
+      "difficulty": "Easy",
+      "tags": [
+        "state",
+        "basics"
+      ]
+    },
+    {
+      "id": "react-07",
+      "q": "What are React Hooks?",
+      "a": "Hooks are functions introduced in React 16.8 that allow you to use **state** and other React features (like lifecycle methods) in **functional components** without writing a class. Common hooks include `useState`, `useEffect`, and `useContext`.",
+      "difficulty": "Easy",
+      "tags": [
+        "hooks",
+        "intro"
+      ]
+    },
+    {
+      "id": "react-08",
+      "q": "Explain the `useState` hook.",
+      "a": "`useState` is a hook that lets you add React state to function components.\n\n```javascript\nconst [count, setCount] = useState(0);\n```\nIt returns an array with two values: the current state and a function to update it. The argument passed to `useState` is the initial state.",
+      "difficulty": "Easy",
+      "tags": [
+        "hooks",
+        "useState"
+      ]
+    },
+    {
+      "id": "react-09",
+      "q": "Explain the `useEffect` hook.",
+      "a": "`useEffect` lets you perform **side effects** in function components (e.g., data fetching, subscriptions, DOM manipulation). It combines the functionality of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`.\n\n```javascript\nuseEffect(() => {\n  // Effect code\n  return () => { /* Cleanup code */ };\n}, [dependencies]);\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "useEffect"
+      ]
+    },
+    {
+      "id": "react-10",
+      "q": "What is the dependency array in `useEffect`?",
+      "a": "The second argument to `useEffect` is an array of dependencies. \n- If **omitted**: The effect runs after **every** render.\n- If **empty (`[]`)**: The effect runs only **once** (on mount).\n- If **values provided (`[prop, state]`)**: The effect runs when any of those values change.",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "useEffect"
+      ]
+    },
+    {
+      "id": "react-11",
+      "q": "What is `useContext`?",
+      "a": "`useContext` is a hook that allows you to access the value of a Context directly in a functional component without wrapping it in a `Context.Consumer`.\n\n```javascript\nconst theme = useContext(ThemeContext);\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "context"
+      ]
+    },
+    {
+      "id": "react-12",
+      "q": "What is Prop Drilling and how to avoid it?",
+      "a": "**Prop Drilling** occurs when you pass data through multiple layers of components just to reach a deeply nested component.\n\n**Solutions**:\n1.  **Context API**: Share data globally.\n2.  **State Management Libraries**: Redux, Zustand, Recoil.\n3.  **Component Composition**: Passing components as props (slots pattern).",
+      "difficulty": "Medium",
+      "tags": [
+        "architecture",
+        "patterns"
+      ]
+    },
+    {
+      "id": "react-13",
+      "q": "Difference between Class and Functional Components?",
+      "a": "- **Class Components**: ES6 classes, manage state via `this.state`, use lifecycle methods (`componentDidMount`), more verbose.\n- **Functional Components**: JS functions, manage state via Hooks (`useState`), use `useEffect` for lifecycle, cleaner and more concise. Modern React recommends functional components.",
+      "difficulty": "Easy",
+      "tags": [
+        "components",
+        "comparison"
+      ]
+    },
+    {
+      "id": "react-14",
+      "q": "What are Lifecycle Methods in Class Components?",
+      "a": "Key lifecycle methods include:\n1.  `componentDidMount`: Called after the component is rendered (good for API calls).\n2.  `componentDidUpdate`: Called after state/props change.\n3.  `componentWillUnmount`: Called before the component is removed (good for cleanup).",
+      "difficulty": "Medium",
+      "tags": [
+        "class-components",
+        "lifecycle"
+      ]
+    },
+    {
+      "id": "react-15",
+      "q": "What is the `key` prop and why is it important?",
+      "a": "The `key` prop is a special string attribute you need to include when creating lists of elements. Keys help React identify which items have changed, are added, or are removed. This is crucial for efficient reconciliation and preventing UI bugs with stateful list items.",
+      "difficulty": "Medium",
+      "tags": [
+        "lists",
+        "performance"
+      ]
+    },
+    {
+      "id": "react-16",
+      "q": "What is `useRef`?",
+      "a": "`useRef` returns a mutable ref object whose `.current` property is initialized to the passed argument. It persists for the full lifetime of the component. \n\nUses:\n1.  Accessing DOM elements directly.\n2.  Storing mutable values that **do not cause re-renders** when updated.",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "useRef"
+      ]
+    },
+    {
+      "id": "react-17",
+      "q": "What is `useMemo`?",
+      "a": "`useMemo` is a hook that **memoizes a computed value**. It only re-computes the value when one of its dependencies changes. This helps avoid expensive calculations on every render.\n\n```javascript\nconst memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "performance"
+      ]
+    },
+    {
+      "id": "react-18",
+      "q": "What is `useCallback`?",
+      "a": "`useCallback` is a hook that **memoizes a callback function**. It returns a memoized version of the callback that only changes if one of the dependencies has changed. Useful for passing callbacks to optimized child components (like those using `React.memo`) to prevent unnecessary re-renders.",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "performance"
+      ]
+    },
+    {
+      "id": "react-19",
+      "q": "Difference between `useMemo` and `useCallback`?",
+      "a": "- `useMemo` returns a **memoized value** (result of a function).\n- `useCallback` returns a **memoized function** itself.\n\n`useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "comparison"
+      ]
+    },
+    {
+      "id": "react-20",
+      "q": "What is React.memo?",
+      "a": "`React.memo` is a **Higher-Order Component (HOC)** for functional components. It prevents a component from re-rendering if its props strictly match the previous props. It performs a shallow comparison of props.",
+      "difficulty": "Medium",
+      "tags": [
+        "performance",
+        "hoc"
+      ]
+    },
+    {
+      "id": "react-21",
+      "q": "What are Higher-Order Components (HOC)?",
+      "a": "A Higher-Order Component is a function that takes a component and returns a new component. It is a pattern for reusing component logic (e.g., authentication, logging).\n\n```javascript\nconst EnhancedComponent = withAuth(WrappedComponent);\n```",
+      "difficulty": "Hard",
+      "tags": [
+        "patterns",
+        "hoc"
+      ]
+    },
+    {
+      "id": "react-22",
+      "q": "What are Render Props?",
+      "a": "Render Props is a technique for sharing code between components using a prop whose value is a function. This function returns a React element.\n\n```javascript\n<DataProvider render={data => <h1>{data.title}</h1>} />\n```",
+      "difficulty": "Hard",
+      "tags": [
+        "patterns",
+        "render-props"
+      ]
+    },
+    {
+      "id": "react-23",
+      "q": "What is Context API?",
+      "a": "The Context API provides a way to pass data through the component tree without having to pass props down manually at every level. It consists of `React.createContext`, `Provider`, and `Consumer` (or `useContext`).",
+      "difficulty": "Medium",
+      "tags": [
+        "context",
+        "state-management"
+      ]
+    },
+    {
+      "id": "react-24",
+      "q": "What is `useReducer`?",
+      "a": "`useReducer` is a hook for state management, similar to Redux reducer pattern. It is preferable to `useState` when you have complex state logic involving multiple sub-values or when the next state depends on the previous one.\n\n```javascript\nconst [state, dispatch] = useReducer(reducer, initialState);\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "state-management"
+      ]
+    },
+    {
+      "id": "react-25",
+      "q": "What are Portals in React?",
+      "a": "Portals provide a way to render children into a DOM node that exists **outside** the DOM hierarchy of the parent component. Common use cases are modals, tooltips, and popups.\n\n```javascript\nReactDOM.createPortal(child, container)\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "advanced",
+        "portals"
+      ]
+    },
+    {
+      "id": "react-26",
+      "q": "What are Error Boundaries?",
+      "a": "Error Boundaries are **class components** that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. They use `componentDidCatch` or `getDerivedStateFromError`.",
+      "difficulty": "Medium",
+      "tags": [
+        "error-handling",
+        "advanced"
+      ]
+    },
+    {
+      "id": "react-27",
+      "q": "What is Controlled vs Uncontrolled Component?",
+      "a": "- **Controlled**: Form data is handled by a React component via state. The input value is set by `value` prop and updated via `onChange`.\n- **Uncontrolled**: Form data is handled by the DOM itself. Values are accessed using `ref`.",
+      "difficulty": "Medium",
+      "tags": [
+        "forms",
+        "components"
+      ]
+    },
+    {
+      "id": "react-28",
+      "q": "What is Code Splitting?",
+      "a": "Code splitting is a feature (supported by bundlers like Webpack) that allows you to split your code into various bundles which can then be loaded on demand (lazy loading). This improves initial load time. React supports this via `React.lazy` and `Suspense`.",
+      "difficulty": "Medium",
+      "tags": [
+        "performance",
+        "architecture"
+      ]
+    },
+    {
+      "id": "react-29",
+      "q": "What is `React.lazy` and `Suspense`?",
+      "a": "`React.lazy` lets you define a component that is loaded dynamically. `Suspense` lets you specify a loading indicator (like a spinner) in case some components in the tree are not yet ready to render.\n\n```javascript\nconst OtherComponent = React.lazy(() => import('./OtherComponent'));\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "performance",
+        "lazy-loading"
+      ]
+    },
+    {
+      "id": "react-30",
+      "q": "What is Strict Mode?",
+      "a": "`React.StrictMode` is a tool for highlighting potential problems in an application. It activates additional checks and warnings (like double-invoking effects in dev mode) for its descendants. It does not render any visible UI.",
+      "difficulty": "Easy",
+      "tags": [
+        "tooling",
+        "debugging"
+      ]
+    },
+    {
+      "id": "react-31",
+      "q": "What are Synthetic Events?",
+      "a": "React uses Synthetic Events, which are a cross-browser wrapper around the browser's native event system. This ensures that events behave consistently across different browsers.",
+      "difficulty": "Medium",
+      "tags": [
+        "events",
+        "internals"
+      ]
+    },
+    {
+      "id": "react-32",
+      "q": "What is the difference between `shadow DOM` and `Virtual DOM`?",
+      "a": "- **Virtual DOM**: A pattern used by React to optimize DOM updates by diffing JS objects.\n- **Shadow DOM**: A browser technology designed for scoping variables and CSS in Web Components. React generally doesn't use Shadow DOM by default.",
+      "difficulty": "Hard",
+      "tags": [
+        "comparison",
+        "concepts"
+      ]
+    },
+    {
+      "id": "react-33",
+      "q": "How to optimize React performance?",
+      "a": "1.  Use `React.memo` to prevent unnecessary re-renders.\n2.  Use `useMemo` and `useCallback` for expensive calculations/functions.\n3.  **Virtualize** long lists (e.g., `react-window`).\n4.  **Code Splitting** and Lazy Loading.\n5.  Avoid inline functions/objects as props if possible.\n6.  Optimize images and assets.",
+      "difficulty": "Hard",
+      "tags": [
+        "performance",
+        "best-practices"
+      ]
+    },
+    {
+      "id": "react-34",
+      "q": "What is Server-Side Rendering (SSR)?",
+      "a": "SSR is the process of rendering pages on the server and sending the fully rendered HTML to the client. This improves **SEO** and **First Contentful Paint (FCP)**. Next.js is a popular framework for React SSR.",
+      "difficulty": "Medium",
+      "tags": [
+        "ssr",
+        "architecture"
+      ]
+    },
+    {
+      "id": "react-35",
+      "q": "What is Static Site Generation (SSG)?",
+      "a": "SSG pre-renders pages at **build time**. The HTML is generated once and reused for each request. It is very fast and can be cached by CDNs. Next.js supports SSG via `getStaticProps`.",
+      "difficulty": "Medium",
+      "tags": [
+        "ssg",
+        "architecture"
+      ]
+    },
+    {
+      "id": "react-36",
+      "q": "What is Hydration?",
+      "a": "Hydration is the process where React attaches event listeners to the HTML markup that was rendered on the server (SSR). It makes the static HTML interactive.",
+      "difficulty": "Medium",
+      "tags": [
+        "ssr",
+        "concepts"
+      ]
+    },
+    {
+      "id": "react-37",
+      "q": "What are Custom Hooks?",
+      "a": "Custom Hooks are JavaScript functions whose names start with `use` and can call other Hooks. They allow you to extract and reuse stateful logic between components without changing component hierarchy.",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "patterns"
+      ]
+    },
+    {
+      "id": "react-38",
+      "q": "How does React handle forms?",
+      "a": "React handles forms primarily using **Controlled Components**, where the form state is the single source of truth. Updates happen via `onChange`, and the value is locked to the state. Uncontrolled components (using refs) are an alternative.",
+      "difficulty": "Easy",
+      "tags": [
+        "forms"
+      ]
+    },
+    {
+      "id": "react-39",
+      "q": "What is Flux Architecture?",
+      "a": "Flux is an application architecture for React that utilizes a **unidirectional data flow**. It consists of **Actions**, **Dispatcher**, **Store**, and **View**. Redux is a popular implementation of this pattern.",
+      "difficulty": "Hard",
+      "tags": [
+        "architecture",
+        "flux"
+      ]
+    },
+    {
+      "id": "react-40",
+      "q": "What is Redux?",
+      "a": "Redux is a predictable state container for JS apps. It stores the whole state of your app in an object tree inside a single **store**. The only way to change the state is to emit an **action**, which is processed by a **reducer** function.",
+      "difficulty": "Medium",
+      "tags": [
+        "redux",
+        "state-management"
+      ]
+    },
+    {
+      "id": "react-41",
+      "q": "What is Redux Middleware (e.g., Thunk, Saga)?",
+      "a": "Middleware extends Redux with custom functionality. \n- **Redux Thunk**: Allows you to write action creators that return a function instead of an action, enabling **async** logic.\n- **Redux Saga**: Uses generator functions to handle side effects.",
+      "difficulty": "Hard",
+      "tags": [
+        "redux",
+        "middleware"
+      ]
+    },
+    {
+      "id": "react-42",
+      "q": "What is `React.Fragment`?",
+      "a": "Fragments let you group a list of children without adding extra nodes to the DOM. \n\n```javascript\n<React.Fragment>\n  <ChildA />\n  <ChildB />\n</React.Fragment>\n```\nShort syntax: `<> ... </>`.",
+      "difficulty": "Easy",
+      "tags": [
+        "basics",
+        "syntax"
+      ]
+    },
+    {
+      "id": "react-43",
+      "q": "What is the purpose of `super(props)` in Class Components?",
+      "a": "In a class component's constructor, `super(props)` must be called to access `this.props`. If you don't pass `props` to `super`, `this.props` will be undefined in the constructor.",
+      "difficulty": "Easy",
+      "tags": [
+        "class-components"
+      ]
+    },
+    {
+      "id": "react-44",
+      "q": "What is the difference between `state` and `props`?",
+      "a": "- **Props** are passed from parent to child and are immutable (read-only) within the child.\n- **State** is managed within the component and can be changed (mutable) using `setState` or `useState`.",
+      "difficulty": "Easy",
+      "tags": [
+        "basics",
+        "comparison"
+      ]
+    },
+    {
+      "id": "react-45",
+      "q": "Can you force a component to re-render without changing state?",
+      "a": "Yes, in class components you can use `this.forceUpdate()`. However, this is generally discouraged as it bypasses the normal React flow. In functional components, you can simulate it by updating a dummy state variable.",
+      "difficulty": "Medium",
+      "tags": [
+        "advanced",
+        "rendering"
+      ]
+    },
+    {
+      "id": "react-46",
+      "q": "What are pure functions and how do they relate to React?",
+      "a": "A pure function always returns the same output for the same input and has no side effects. React reducers and functional components (conceptually) strive to be pure. React's `memo` optimizes components that behave like pure functions.",
+      "difficulty": "Medium",
+      "tags": [
+        "concepts",
+        "functional-programming"
+      ]
+    },
+    {
+      "id": "react-47",
+      "q": "What is the \"Rules of Hooks\"?",
+      "a": "1.  **Only call Hooks at the top level**: Don't call them inside loops, conditions, or nested functions.\n2.  **Only call Hooks from React function components** (or custom hooks).",
+      "difficulty": "Medium",
+      "tags": [
+        "hooks",
+        "rules"
+      ]
+    },
+    {
+      "id": "react-48",
+      "q": "How to handle errors in Functional Components?",
+      "a": "Functional components themselves cannot be Error Boundaries. You must wrap them in a Class Component Error Boundary or use a library like `react-error-boundary`.",
+      "difficulty": "Medium",
+      "tags": [
+        "error-handling"
+      ]
+    },
+    {
+      "id": "react-49",
+      "q": "What is the purpose of `displayName`?",
+      "a": "The `displayName` string is used in debugging messages. It's often inferred, but can be explicitly set for Higher-Order Components or Contexts to make them easier to identify in React DevTools.",
+      "difficulty": "Easy",
+      "tags": [
+        "debugging",
+        "tooling"
+      ]
+    },
+    {
+      "id": "react-50",
+      "q": "What is `ReactDOM.createRoot`?",
+      "a": "Introduced in React 18, `createRoot` is the new API to initialize a React app. It enables React 18's **Concurrent features** (like automatic batching and transitions).\n\n```javascript\nconst root = ReactDOM.createRoot(container);\nroot.render(<App />);\n```",
+      "difficulty": "Medium",
+      "tags": [
+        "react-18",
+        "api"
+      ]
+    },
+    {
+      "id": "react-51",
+      "q": "What is Automatic Batching in React 18?",
+      "a": "Automatic batching groups multiple state updates into a single re-render for better performance. In React 18, this works for promises, timeouts, and native event handlers, not just React events.",
+      "difficulty": "Medium",
+      "tags": [
+        "react-18",
+        "performance"
+      ]
+    },
+    {
+      "id": "react-52",
+      "q": "What are React Server Components (RSC)?",
+      "a": "RSCs are a new feature allowing components to render exclusively on the server. They have zero bundle size impact on the client and can access server resources (database, fs) directly. They differ from SSR which hydrates on the client.",
+      "difficulty": "Hard",
+      "tags": [
+        "advanced",
+        "server-components"
+      ]
+    }
+  ]
+}

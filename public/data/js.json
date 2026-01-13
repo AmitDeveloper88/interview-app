@@ -1,0 +1,362 @@
+{
+  "slug": "js",
+  "questions": [
+    {
+      "id": "js-01",
+      "q": "What are the different data types in JavaScript?",
+      "a": "JavaScript has **Primitive** and **Non-Primitive** (Reference) data types.\n\n### Primitive Types (Immutable)\n1.  **String**: Represents text (`'hello'`).\n2.  **Number**: Integers and floating-point numbers (`42`, `3.14`).\n3.  **BigInt**: Integers larger than `2^53 - 1`.\n4.  **Boolean**: `true` or `false`.\n5.  **Undefined**: A variable declared but not assigned a value.\n6.  **Null**: Represents an intentional absence of any object value.\n7.  **Symbol**: Unique and immutable identifiers (ES6).\n\n### Non-Primitive Types (Mutable)\n1.  **Object**: Key-value pairs (includes Arrays, Functions, Dates, etc.).\n\n```javascript\ntypeof null; // 'object' (known bug in JS)\ntypeof undefined; // 'undefined'\ntypeof []; // 'object'\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "types"]
+    },
+    {
+      "id": "js-02",
+      "q": "What is the difference between `var`, `let`, and `const`?",
+      "a": "### 1. Scope\n- **`var`**: Function-scoped. If declared outside a function, it is globally scoped.\n- **`let` & `const`**: Block-scoped (only accessible inside `{}`).\n\n### 2. Hoisting\n- **`var`**: Hoisted and initialized with `undefined`.\n- **`let` & `const`**: Hoisted but stay in the **Temporal Dead Zone (TDZ)** until the declaration line. Accessing them before declaration throws a `ReferenceError`.\n\n### 3. Re-declaration\n- **`var`**: Can be re-declared in the same scope.\n- **`let` & `const`**: Cannot be re-declared in the same scope.\n\n### 4. Re-assignment\n- **`var` & `let`**: Can be re-assigned.\n- **`const`**: Cannot be re-assigned. (Note: Object properties *can* still be mutated).",
+      "difficulty": "Easy",
+      "tags": ["basics", "variables", "es6"]
+    },
+    {
+      "id": "js-03",
+      "q": "What is Hoisting in JavaScript?",
+      "a": "**Hoisting** is the default behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase.\n\n### Function Hoisting\n- **Function Declarations** are fully hoisted. You can call them before they are defined.\n- **Function Expressions** (e.g., `var foo = function() {}`) are not hoisted; only the variable `foo` is hoisted (as `undefined`).\n\n### Variable Hoisting\n- `var` is hoisted as `undefined`.\n- `let` and `const` are hoisted but uninitialized (TDZ).\n\n```javascript\nconsole.log(a); // undefined\nvar a = 5;\n\nhello(); // Works!\nfunction hello() { console.log('Hi'); }\n```",
+      "difficulty": "Medium",
+      "tags": ["hoisting", "basics"]
+    },
+    {
+      "id": "js-04",
+      "q": "What is the Temporal Dead Zone (TDZ)?",
+      "a": "The **Temporal Dead Zone (TDZ)** is the period between the start of a scope and the actual declaration of a variable with `let` or `const`.\n\nTrying to access the variable during this phase throws a `ReferenceError`.\n\n```javascript\nconsole.log(x); // ReferenceError: Cannot access 'x' before initialization\nlet x = 10;\n```\nIt helps catch bugs where variables are used before they are properly initialized.",
+      "difficulty": "Medium",
+      "tags": ["hoisting", "scope", "es6"]
+    },
+    {
+      "id": "js-05",
+      "q": "Explain `==` vs `===`.",
+      "a": "- **`==` (Loose Equality)**: Performs **Type Coercion**. It converts values to a common type before comparing.\n  ```javascript\n  5 == '5' // true\n  null == undefined // true\n  ```\n- **`===` (Strict Equality)**: Checks both **Value** and **Type**. No conversion occurs.\n  ```javascript\n  5 === '5' // false\n  null === undefined // false\n  ```\n\n**Best Practice:** Always use `===` to prevent unexpected behavior.",
+      "difficulty": "Easy",
+      "tags": ["basics", "operators"]
+    },
+    {
+      "id": "js-06",
+      "q": "What are Closures? Give an example.",
+      "a": "A **Closure** is a function that remembers its **lexical scope** even when executed outside that scope. It allows an inner function to access variables from an outer function after the outer function has returned.\n\n### Example: Private Counter\n```javascript\nfunction createCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\nHere, the inner function maintains a reference to `count`.",
+      "difficulty": "Medium",
+      "tags": ["closures", "scope"]
+    },
+    {
+      "id": "js-07",
+      "q": "What is the difference between `null` and `undefined`?",
+      "a": "- **`undefined`**: A variable has been declared but **not assigned a value**. It is the default value of uninitialized variables.\n- **`null`**: An assignment value that represents **\"no value\"** or \"empty\". It is explicitly assigned by a developer.\n\n```javascript\nlet a;\nconsole.log(a); // undefined\n\nlet b = null;\nconsole.log(b); // null\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "types"]
+    },
+    {
+      "id": "js-08",
+      "q": "What is NaN? How do you check if a value is NaN?",
+      "a": "**NaN** stands for \"Not-a-Number\". It is a value of the Number type resulting from an invalid math operation (e.g., `\"abc\" / 2`).\n\n### Uniqueness\n`NaN` is the only value in JS that is **not equal to itself**.\n```javascript\nNaN === NaN // false\n```\n\n### How to Check\n1.  **`isNaN(value)`**: Converts value to number first. `isNaN(\"hello\")` is `true`.\n2.  **`Number.isNaN(value)`** (ES6): Strict check. Returns `true` only if the value is essentially `NaN`.\n\n```javascript\nNumber.isNaN(\"hello\"); // false\nNumber.isNaN(NaN); // true\n```",
+      "difficulty": "Medium",
+      "tags": ["basics", "types"]
+    },
+    {
+      "id": "js-09",
+      "q": "Explain Implicit Type Coercion with examples.",
+      "a": "Type coercion is the automatic conversion of values from one data type to another.\n\n### String Coercion\n```javascript\n'5' + 3 // '53' (Number becomes String)\n```\n\n### Number Coercion\n```javascript\n'5' - 3 // 2 (String becomes Number)\n'5' * 2 // 10\ntrue + 1 // 2 (true becomes 1)\n```\n\n### Boolean Coercion\nHappens in `if` statements or logic.\n- **Falsy values**: `0`, `\"\"`, `null`, `undefined`, `NaN`, `false`.\n- **Truthy values**: Everything else (including `[]`, `{}`).",
+      "difficulty": "Medium",
+      "tags": ["basics", "coercion"]
+    },
+    {
+      "id": "js-10",
+      "q": "What is an IIFE (Immediately Invoked Function Expression)?",
+      "a": "An **IIFE** is a function that runs as soon as it is defined.\n\n### Syntax\n```javascript\n(function() {\n  console.log('I run immediately!');\n})();\n```\n\n### Use Cases\n1.  **Avoid Global Pollution**: Variables inside IIFE are not accessible globally.\n2.  **Module Pattern**: Used to create private state before ES6 modules.",
+      "difficulty": "Medium",
+      "tags": ["functions", "patterns"]
+    },
+    {
+      "id": "js-11",
+      "q": "Explain the `this` keyword in JavaScript.",
+      "a": "The value of `this` depends on **how a function is called** (Execution Context).\n\n1.  **Global Context**: `window` (browser) or `global` (Node).\n2.  **Method Call**: `this` refers to the **object** the method belongs to.\n3.  **Constructor (`new`)**: `this` refers to the **newly created instance**.\n4.  **Event Handler**: `this` refers to the **element** that received the event.\n5.  **Arrow Function**: Inherits `this` from the **surrounding lexical scope** (it doesn't have its own `this`).\n6.  **Explicit Binding**: Using `.call()`, `.apply()`, or `.bind()`.",
+      "difficulty": "Hard",
+      "tags": ["this", "functions"]
+    },
+    {
+      "id": "js-12",
+      "q": "What are `call`, `apply`, and `bind`?",
+      "a": "They are methods to manually set the value of `this` for a function.\n\n### `call(thisArg, arg1, arg2)`\nInvokes the function immediately with a specified `this`.\n```javascript\ngreet.call(user, 'Hello');\n```\n\n### `apply(thisArg, [argsArray])`\nSame as `call`, but arguments are passed as an **array**.\n```javascript\ngreet.apply(user, ['Hello']);\n```\n\n### `bind(thisArg, arg1)`\n**Returns a new function** with `this` permanently bound. It does **not** execute immediately.\n```javascript\nconst boundGreet = greet.bind(user);\nboundGreet();\n```",
+      "difficulty": "Medium",
+      "tags": ["functions", "this"]
+    },
+    {
+      "id": "js-13",
+      "q": "What is the difference between Arrow Functions and Regular Functions?",
+      "a": "1.  **`this` Binding**: Arrow functions do not have their own `this`; they inherit it from the parent scope (Lexical `this`). Regular functions have dynamic `this`.\n2.  **Arguments Object**: Arrow functions do not have the `arguments` object.\n3.  **Constructor**: Arrow functions cannot be used as constructors (cannot use `new`).\n4.  **Syntax**: Arrow functions are concise.\n\n```javascript\nconst add = (a, b) => a + b;\n```",
+      "difficulty": "Medium",
+      "tags": ["es6", "functions"]
+    },
+    {
+      "id": "js-14",
+      "q": "What is Currying in JavaScript?",
+      "a": "**Currying** is the process of transforming a function that takes multiple arguments into a sequence of functions that each take a single argument.\n\n### Example\n```javascript\n// Normal\nfunction add(a, b) { return a + b; }\n\n// Curried\nfunction curriedAdd(a) {\n  return function(b) {\n    return a + b;\n  };\n}\n\n// Arrow syntax\nconst add = a => b => a + b;\n\nconsole.log(add(5)(3)); // 8\n```\nIt helps in function composition and creating specialized functions.",
+      "difficulty": "Hard",
+      "tags": ["functional-programming", "patterns"]
+    },
+    {
+      "id": "js-15",
+      "q": "What is a Higher-Order Function?",
+      "a": "A **Higher-Order Function** is a function that either:\n1.  Takes one or more functions as **arguments** (e.g., `map`, `filter`, `setTimeout`).\n2.  **Returns** a function.\n\n```javascript\n// Example: Map takes a function\n[1, 2, 3].map(num => num * 2);\n\n// Example: Returns a function\nfunction multiplier(factor) {\n  return num => num * factor;\n}\n```",
+      "difficulty": "Medium",
+      "tags": ["functions", "functional-programming"]
+    },
+    {
+      "id": "js-16",
+      "q": "Explain the Prototype Chain.",
+      "a": "Every JavaScript object has a property called `__proto__` (or `[[Prototype]]`) that points to another object. This chain ends at `null`.\n\nWhen you access a property on an object:\n1.  JS looks for it on the object itself.\n2.  If not found, it looks at the object's prototype.\n3.  It continues up the chain until found or `null` is reached.\n\nThis is how **Inheritance** works in JavaScript.",
+      "difficulty": "Hard",
+      "tags": ["prototypes", "inheritance"]
+    },
+    {
+      "id": "js-17",
+      "q": "What is the Event Loop?",
+      "a": "The **Event Loop** allows JavaScript (which is single-threaded) to handle asynchronous operations.\n\n### Mechanism\n1.  **Call Stack**: Executes synchronous code.\n2.  **Web APIs**: Handles async tasks (timers, network requests).\n3.  **Callback Queue (Task Queue)**: Holds callbacks (e.g., `setTimeout`).\n4.  **Microtask Queue**: Holds Promises. Has **higher priority** than the Callback Queue.\n\nThe Event Loop constantly checks: **\"Is the Call Stack empty?\"**. If yes, it pushes tasks from the Microtask Queue first, then the Callback Queue.",
+      "difficulty": "Hard",
+      "tags": ["async", "event-loop"]
+    },
+    {
+      "id": "js-18",
+      "q": "What is the difference between Microtasks and Macrotasks?",
+      "a": "- **Macrotasks (Task Queue)**: `setTimeout`, `setInterval`, `setImmediate`, I/O, UI rendering.\n- **Microtasks (Microtask Queue)**: `Promise.then`, `queueMicrotask`, `MutationObserver`.\n\n**Priority**: After every Macrotask (or script execution), the engine executes **all** Microtasks before moving to the next Macrotask. This means Promises resolve before `setTimeout`.",
+      "difficulty": "Hard",
+      "tags": ["async", "event-loop"]
+    },
+    {
+      "id": "js-19",
+      "q": "What are Promises? What are the states of a Promise?",
+      "a": "A **Promise** is an object representing the eventual completion (or failure) of an asynchronous operation.\n\n### States\n1.  **Pending**: Initial state, neither fulfilled nor rejected.\n2.  **Fulfilled (Resolved)**: Operation completed successfully.\n3.  **Rejected**: Operation failed.\n\n```javascript\nconst p = new Promise((resolve, reject) => {\n  if (success) resolve('Value');\n  else reject('Error');\n});\n```",
+      "difficulty": "Medium",
+      "tags": ["async", "promises"]
+    },
+    {
+      "id": "js-20",
+      "q": "Explain `Promise.all` vs `Promise.race` vs `Promise.allSettled` vs `Promise.any`.",
+      "a": "- **`Promise.all(iterable)`**: Waits for **all** promises to resolve. Fails immediately if **any** promise rejects.\n- **`Promise.race(iterable)`**: Returns the result of the **first** promise that settles (resolves OR rejects).\n- **`Promise.allSettled(iterable)`**: Waits for **all** promises to finish, regardless of success or failure. Returns an array of objects with status (`fulfilled`/`rejected`).\n- **`Promise.any(iterable)`**: Waits for the **first** promise to fulfill (resolve). It ignores rejections unless **all** promises reject (throws `AggregateError`).",
+      "difficulty": "Hard",
+      "tags": ["async", "promises"]
+    },
+    {
+      "id": "js-21",
+      "q": "What is `async/await`?",
+      "a": "**Syntactic sugar** over Promises making async code look synchronous.\n- **`async`**: Ensures the function returns a Promise.\n- **`await`**: Pauses execution until the Promise resolves.\n\n```javascript\nasync function getData() {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n  } catch (error) {\n    console.log(error);\n  }\n}\n```",
+      "difficulty": "Medium",
+      "tags": ["async", "es6"]
+    },
+    {
+      "id": "js-22",
+      "q": "What is Callback Hell? How to fix it?",
+      "a": "**Callback Hell** is deeply nested callbacks that make code hard to read and debug (Pyramid of Doom).\n\n```javascript\ndoA(function() {\n  doB(function() {\n    doC(function() {\n      // ...\n    });\n  });\n});\n```\n\n### Solution\n1.  **Promises**: Chain `.then()` calls.\n2.  **Async/Await**: Write sequential-looking code.",
+      "difficulty": "Medium",
+      "tags": ["async", "patterns"]
+    },
+    {
+      "id": "js-23",
+      "q": "What is Event Bubbling and Capturing?",
+      "a": "These describe how events propagate through the DOM.\n\n1.  **Capturing Phase** (Trickling): Event goes down from `window` -> `document` -> target element.\n2.  **Target Phase**: Event reaches the target.\n3.  **Bubbling Phase**: Event bubbles up from target -> `document` -> `window`.\n\nBy default, event listeners trigger in the **Bubbling** phase.\nTo use Capturing: `elem.addEventListener(type, handler, true)`.",
+      "difficulty": "Medium",
+      "tags": ["dom", "events"]
+    },
+    {
+      "id": "js-24",
+      "q": "What is Event Delegation?",
+      "a": "**Event Delegation** is a technique of adding a single event listener to a parent element instead of adding listeners to multiple child elements. It works because of **Event Bubbling**.\n\n```javascript\n// Instead of adding click to every <li>\ndocument.querySelector('ul').addEventListener('click', function(e) {\n  if (e.target.tagName === 'LI') {\n    console.log('List item clicked');\n  }\n});\n```\n**Benefits**: Less memory usage, handles dynamic elements added later.",
+      "difficulty": "Medium",
+      "tags": ["dom", "events", "performance"]
+    },
+    {
+      "id": "js-25",
+      "q": "How to prevent default behavior and stop propagation?",
+      "a": "- **`event.preventDefault()`**: Stops the browser's default action (e.g., prevents form submission or link navigation).\n- **`event.stopPropagation()`**: Stops the event from bubbling up the DOM tree.",
+      "difficulty": "Easy",
+      "tags": ["dom", "events"]
+    },
+    {
+      "id": "js-26",
+      "q": "What is Debouncing?",
+      "a": "**Debouncing** limits the rate at which a function is executed. It ensures that the function is called only after a certain period of inactivity.\n\n### Use Case\nSearch bar input. Wait for the user to stop typing for 300ms before making an API call.\n\n```javascript\nfunction debounce(func, delay) {\n  let timer;\n  return function(...args) {\n    clearTimeout(timer);\n    timer = setTimeout(() => func.apply(this, args), delay);\n  };\n}\n```",
+      "difficulty": "Hard",
+      "tags": ["performance", "patterns"]
+    },
+    {
+      "id": "js-27",
+      "q": "What is Throttling?",
+      "a": "**Throttling** ensures that a function is called at most once in a specified time period.\n\n### Use Case\nWindow resize or scroll events. Update layout only once every 100ms.\n\n```javascript\nfunction throttle(func, limit) {\n  let inThrottle;\n  return function(...args) {\n    if (!inThrottle) {\n      func.apply(this, args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n}\n```",
+      "difficulty": "Hard",
+      "tags": ["performance", "patterns"]
+    },
+    {
+      "id": "js-28",
+      "q": "Difference between `map`, `forEach`, `filter`, and `reduce`.",
+      "a": "- **`forEach`**: Iterates over array. Returns `undefined`. Used for side effects.\n- **`map`**: Creates a **new array** by applying a function to each element.\n- **`filter`**: Creates a **new array** with elements that pass the test.\n- **`reduce`**: Reduces the array to a **single value** (accumulator).\n\n```javascript\nconst sum = [1, 2, 3].reduce((acc, curr) => acc + curr, 0);\n```",
+      "difficulty": "Medium",
+      "tags": ["arrays", "basics"]
+    },
+    {
+      "id": "js-29",
+      "q": "What is Destructuring Assignment?",
+      "a": "A syntax to unpack values from arrays or properties from objects into distinct variables.\n\n### Object Destructuring\n```javascript\nconst { name, age } = user;\n```\n\n### Array Destructuring\n```javascript\nconst [first, second] = numbers;\n```",
+      "difficulty": "Easy",
+      "tags": ["es6", "syntax"]
+    },
+    {
+      "id": "js-30",
+      "q": "What is the Spread Operator and Rest Parameter?",
+      "a": "Both use `...` syntax but for opposite purposes.\n\n### Spread (Unpacks)\nExpands an array/object into individual elements.\n```javascript\nconst arr = [...oldArr, 4, 5];\nconst obj = { ...oldObj, newProp: 1 };\n```\n\n### Rest (Packs)\nCollects multiple elements into an array. Used in function arguments.\n```javascript\nfunction sum(...numbers) {\n  return numbers.reduce((a, b) => a + b);\n}\n```",
+      "difficulty": "Easy",
+      "tags": ["es6", "syntax"]
+    },
+    {
+      "id": "js-31",
+      "q": "What is a Generator Function?",
+      "a": "A function that can be **paused** and **resumed**.\n\n### Syntax\nMarked with `function*`. Uses `yield` to pause.\n\n```javascript\nfunction* simpleGenerator() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst gen = simpleGenerator();\nconsole.log(gen.next()); // { value: 1, done: false }\nconsole.log(gen.next()); // { value: 2, done: false }\nconsole.log(gen.next()); // { value: 3, done: true }\n```",
+      "difficulty": "Hard",
+      "tags": ["es6", "generators"]
+    },
+    {
+      "id": "js-32",
+      "q": "What are Map and Set objects?",
+      "a": "- **`Map`**: A collection of keyed data items, similar to an Object. **Key differences**: Keys can be any type (objects, functions), maintains insertion order, has `.size` property.\n- **`Set`**: A collection of **unique** values. No duplicates allowed.\n\n```javascript\nconst unique = [...new Set([1, 2, 2, 3])]; // [1, 2, 3]\n```",
+      "difficulty": "Medium",
+      "tags": ["es6", "data-structures"]
+    },
+    {
+      "id": "js-33",
+      "q": "What is a WeakMap and WeakSet?",
+      "a": "Similar to Map/Set but keys (in WeakMap) or values (in WeakSet) must be **Objects** and are held **weakly**.\n\n### Significance\nIf there are no other references to the object, it can be **garbage collected**. Useful for caching or storing metadata without memory leaks. They are not iterable.",
+      "difficulty": "Hard",
+      "tags": ["es6", "memory"]
+    },
+    {
+      "id": "js-34",
+      "q": "Explain `localStorage` vs `sessionStorage` vs `cookies`.",
+      "a": "1.  **`localStorage`**: Stores data with **no expiration**. Persists even after browser restart. (Capacity: ~5-10MB).\n2.  **`sessionStorage`**: Stores data for **one session**. Data is lost when the tab is closed.\n3.  **Cookies**: Mainly for server-side reading (sent with requests). Small capacity (4KB). Can set expiration.",
+      "difficulty": "Medium",
+      "tags": ["storage", "web-api"]
+    },
+    {
+      "id": "js-35",
+      "q": "What is Strict Mode (`'use strict'`)?",
+      "a": "Enforces stricter parsing and error handling in JavaScript code.\n\n### Effects\n1.  Prevents using undeclared variables.\n2.  Disallows deleting variables/functions.\n3.  `this` in global scope becomes `undefined` instead of `window`.\n4.  Disallows duplicate parameter names.\n\n```javascript\n'use strict';\nx = 3.14; // ReferenceError\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "syntax"]
+    },
+    {
+      "id": "js-36",
+      "q": "What is Memoization?",
+      "a": "**Memoization** is an optimization technique to speed up function calls by **caching** results of expensive function calls and returning the cached result when the same inputs occur again.\n\n```javascript\nconst memoizedAdd = () => {\n  let cache = {};\n  return (n) => {\n    if (n in cache) return cache[n];\n    else {\n      let result = n + 10;\n      cache[n] = result;\n      return result;\n    }\n  }\n};\n```",
+      "difficulty": "Hard",
+      "tags": ["performance", "optimization"]
+    },
+    {
+      "id": "js-37",
+      "q": "What is the `typeof` operator? Any quirks?",
+      "a": "Returns a string indicating the type of the operand.\n\n```javascript\ntypeof \"text\" // \"string\"\ntypeof 42 // \"number\"\ntypeof true // \"boolean\"\ntypeof undefined // \"undefined\"\n```\n\n### Quirks\n```javascript\ntypeof null // \"object\" (Historical bug)\ntypeof [] // \"object\"\ntypeof NaN // \"number\"\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "types"]
+    },
+    {
+      "id": "js-38",
+      "q": "How to check if an object is an Array?",
+      "a": "Using `typeof` returns `'object'` for arrays, which is not helpful.\n\n### Solution\nUse **`Array.isArray(value)`**.\n\n```javascript\nArray.isArray([1, 2, 3]); // true\nArray.isArray({}); // false\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "basics"]
+    },
+    {
+      "id": "js-39",
+      "q": "What is the difference between shallow copy and deep copy?",
+      "a": "- **Shallow Copy**: Copies only the first level. Nested objects are referenced.\n  ```javascript\n  const copy = { ...original }; // Shallow\n  const copy2 = Object.assign({}, original); // Shallow\n  ```\n- **Deep Copy**: Copies all levels recursively. Independent of the original.\n  ```javascript\n  const deep = JSON.parse(JSON.stringify(original)); // Simple Deep Copy\n  // Or use structuredClone() (modern) or Lodash _.cloneDeep\n  ```",
+      "difficulty": "Medium",
+      "tags": ["objects", "memory"]
+    },
+    {
+      "id": "js-40",
+      "q": "What is `Object.freeze` vs `Object.seal`?",
+      "a": "- **`Object.freeze(obj)`**: Makes object **immutable**. Cannot add, delete, or modify properties.\n- **`Object.seal(obj)`**: Cannot add or delete properties, but **can modify existing** properties.\n\nNote: Both are shallow.",
+      "difficulty": "Medium",
+      "tags": ["objects", "security"]
+    },
+    {
+      "id": "js-41",
+      "q": "What are Template Literals?",
+      "a": "String literals allowing embedded expressions. Enclosed by backticks (`` ` ``).\n\nFeatures:\n1.  Multi-line strings.\n2.  String Interpolation `${variable}`.\n\n```javascript\nconst name = 'World';\nconsole.log(`Hello, ${name}!`);\n```",
+      "difficulty": "Easy",
+      "tags": ["es6", "syntax"]
+    },
+    {
+      "id": "js-42",
+      "q": "What is the Optional Chaining Operator (`?.`)?",
+      "a": "Allows reading the value of a property located deep within a chain of connected objects without validation each reference.\n\n```javascript\nconst street = user?.address?.street;\n```\nIf `user` or `address` is null/undefined, it returns `undefined` instead of throwing an error.",
+      "difficulty": "Easy",
+      "tags": ["es6", "syntax"]
+    },
+    {
+      "id": "js-43",
+      "q": "What is the Nullish Coalescing Operator (`??`)?",
+      "a": "A logical operator that returns the right-hand side operand only when the left-hand side is **`null`** or **`undefined`**.\n\n### Difference from `||`\n`||` checks for **Falsy** values (0, '', false).\n\n```javascript\nconst count = 0;\nconsole.log(count || 10); // 10 (0 is falsy)\nconsole.log(count ?? 10); // 0 (0 is not null/undefined)\n```",
+      "difficulty": "Medium",
+      "tags": ["es6", "operators"]
+    },
+    {
+      "id": "js-44",
+      "q": "What are Modules in JavaScript (ES6)?",
+      "a": "A way to split code into separate files. Variables are local to the module unless exported.\n\n- **`export`**: Named export or default export.\n- **`import`**: Bring exported values into another file.\n\n```javascript\n// math.js\nexport const add = (a, b) => a + b;\n\n// main.js\nimport { add } from './math.js';\n```",
+      "difficulty": "Easy",
+      "tags": ["es6", "modules"]
+    },
+    {
+      "id": "js-45",
+      "q": "What is the DOM?",
+      "a": "The **Document Object Model (DOM)** is a programming interface for HTML and XML documents. It represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects.",
+      "difficulty": "Easy",
+      "tags": ["dom", "basics"]
+    },
+    {
+      "id": "js-46",
+      "q": "How does Garbage Collection work in JavaScript?",
+      "a": "JavaScript automatically manages memory. The engine's Garbage Collector runs in the background.\n\n### Mark-and-Sweep Algorithm\n1.  **Roots**: Global variables.\n2.  **Mark**: The GC traverses from roots to find all reachable objects.\n3.  **Sweep**: Any object not marked (unreachable) is removed from memory.",
+      "difficulty": "Hard",
+      "tags": ["memory", "engine"]
+    },
+    {
+      "id": "js-47",
+      "q": "What is a Proxy object?",
+      "a": "A **Proxy** wraps an object and allows you to intercept and redefine fundamental operations (like getting, setting, defining properties).\n\n```javascript\nconst handler = {\n  get: function(obj, prop) {\n    return prop in obj ? obj[prop] : 'Not Found';\n  }\n};\nconst p = new Proxy({}, handler);\np.a = 1;\nconsole.log(p.a); // 1\nconsole.log(p.b); // Not Found\n```",
+      "difficulty": "Hard",
+      "tags": ["es6", "metaprogramming"]
+    },
+    {
+      "id": "js-48",
+      "q": "What is `JSON.stringify` and `JSON.parse`?",
+      "a": "- **`JSON.stringify(obj)`**: Converts a JavaScript object into a JSON string.\n- **`JSON.parse(string)`**: Parses a JSON string back into a JavaScript object.\n\nNote: Functions and `undefined` are lost during stringification.",
+      "difficulty": "Easy",
+      "tags": ["json", "basics"]
+    },
+    {
+      "id": "js-49",
+      "q": "What is the difference between Function Declaration and Function Expression?",
+      "a": "- **Declaration**: `function foo() {}`. Hoisted completely.\n- **Expression**: `const foo = function() {}`. Only variable declaration is hoisted (if var), or TDZ (if const/let). Not callable before definition.",
+      "difficulty": "Easy",
+      "tags": ["functions", "basics"]
+    },
+    {
+      "id": "js-50",
+      "q": "What are Constructor Functions?",
+      "a": "Regular functions used to create objects. Conventionally capitalized. Used with `new` keyword.\n\n```javascript\nfunction Person(name) {\n  this.name = name;\n}\nconst p = new Person('John');\n```\nES6 **Classes** are primarily syntactic sugar over this pattern.",
+      "difficulty": "Medium",
+      "tags": ["objects", "oop"]
+    },
+    {
+      "id": "js-51",
+      "q": "What is `globalThis`?",
+      "a": "A standard way to access the global object across different environments.\n- Browser: `window`\n- Node.js: `global`\n- Web Worker: `self`\n\n`globalThis` works in all of them.",
+      "difficulty": "Easy",
+      "tags": ["es2020", "basics"]
+    }
+  ]
+}

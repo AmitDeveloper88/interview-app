@@ -1,0 +1,425 @@
+{
+  "slug": "express",
+  "questions": [
+    {
+      "id": "exp-01",
+      "q": "What is Express.js?",
+      "a": "**Express.js** is a fast, unopinionated, minimalist web framework for **Node.js**. It provides a robust set of features for web and mobile applications, making it easier to build APIs and handle HTTP requests without the boilerplate of raw Node.js `http` module.",
+      "difficulty": "Easy",
+      "tags": ["basics", "intro"]
+    },
+    {
+      "id": "exp-02",
+      "q": "Why is Express.js used?",
+      "a": "Express is used to simplify server-side development in Node.js by providing:\n1.  **Routing**: Easy handling of different URL paths and HTTP methods.\n2.  **Middleware**: Modular handling of requests (parsing, logging, auth).\n3.  **Template Engines**: Rendering dynamic HTML pages (Pug, EJS).\n4.  **Static Files**: Serving images, CSS, JS files easily.\n5.  **Performance**: Thin layer on top of Node.js.",
+      "difficulty": "Easy",
+      "tags": ["basics", "benefits"]
+    },
+    {
+      "id": "exp-03",
+      "q": "What is the difference between Node.js and Express.js?",
+      "a": "- **Node.js**: A runtime environment that allows you to execute JavaScript on the server side using the V8 engine. It provides core modules like `http`, `fs`, etc.\n- **Express.js**: A framework **built on top of Node.js**. It abstracts the complexity of the raw `http` module and adds structure (routing, middleware) for building web apps.",
+      "difficulty": "Easy",
+      "tags": ["basics", "nodejs"]
+    },
+    {
+      "id": "exp-04",
+      "q": "What are the core features of Express.js?",
+      "a": "1.  **Routing**: Map URLs to server-side logic.\n2.  **Middleware**: Intercept and process requests.\n3.  **Templating**: Support for view engines like EJS, Pug.\n4.  **Debugging**: Easy debugging mechanism.\n5.  **Database Integration**: Connects easily with MongoDB, MySQL, Postgres, etc.",
+      "difficulty": "Easy",
+      "tags": ["basics", "features"]
+    },
+    {
+      "id": "exp-05",
+      "q": "How do you create an Express application?",
+      "a": "First, install it via npm:\n`npm install express`\n\nThen create a simple app:\n```javascript\nconst express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('Hello World');\n});\n\napp.listen(3000, () => console.log('Server running on port 3000'));\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "setup"]
+    },
+    {
+      "id": "exp-06",
+      "q": "What does `app.listen()` do?",
+      "a": "`app.listen()` binds and listens for connections on the specified host and port. It is identical to Node's `http.Server.listen()`.\n\n```javascript\napp.listen(3000, () => {\n  console.log('Server is ready!');\n});\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "server"]
+    },
+    {
+      "id": "exp-07",
+      "q": "What are `req` and `res` objects?",
+      "a": "- **`req` (Request)**: Represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, etc.\n- **`res` (Response)**: Represents the HTTP response that an Express app sends when it gets an HTTP request. It has methods like `.send()`, `.json()`, `.status()`.",
+      "difficulty": "Easy",
+      "tags": ["basics", "http"]
+    },
+    {
+      "id": "exp-08",
+      "q": "How do you handle GET and POST requests in Express?",
+      "a": "Using `app.get()` and `app.post()` methods:\n\n```javascript\n// GET Request\napp.get('/users', (req, res) => {\n  res.send('Get all users');\n});\n\n// POST Request\napp.post('/users', (req, res) => {\n  // Access data from req.body\n  res.send('Create a user');\n});\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "routing"]
+    },
+    {
+      "id": "exp-09",
+      "q": "What is the difference between `res.send()`, `res.json()`, and `res.end()`?",
+      "a": "- **`res.send(body)`**: Generic response. Automatically sets `Content-Type` based on body type (HTML, String, Array).\n- **`res.json(body)`**: Sends a JSON response. Converts objects/arrays to JSON and sets `Content-Type: application/json`.\n- **`res.end()`**: Quickly ends the response without any data. Used if you don't need to send data back.",
+      "difficulty": "Easy",
+      "tags": ["basics", "response"]
+    },
+    {
+      "id": "exp-10",
+      "q": "How do you define routes in Express?",
+      "a": "Routes are defined using methods of the Express `app` object that correspond to HTTP methods.\n\n```javascript\napp.METHOD(PATH, HANDLER)\n```\nExample:\n```javascript\napp.get('/', (req, res) => res.send('Home'));\napp.post('/login', (req, res) => res.send('Login'));\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "routing"]
+    },
+    {
+      "id": "exp-11",
+      "q": "What are route parameters?",
+      "a": "Route parameters are named URL segments used to capture values specified at their position in the URL. They are available in `req.params`.\n\n```javascript\napp.get('/users/:id', (req, res) => {\n  console.log(req.params.id);\n  res.send(`User ID: ${req.params.id}`);\n});\n// Request: /users/42 -> Output: User ID: 42\n```",
+      "difficulty": "Easy",
+      "tags": ["routing", "params"]
+    },
+    {
+      "id": "exp-12",
+      "q": "How do you access query parameters?",
+      "a": "Query parameters (after `?` in URL) are accessible via `req.query`.\n\n```javascript\n// Request: /search?term=express&sort=asc\napp.get('/search', (req, res) => {\n  const { term, sort } = req.query;\n  res.send(`Searching for ${term} sorted by ${sort}`);\n});\n```",
+      "difficulty": "Easy",
+      "tags": ["routing", "query"]
+    },
+    {
+      "id": "exp-13",
+      "q": "Difference between `req.params` and `req.query`?",
+      "a": "- **`req.params`**: Contains properties mapped to the named route \"parameters\". Used for identifying specific resources (e.g., `/users/123`).\n- **`req.query`**: Contains properties for each query string parameter in the route. Used for filtering, sorting, or pagination (e.g., `/users?sort=desc`).",
+      "difficulty": "Easy",
+      "tags": ["routing", "comparison"]
+    },
+    {
+      "id": "exp-14",
+      "q": "How do you serve static files in Express?",
+      "a": "Use the built-in middleware function `express.static`.\n\n```javascript\napp.use(express.static('public'));\n```\nNow, files in the `public` directory (like images, CSS) are accessible directly via URL (e.g., `http://localhost:3000/style.css`).",
+      "difficulty": "Easy",
+      "tags": ["basics", "static-files"]
+    },
+    {
+      "id": "exp-15",
+      "q": "What does `express.json()` middleware do?",
+      "a": "It is a built-in middleware that parses incoming requests with JSON payloads (`Content-Type: application/json`). It makes the parsed data available in `req.body`.\n\n```javascript\napp.use(express.json());\n```",
+      "difficulty": "Easy",
+      "tags": ["middleware", "parsing"]
+    },
+    {
+      "id": "exp-16",
+      "q": "What is middleware in Express.js?",
+      "a": "Middleware functions are functions that have access to the **request object** (`req`), the **response object** (`res`), and the **next middleware** function (`next`).\n\nThey can:\n- Execute code.\n- Modify req/res objects.\n- End the request-response cycle.\n- Call the next middleware.",
+      "difficulty": "Medium",
+      "tags": ["middleware", "concepts"]
+    },
+    {
+      "id": "exp-17",
+      "q": "What are the different types of middleware?",
+      "a": "1.  **Application-level**: `app.use()`\n2.  **Router-level**: `router.use()`\n3.  **Error-handling**: `(err, req, res, next)`\n4.  **Built-in**: `express.static`, `express.json`\n5.  **Third-party**: `cors`, `morgan`, `helmet`",
+      "difficulty": "Medium",
+      "tags": ["middleware", "types"]
+    },
+    {
+      "id": "exp-18",
+      "q": "What is application-level middleware?",
+      "a": "Middleware bound to an instance of the `app` object using `app.use()` or `app.METHOD()`. It executes for every request (or specified paths) defined on the app.\n\n```javascript\napp.use((req, res, next) => {\n  console.log('Time:', Date.now());\n  next();\n});\n```",
+      "difficulty": "Medium",
+      "tags": ["middleware"]
+    },
+    {
+      "id": "exp-19",
+      "q": "What is router-level middleware?",
+      "a": "Middleware bound to an instance of `express.Router()`. It works exactly like app-level middleware but is scoped to the specific router instance.\n\n```javascript\nconst router = express.Router();\nrouter.use((req, res, next) => { ... });\n```",
+      "difficulty": "Medium",
+      "tags": ["middleware", "routing"]
+    },
+    {
+      "id": "exp-20",
+      "q": "How do you create custom middleware?",
+      "a": "Define a function with `(req, res, next)` arguments and use it with `app.use()`.\n\n```javascript\nconst myLogger = (req, res, next) => {\n  console.log('Logged');\n  next(); // Pass control to next handler\n};\n\napp.use(myLogger);\n```",
+      "difficulty": "Medium",
+      "tags": ["middleware", "custom"]
+    },
+    {
+      "id": "exp-21",
+      "q": "What is the purpose of the `next()` function?",
+      "a": "**`next()`** is a callback function passed to middleware. Calling it passes control to the next matching middleware or route handler. If `next()` is not called, the request will hang (leave the client waiting).",
+      "difficulty": "Medium",
+      "tags": ["middleware", "core"]
+    },
+    {
+      "id": "exp-22",
+      "q": "What is error-handling middleware?",
+      "a": "Middleware specifically defined with **4 arguments**: `(err, req, res, next)`.\nExpress recognizes the 4 arguments and treats it as an error handler.\n\n```javascript\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).send('Something broke!');\n});\n```",
+      "difficulty": "Medium",
+      "tags": ["middleware", "error-handling"]
+    },
+    {
+      "id": "exp-23",
+      "q": "How does middleware execution order work?",
+      "a": "Middleware is executed sequentially in the order it is defined (`app.use`).\n- If `Middleware A` is defined before `Middleware B`, A runs first.\n- If A does not call `next()`, B never runs.",
+      "difficulty": "Medium",
+      "tags": ["middleware", "execution"]
+    },
+    {
+      "id": "exp-24",
+      "q": "What is Express Router?",
+      "a": "**Express Router** is a class that creates modular, mountable route handlers. A Router instance is a complete middleware and routing system (often referred to as a \"mini-app\").\n\n```javascript\nconst users = express.Router();\nusers.get('/', (req, res) => { ... });\napp.use('/users', users);\n```",
+      "difficulty": "Medium",
+      "tags": ["routing", "architecture"]
+    },
+    {
+      "id": "exp-25",
+      "q": "Difference between `app.use()` and `app.get()`?",
+      "a": "- **`app.use(path, callback)`**: Matches **any** HTTP method (GET, POST, PUT, etc.) starting with the path. Often used for middleware.\n- **`app.get(path, callback)`**: Matches **only** GET requests for that exact path.",
+      "difficulty": "Medium",
+      "tags": ["routing", "middleware"]
+    },
+    {
+      "id": "exp-26",
+      "q": "What is route chaining?",
+      "a": "Route chaining allows you to define multiple handlers for the same route path to handle different HTTP methods, reducing redundancy.\n\n```javascript\napp.route('/book')\n  .get((req, res) => { res.send('Get a random book'); })\n  .post((req, res) => { res.send('Add a book'); })\n  .put((req, res) => { res.send('Update the book'); });\n```",
+      "difficulty": "Medium",
+      "tags": ["routing", "patterns"]
+    },
+    {
+      "id": "exp-27",
+      "q": "Why is `req.body` sometimes undefined?",
+      "a": "By default, Express **does not parse** the HTTP request body. `req.body` is undefined unless you use body-parsing middleware like `express.json()` or `express.urlencoded()`.",
+      "difficulty": "Medium",
+      "tags": ["troubleshooting", "middleware"]
+    },
+    {
+      "id": "exp-28",
+      "q": "How does body parsing work in Express?",
+      "a": "Body parsers (like `express.json()`) listen to the request stream, collect the data chunks, parse the result (e.g., from JSON string to JS object), and attach it to `req.body` before calling `next()`.",
+      "difficulty": "Medium",
+      "tags": ["middleware", "internal"]
+    },
+    {
+      "id": "exp-29",
+      "q": "What does `express.urlencoded()` do?",
+      "a": "It parses incoming requests with URL-encoded payloads (typically from HTML forms: `application/x-www-form-urlencoded`).\n\n```javascript\napp.use(express.urlencoded({ extended: true }));\n```",
+      "difficulty": "Medium",
+      "tags": ["middleware", "forms"]
+    },
+    {
+      "id": "exp-30",
+      "q": "What is CORS and how do you handle it in Express?",
+      "a": "**CORS** (Cross-Origin Resource Sharing) is a security mechanism restricting requests from a different domain.\nTo allow cross-origin requests, use the `cors` middleware:\n\n```javascript\nconst cors = require('cors');\napp.use(cors());\n```",
+      "difficulty": "Medium",
+      "tags": ["security", "cors"]
+    },
+    {
+      "id": "exp-31",
+      "q": "What does Helmet middleware do?",
+      "a": "**Helmet** helps secure Express apps by setting various HTTP headers (like `Content-Security-Policy`, `X-Frame-Options`, etc.) to protect against common vulnerabilities.\n\n```javascript\nconst helmet = require('helmet');\napp.use(helmet());\n```",
+      "difficulty": "Medium",
+      "tags": ["security", "middleware"]
+    },
+    {
+      "id": "exp-32",
+      "q": "How do you structure a scalable Express application?",
+      "a": "Use a modular structure, separating concerns:\n- **Controllers**: Handle request/response logic.\n- **Services**: Business logic.\n- **Models**: Database schemas.\n- **Routes**: API endpoint definitions.\n- **Middleware**: Shared processing.\n- **Config**: Environment variables.",
+      "difficulty": "Hard",
+      "tags": ["architecture", "best-practices"]
+    },
+    {
+      "id": "exp-33",
+      "q": "How do you implement MVC architecture in Express?",
+      "a": "Organize folders by role:\n- `/models`: DB schemas (e.g., Mongoose models).\n- `/views`: Templates (if SSR).\n- `/controllers`: Functions that take `req, res` and call services.\n- `/routes`: Map URLs to controllers.\nThis decouples the routing from the logic.",
+      "difficulty": "Hard",
+      "tags": ["architecture", "mvc"]
+    },
+    {
+      "id": "exp-34",
+      "q": "What is the role of controllers and services?",
+      "a": "- **Controllers**: Entry point for the request. They validate input, parse params, call the Service layer, and send the HTTP response.\n- **Services**: Contain the core business logic. They interact with the database (Models) and return data to the Controller. They are reusable and framework-agnostic.",
+      "difficulty": "Hard",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "exp-35",
+      "q": "How do you manage environment variables in Express?",
+      "a": "Use the `dotenv` package to load variables from a `.env` file into `process.env`.\n\n```javascript\nrequire('dotenv').config();\nconsole.log(process.env.DB_HOST);\n```",
+      "difficulty": "Hard",
+      "tags": ["configuration", "security"]
+    },
+    {
+      "id": "exp-36",
+      "q": "Why is `.env` file used?",
+      "a": "To keep sensitive configuration data (API keys, DB passwords, Ports) out of the source code. The `.env` file is typically ignored by version control (`.gitignore`).",
+      "difficulty": "Hard",
+      "tags": ["configuration", "security"]
+    },
+    {
+      "id": "exp-37",
+      "q": "How do you handle async/await errors in Express?",
+      "a": "In Express 4, async errors are not caught automatically. You must use `try...catch` and pass the error to `next(err)`.\n\n```javascript\napp.get('/', async (req, res, next) => {\n  try {\n    const data = await getData();\n    res.json(data);\n  } catch (err) {\n    next(err);\n  }\n});\n```\n(Note: Express 5 handles rejected promises automatically).",
+      "difficulty": "Hard",
+      "tags": ["error-handling", "async"]
+    },
+    {
+      "id": "exp-38",
+      "q": "How does error propagation work in Express?",
+      "a": "When you call `next(error)`, Express skips all remaining non-error handling middleware and jumps to the defined **error-handling middleware** (functions with 4 arguments).",
+      "difficulty": "Hard",
+      "tags": ["error-handling"]
+    },
+    {
+      "id": "exp-39",
+      "q": "How do you implement centralized error handling?",
+      "a": "Define a custom error-handling middleware at the **end** of your middleware stack (after all routes).\n\n```javascript\napp.use((err, req, res, next) => {\n  const status = err.status || 500;\n  res.status(status).json({ error: err.message });\n});\n```",
+      "difficulty": "Hard",
+      "tags": ["error-handling", "best-practices"]
+    },
+    {
+      "id": "exp-40",
+      "q": "How do you validate requests in Express?",
+      "a": "Use validation libraries like `express-validator` or `Joi`.\n\n```javascript\n// express-validator example\napp.post('/user', [\n  body('email').isEmail(),\n  body('password').isLength({ min: 5 })\n], (req, res) => {\n  const errors = validationResult(req);\n  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });\n  // proceed...\n});\n```",
+      "difficulty": "Hard",
+      "tags": ["validation", "security"]
+    },
+    {
+      "id": "exp-41",
+      "q": "What is rate limiting and how do you implement it?",
+      "a": "Rate limiting restricts the number of requests a client can make in a given timeframe to prevent abuse/DDoS.\nUse `express-rate-limit`:\n\n```javascript\nconst limit = rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 mins\n  max: 100 // limit each IP to 100 requests per window\n});\napp.use(limit);\n```",
+      "difficulty": "Hard",
+      "tags": ["security", "performance"]
+    },
+    {
+      "id": "exp-42",
+      "q": "How do you secure an Express application?",
+      "a": "1.  Use **Helmet** for headers.\n2.  Use **Rate Limiting**.\n3.  Validate input (`Joi`, `express-validator`).\n4.  Sanitize data (prevent NoSQL injection/XSS).\n5.  Use HTTPS.\n6.  Keep dependencies updated (`npm audit`).",
+      "difficulty": "Hard",
+      "tags": ["security", "best-practices"]
+    },
+    {
+      "id": "exp-43",
+      "q": "How do you implement logging in Express?",
+      "a": "Use a logging middleware like **Morgan** for HTTP request logs and **Winston** or **Pino** for application-level logs (errors, info, debug).\n\n```javascript\napp.use(morgan('combined'));\n```",
+      "difficulty": "Hard",
+      "tags": ["logging", "monitoring"]
+    },
+    {
+      "id": "exp-44",
+      "q": "What makes an Express app production-ready?",
+      "a": "1.  Environment variables configured.\n2.  Logging enabled.\n3.  Error handling centralized.\n4.  Security headers (Helmet).\n5.  Compression (Gzip).\n6.  Clustering/Process Management (PM2).\n7.  Database connection pooling.",
+      "difficulty": "Hard",
+      "tags": ["production", "deployment"]
+    },
+    {
+      "id": "exp-45",
+      "q": "How do you optimize Express application performance?",
+      "a": "1.  Use **Gzip compression** (`compression` middleware).\n2.  Use asynchronous functions properly.\n3.  Cache results (Redis).\n4.  Run in production mode (`NODE_ENV=production`).\n5.  Use a reverse proxy (Nginx) for static files and load balancing.",
+      "difficulty": "Hard",
+      "tags": ["performance"]
+    },
+    {
+      "id": "exp-46",
+      "q": "What is clustering in Node.js?",
+      "a": "Since Node is single-threaded, clustering allows you to create child processes (workers) that run simultaneously and share the same server port, utilizing multiple CPU cores.\n\n```javascript\nif (cluster.isPrimary) {\n  // Fork workers\n} else {\n  app.listen(3000);\n}\n```",
+      "difficulty": "Hard",
+      "tags": ["performance", "scaling"]
+    },
+    {
+      "id": "exp-47",
+      "q": "How does load balancing work with Express?",
+      "a": "Load balancing distributes incoming traffic across multiple server instances (e.g., using Nginx or AWS ELB). This ensures no single server is overwhelmed and provides redundancy.",
+      "difficulty": "Hard",
+      "tags": ["scaling", "deployment"]
+    },
+    {
+      "id": "exp-48",
+      "q": "How do you implement caching in Express?",
+      "a": "Use an in-memory store like **Redis** to cache responses or database query results.\nMiddleware checks if data exists in cache; if yes, return it. If no, fetch from DB, save to cache, and return.",
+      "difficulty": "Hard",
+      "tags": ["performance", "caching"]
+    },
+    {
+      "id": "exp-49",
+      "q": "What is a reverse proxy?",
+      "a": "A server (like Nginx) that sits in front of your web servers (Express). It forwards client requests to the web servers. It handles SSL termination, load balancing, caching, and serving static files efficiently.",
+      "difficulty": "Hard",
+      "tags": ["deployment", "architecture"]
+    },
+    {
+      "id": "exp-50",
+      "q": "How do you use Express with Docker?",
+      "a": "Create a `Dockerfile`:\n1.  Start from a Node image.\n2.  Copy `package.json` and install dependencies.\n3.  Copy source code.\n4.  Expose port.\n5.  Run the app (`CMD [\"node\", \"app.js\"]`).",
+      "difficulty": "Hard",
+      "tags": ["deployment", "docker"]
+    },
+    {
+      "id": "exp-51",
+      "q": "How do you deploy an Express app to production?",
+      "a": "1.  Set `NODE_ENV=production`.\n2.  Use a process manager (PM2) to keep it alive.\n3.  Use a reverse proxy (Nginx).\n4.  Host on a cloud provider (AWS, DigitalOcean, Heroku, Vercel).",
+      "difficulty": "Hard",
+      "tags": ["deployment"]
+    },
+    {
+      "id": "exp-52",
+      "q": "How do you test Express routes?",
+      "a": "Use testing frameworks like **Jest** or **Mocha** combined with **Supertest** to simulate HTTP requests against your app without starting the server on a port.",
+      "difficulty": "Hard",
+      "tags": ["testing"]
+    },
+    {
+      "id": "exp-53",
+      "q": "Difference between unit testing and integration testing?",
+      "a": "- **Unit Testing**: Testing individual functions or modules in isolation (e.g., testing a helper function).\n- **Integration Testing**: Testing how different parts work together (e.g., testing an API endpoint involving routes, controllers, and DB).",
+      "difficulty": "Hard",
+      "tags": ["testing"]
+    },
+    {
+      "id": "exp-54",
+      "q": "What is Supertest?",
+      "a": "Supertest is a library for testing Node.js HTTP servers. It allows you to send GET/POST requests to your Express app and assert the response (status, body) in your tests.",
+      "difficulty": "Hard",
+      "tags": ["testing"]
+    },
+    {
+      "id": "exp-55",
+      "q": "How do you handle file uploads in Express?",
+      "a": "Use middleware like **Multer**.\n\n```javascript\nconst upload = multer({ dest: 'uploads/' });\napp.post('/profile', upload.single('avatar'), (req, res) => {\n  // req.file contains the file\n});\n```",
+      "difficulty": "Hard",
+      "tags": ["features", "files"]
+    },
+    {
+      "id": "exp-56",
+      "q": "Express vs NestJS – key differences?",
+      "a": "- **Express**: Minimal, unopinionated, flexible. You choose your architecture.\n- **NestJS**: Built on top of Express (or Fastify). Highly opinionated, uses TypeScript, decorators, and Angular-like architecture (Modules, Controllers, Services).",
+      "difficulty": "Hard",
+      "tags": ["comparison", "nestjs"]
+    },
+    {
+      "id": "exp-57",
+      "q": "Explain the Express request lifecycle.",
+      "a": "1.  **Request** enters the server.\n2.  **Middleware** chain executes (Global -> Router -> Route specific).\n3.  **Route Handler** processes the request.\n4.  **Response** is sent back to client.\n5.  **Error Middleware** catches any errors during the process.",
+      "difficulty": "Hard",
+      "tags": ["concepts", "lifecycle"]
+    },
+    {
+      "id": "exp-58",
+      "q": "Monolithic vs modular Express architecture?",
+      "a": "- **Monolithic**: All code in one place. Easy to start, hard to scale.\n- **Modular**: Code split into modules (by feature: `/users`, `/products`). Easier to maintain and scale. Can evolve into microservices.",
+      "difficulty": "Hard",
+      "tags": ["architecture"]
+    },
+    {
+      "id": "exp-59",
+      "q": "REST API best practices in Express?",
+      "a": "1.  Use standard HTTP verbs (GET, POST, PUT, DELETE).\n2.  Use standard HTTP status codes (200, 201, 400, 404, 500).\n3.  Use plural nouns for resources (`/users`).\n4.  Version your API (`/api/v1/users`).\n5.  Use pagination and filtering.",
+      "difficulty": "Hard",
+      "tags": ["api", "best-practices"]
+    },
+    {
+      "id": "exp-60",
+      "q": "How do you implement authentication in Express?",
+      "a": "Common approaches:\n1.  **Passport.js**: Middleware for various strategies (Local, OAuth).\n2.  **JWT (JSON Web Tokens)**: Stateless auth. Generate token on login, verify in middleware.\n3.  **Sessions**: Server-side session storage (express-session).",
+      "difficulty": "Hard",
+      "tags": ["security", "auth"]
+    }
+  ]
+}

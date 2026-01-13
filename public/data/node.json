@@ -1,0 +1,362 @@
+{
+  "slug": "node",
+  "questions": [
+    {
+      "id": "node-01",
+      "q": "What is Node.js?",
+      "a": "Node.js is an **open-source, cross-platform JavaScript runtime environment** that executes JavaScript code outside a web browser. It is built on Chrome's **V8 JavaScript engine**.\n\n### Key Features\n1.  **Asynchronous & Event-Driven**: Non-blocking I/O operations.\n2.  **Single-Threaded**: Uses a single thread with an Event Loop to handle concurrency.\n3.  **Fast**: V8 compiles JS to native machine code.\n4.  **NPM**: Huge ecosystem of libraries.",
+      "difficulty": "Easy",
+      "tags": ["basics", "intro"]
+    },
+    {
+      "id": "node-02",
+      "q": "How does Node.js handle concurrency being Single-Threaded?",
+      "a": "Node.js uses an **Event-Driven, Non-Blocking I/O model**.\n\nAlthough the main JavaScript thread is single-threaded, Node.js offloads blocking I/O operations (like file access, network requests) to the **Libuv** library, which uses a thread pool (C++ threads) or OS kernel mechanisms. When the operation completes, a callback is pushed to the **Event Loop**, which executes it on the main thread.",
+      "difficulty": "Hard",
+      "tags": ["architecture", "concurrency"]
+    },
+    {
+      "id": "node-03",
+      "q": "What is Libuv?",
+      "a": "**Libuv** is a multi-platform support library with a focus on asynchronous I/O. It gives Node.js access to the underlying operating system's non-blocking I/O capabilities.\n\n### Responsibilities\n1.  **Event Loop**: Manages the event loop mechanism.\n2.  **Thread Pool**: Handles expensive tasks (File I/O, DNS lookups, Compression) asynchronously.\n3.  **Networking**: TCP/UDP sockets.",
+      "difficulty": "Hard",
+      "tags": ["architecture", "libuv"]
+    },
+    {
+      "id": "node-04",
+      "q": "What is the difference between `process.nextTick()` and `setImmediate()`?",
+      "a": "- **`process.nextTick()`**: Fires **immediately** after the current operation completes, *before* the Event Loop continues. It has higher priority than other asynchronous events.\n- **`setImmediate()`**: Fires in the **Check Phase** of the Event Loop (after I/O callbacks).\n\n**Order**: `process.nextTick` -> `Promise.then` (Microtasks) -> `setTimeout` -> `setImmediate` (usually).",
+      "difficulty": "Hard",
+      "tags": ["event-loop", "timers"]
+    },
+    {
+      "id": "node-05",
+      "q": "What is `module.exports` vs `exports`?",
+      "a": "- **`module.exports`**: The actual object that gets returned by `require()`. You can assign a single object, function, or class to it directly.\n- **`exports`**: A helper reference (alias) to `module.exports`.\n\n### Catch\nIf you reassign `exports` (e.g., `exports = {}`), it breaks the link to `module.exports`, and your module will export nothing (or the original object). Always use `module.exports` if you want to export a single class/function.",
+      "difficulty": "Medium",
+      "tags": ["modules", "commonjs"]
+    },
+    {
+      "id": "node-06",
+      "q": "What is the difference between CommonJS and ES Modules?",
+      "a": "### CommonJS (CJS)\n- Default in Node.js.\n- Uses `require()` and `module.exports`.\n- Synchronous loading.\n- Dynamic (can call require conditionally).\n\n### ES Modules (ESM)\n- Standard in modern JS.\n- Uses `import` and `export`.\n- Asynchronous loading.\n- Static structure (analyzed at compile time).\n- Requires `\"type\": \"module\"` in `package.json` or `.mjs` extension.",
+      "difficulty": "Medium",
+      "tags": ["modules", "es6"]
+    },
+    {
+      "id": "node-07",
+      "q": "What is the Event Emitter?",
+      "a": "**EventEmitter** is a core class in the `events` module used to handle events in Node.js. Many core modules (like `http`, `fs`) inherit from it.\n\n### Usage\n```javascript\nconst EventEmitter = require('events');\nconst myEmitter = new EventEmitter();\n\n// Listener\nmyEmitter.on('greet', (name) => {\n  console.log(`Hello, ${name}`);\n});\n\n// Emitter\nmyEmitter.emit('greet', 'Alice');\n```",
+      "difficulty": "Medium",
+      "tags": ["events", "core"]
+    },
+    {
+      "id": "node-08",
+      "q": "What are Buffers?",
+      "a": "**Buffer** is a global class used to handle **binary data** directly. Since JavaScript historically handled only strings well, Buffers were introduced to deal with TCP streams, file system operations, etc.\n\nBuffers are fixed-length sequences of bytes.\n\n```javascript\nconst buf = Buffer.from('Hello');\nconsole.log(buf); // <Buffer 48 65 6c 6c 6f>\nconsole.log(buf.toString()); // 'Hello'\n```",
+      "difficulty": "Medium",
+      "tags": ["buffers", "binary"]
+    },
+    {
+      "id": "node-09",
+      "q": "What are Streams in Node.js?",
+      "a": "**Streams** are objects that let you read data from a source or write data to a destination in continuous chunks. They are memory efficient because you don't need to load the entire file into memory.\n\n### Types\n1.  **Readable**: Reading (e.g., `fs.createReadStream`).\n2.  **Writable**: Writing (e.g., `fs.createWriteStream`).\n3.  **Duplex**: Both read and write (e.g., TCP sockets).\n4.  **Transform**: Modify data as it is written/read (e.g., zlib compression).",
+      "difficulty": "Medium",
+      "tags": ["streams", "performance"]
+    },
+    {
+      "id": "node-10",
+      "q": "How do you handle errors in Node.js?",
+      "a": "1.  **Try-Catch**: For synchronous code and `async/await`.\n2.  **Callbacks**: Check the first argument (`err`) in Error-First Callbacks.\n3.  **Events**: Listen for `'error'` events on Emitters/Streams. **Crucial**: Unhandled 'error' events crash the process.\n4.  **Promises**: Use `.catch()`.\n5.  **Process-level**: `process.on('uncaughtException')` and `process.on('unhandledRejection')` (last resort).",
+      "difficulty": "Medium",
+      "tags": ["error-handling", "best-practices"]
+    },
+    {
+      "id": "node-11",
+      "q": "What is Middleware in Express?",
+      "a": "Middleware functions have access to the **request object (req)**, the **response object (res)**, and the **next middleware** function (`next`).\n\n### Capabilities\n- Execute code.\n- Modify req/res objects.\n- End the request-response cycle.\n- Call the next middleware.\n\n```javascript\napp.use((req, res, next) => {\n  console.log('Time:', Date.now());\n  next();\n});\n```",
+      "difficulty": "Easy",
+      "tags": ["express", "middleware"]
+    },
+    {
+      "id": "node-12",
+      "q": "Explain `package.json` and `package-lock.json`.",
+      "a": "- **`package.json`**: The manifest file. Contains metadata (name, version), scripts, and a list of dependencies (with semantic versioning ranges, e.g., `^1.0.0`).\n- **`package-lock.json`**: Automatically generated. Locks the dependencies to a **specific version** tree (including sub-dependencies) to ensure consistent installs across different machines/environments.",
+      "difficulty": "Easy",
+      "tags": ["npm", "basics"]
+    },
+    {
+      "id": "node-13",
+      "q": "What is REPL?",
+      "a": "**REPL** stands for **Read-Eval-Print Loop**.\nIt is an interactive shell (like the browser console) to execute JavaScript code directly in the terminal.\n\nCommand: Type `node` in the terminal.",
+      "difficulty": "Easy",
+      "tags": ["tools", "basics"]
+    },
+    {
+      "id": "node-14",
+      "q": "What is the purpose of `__dirname` and `__filename`?",
+      "a": "- **`__dirname`**: The absolute path to the **directory** containing the currently executing file.\n- **`__filename`**: The absolute path to the **file** being executed.\n\nNote: These are available in CommonJS but **not** directly in ES Modules (where you use `import.meta.url`).",
+      "difficulty": "Easy",
+      "tags": ["globals", "commonjs"]
+    },
+    {
+      "id": "node-15",
+      "q": "How to read a file asynchronously vs synchronously?",
+      "a": "Using the `fs` (File System) module.\n\n### Asynchronous (Recommended)\nNon-blocking. Uses a callback or Promise.\n```javascript\nfs.readFile('file.txt', 'utf8', (err, data) => {\n  if (err) throw err;\n  console.log(data);\n});\n```\n\n### Synchronous (Blocking)\nBlocks the thread until finished.\n```javascript\nconst data = fs.readFileSync('file.txt', 'utf8');\nconsole.log(data);\n```",
+      "difficulty": "Medium",
+      "tags": ["fs", "io"]
+    },
+    {
+      "id": "node-16",
+      "q": "What is Clustering in Node.js?",
+      "a": "Since Node.js is single-threaded, it runs on a single CPU core. **Clustering** allows you to create child processes (workers) that run simultaneously and share the same server port.\n\nThis enables a Node.js app to utilize **multi-core systems**.\n\n```javascript\nconst cluster = require('cluster');\nconst os = require('os');\n\nif (cluster.isMaster) {\n  const cpus = os.cpus().length;\n  for (let i = 0; i < cpus; i++) cluster.fork();\n} else {\n  // Worker code (server)\n}\n```",
+      "difficulty": "Hard",
+      "tags": ["performance", "scaling"]
+    },
+    {
+      "id": "node-17",
+      "q": "What are Worker Threads?",
+      "a": "**Worker Threads** (`worker_threads` module) allow running JavaScript in parallel threads. Unlike Cluster (which uses processes), Workers share memory (via `SharedArrayBuffer`).\n\nThey are useful for **CPU-intensive tasks** (e.g., image processing, encryption) to avoid blocking the main Event Loop.",
+      "difficulty": "Hard",
+      "tags": ["performance", "concurrency"]
+    },
+    {
+      "id": "node-18",
+      "q": "What is Callback Hell?",
+      "a": "A situation where callbacks are nested within other callbacks several levels deep, making code difficult to read and maintain.\n\n**Solution**: Use Promises or `async/await`.",
+      "difficulty": "Easy",
+      "tags": ["async", "patterns"]
+    },
+    {
+      "id": "node-19",
+      "q": "What is the difference between `fork()` and `spawn()`?",
+      "a": "Both are methods in the `child_process` module.\n\n- **`spawn()`**: Launches a new command in a new process. Used for running system commands. Streams data (stdout/stderr).\n- **`fork()`**: Specifically used to spawn new **Node.js** processes. It establishes a communication channel (IPC) between parent and child, allowing message passing (`send()` / `on('message')`).",
+      "difficulty": "Hard",
+      "tags": ["child_process", "os"]
+    },
+    {
+      "id": "node-20",
+      "q": "How to secure a Node.js application?",
+      "a": "1.  **Validate Input**: Prevent Injection attacks.\n2.  **Helmet.js**: Use Helmet middleware to set secure HTTP headers.\n3.  **Environment Variables**: Store secrets in `.env`, never in code.\n4.  **Rate Limiting**: Prevent DDoS/Brute-force (e.g., `express-rate-limit`).\n5.  **Dependencies**: Audit npm packages (`npm audit`).\n6.  **Avoid Eval**: Never use `eval()`.",
+      "difficulty": "Medium",
+      "tags": ["security", "best-practices"]
+    },
+    {
+      "id": "node-21",
+      "q": "What is Semantic Versioning (SemVer)?",
+      "a": "Version format: **Major.Minor.Patch** (e.g., 1.0.0)\n\n1.  **Major**: Breaking changes.\n2.  **Minor**: New features (backward compatible).\n3.  **Patch**: Bug fixes (backward compatible).\n\nSymbols:\n- `^1.2.0`: Updates to any version < 2.0.0 (Minor/Patch).\n- `~1.2.0`: Updates to any version < 1.3.0 (Patch only).",
+      "difficulty": "Medium",
+      "tags": ["npm", "devops"]
+    },
+    {
+      "id": "node-22",
+      "q": "What is a Stub?",
+      "a": "In testing, a **Stub** is a dummy function/object that replaces a real component to simulate specific behavior or return values. It does not contain assertions (unlike Mocks). Used to isolate the unit being tested.",
+      "difficulty": "Medium",
+      "tags": ["testing"]
+    },
+    {
+      "id": "node-23",
+      "q": "Explain the concept of 'Piping' streams.",
+      "a": "**Piping** connects a Readable Stream to a Writable Stream. It automatically handles the flow of data so the destination is not overwhelmed (Backpressure).\n\n```javascript\n// Read from file and write to response\nfs.createReadStream('video.mp4').pipe(res);\n```",
+      "difficulty": "Medium",
+      "tags": ["streams", "io"]
+    },
+    {
+      "id": "node-24",
+      "q": "What is `NODE_ENV`?",
+      "a": "An environment variable conventionally used to specify the environment (e.g., `development`, `production`, `test`).\n\nFrameworks like Express use it to optimize performance (e.g., if `NODE_ENV=production`, Express caches templates and disables verbose error messages).",
+      "difficulty": "Easy",
+      "tags": ["configuration", "devops"]
+    },
+    {
+      "id": "node-25",
+      "q": "What is Body Parser middleware?",
+      "a": "In Express, raw request body (POST/PUT) is not parsed by default. `body-parser` (now built-in as `express.json()`) parses the incoming request body and exposes it on `req.body`.\n\n```javascript\napp.use(express.json()); // For JSON\napp.use(express.urlencoded({ extended: true })); // For Form Data\n```",
+      "difficulty": "Easy",
+      "tags": ["express", "http"]
+    },
+    {
+      "id": "node-26",
+      "q": "How to handle file uploads in Node.js?",
+      "a": "Node.js doesn't handle multipart form data out of the box. You typically use libraries like **Multer** or **Formidable**.\n\n```javascript\nconst multer = require('multer');\nconst upload = multer({ dest: 'uploads/' });\n\napp.post('/profile', upload.single('avatar'), (req, res) => {\n  // req.file contains file info\n});\n```",
+      "difficulty": "Medium",
+      "tags": ["express", "io"]
+    },
+    {
+      "id": "node-27",
+      "q": "What is JWT?",
+      "a": "**JSON Web Token** is a standard for securely transmitting information between parties as a JSON object. It is stateless.\n\nStructure: **Header.Payload.Signature**.\n\nUsed for **Authentication**: The server issues a token upon login. The client sends this token in the `Authorization` header for subsequent requests.",
+      "difficulty": "Medium",
+      "tags": ["security", "auth"]
+    },
+    {
+      "id": "node-28",
+      "q": "Difference between `exec` and `spawn`?",
+      "a": "- **`exec`**: Runs a command in a shell and buffers the **entire output** (stdout) in memory. Good for small output commands.\n- **`spawn`**: Streams the output. Good for long-running processes or large data output. It does not spawn a shell by default.",
+      "difficulty": "Hard",
+      "tags": ["child_process", "os"]
+    },
+    {
+      "id": "node-29",
+      "q": "What is the `crypto` module?",
+      "a": "Built-in module providing cryptographic functionality. Includes wrappers for OpenSSL's hash, HMAC, cipher, decipher, sign, and verify functions.\n\n```javascript\nconst crypto = require('crypto');\nconst hash = crypto.createHash('sha256').update('password').digest('hex');\n```",
+      "difficulty": "Medium",
+      "tags": ["security", "core"]
+    },
+    {
+      "id": "node-30",
+      "q": "What is CORS?",
+      "a": "**Cross-Origin Resource Sharing**. It is a browser security mechanism that restricts HTTP requests initiated from scripts running in the browser to a different origin (domain, protocol, or port).\n\nTo allow it in Node/Express:\n```javascript\nconst cors = require('cors');\napp.use(cors());\n```",
+      "difficulty": "Medium",
+      "tags": ["web", "security"]
+    },
+    {
+      "id": "node-31",
+      "q": "What is a Reactor Pattern?",
+      "a": "The architectural pattern used by Node.js. It involves:\n1.  **Event Demultiplexer**: Collects I/O requests.\n2.  **Event Queue**: Queues events.\n3.  **Event Loop**: Iterates queue and executes handlers.\n\nThis allows Node to handle multiple concurrent I/O operations without multiple threads.",
+      "difficulty": "Hard",
+      "tags": ["architecture", "theory"]
+    },
+    {
+      "id": "node-32",
+      "q": "How to implement logging in Node.js?",
+      "a": "While `console.log` works, for production, use libraries like **Winston**, **Morgan** (HTTP logger), or **Bunyan**.\n\nBenefits: Timestamping, log levels (info, debug, error), transporting logs to files/databases, and formatting (JSON).",
+      "difficulty": "Easy",
+      "tags": ["best-practices", "tools"]
+    },
+    {
+      "id": "node-33",
+      "q": "What is V8?",
+      "a": "V8 is Google's open-source high-performance JavaScript and WebAssembly engine, written in C++. It powers Chrome and Node.js. It compiles JavaScript directly to native machine code using JIT (Just-In-Time) compilation.",
+      "difficulty": "Medium",
+      "tags": ["architecture", "v8"]
+    },
+    {
+      "id": "node-34",
+      "q": "What is the `path` module?",
+      "a": "Provides utilities for working with file and directory paths. It ensures cross-platform compatibility (Windows uses `\\`, Linux uses `/`).\n\n```javascript\nconst path = require('path');\nconst fullPath = path.join(__dirname, 'files', 'image.png');\n```",
+      "difficulty": "Easy",
+      "tags": ["core", "utils"]
+    },
+    {
+      "id": "node-35",
+      "q": "How does `require()` work?",
+      "a": "1.  **Resolving**: Finds the absolute path of the file.\n2.  **Loading**: Loads the file content.\n3.  **Wrapping**: Wraps code in a function (IIFE) to give it scope (`exports`, `require`, `module`, etc.).\n4.  **Evaluating**: Executes the code.\n5.  **Caching**: Caches the result so subsequent requires return the same object.",
+      "difficulty": "Hard",
+      "tags": ["modules", "internals"]
+    },
+    {
+      "id": "node-36",
+      "q": "What is `npm ci`?",
+      "a": "**Clean Install**. Used in CI/CD environments.\n- It requires `package-lock.json`.\n- It deletes `node_modules` before installing.\n- It installs exact versions from the lockfile.\n- It is faster and more reliable for builds.",
+      "difficulty": "Medium",
+      "tags": ["npm", "devops"]
+    },
+    {
+      "id": "node-37",
+      "q": "What is an EventEmitter memory leak?",
+      "a": "If you keep adding listeners (e.g., inside a loop) without removing them, memory usage grows indefinitely. Node.js warns if more than 10 listeners are added to a single event (default max).\n\nFix: `emitter.removeListener()` or `emitter.once()`.",
+      "difficulty": "Medium",
+      "tags": ["memory", "debugging"]
+    },
+    {
+      "id": "node-38",
+      "q": "What is the global object in Node.js?",
+      "a": "**`global`**. It is analogous to `window` in the browser. Properties attached to it are available everywhere.\n\nExamples: `setTimeout`, `console`, `Buffer`, `process`.",
+      "difficulty": "Easy",
+      "tags": ["basics", "globals"]
+    },
+    {
+      "id": "node-39",
+      "q": "What is PM2?",
+      "a": "A production **Process Manager** for Node.js.\n- Keeps apps alive forever (auto-restart on crash).\n- Zero-downtime reloads.\n- Load balancing (Cluster mode).\n- Log management.",
+      "difficulty": "Medium",
+      "tags": ["devops", "tools"]
+    },
+    {
+      "id": "node-40",
+      "q": "What is `util.promisify`?",
+      "a": "A utility to convert a function that accepts a callback (Error-First style) into a function that returns a Promise.\n\n```javascript\nconst util = require('util');\nconst fs = require('fs');\nconst readFile = util.promisify(fs.readFile);\n\n// Now you can use await\nconst data = await readFile('file.txt');\n```",
+      "difficulty": "Medium",
+      "tags": ["utils", "async"]
+    },
+    {
+      "id": "node-41",
+      "q": "What is Backpressure in streams?",
+      "a": "Backpressure occurs when the Readable stream produces data faster than the Writable stream can consume it. Node.js streams handle this automatically (using `.pipe()`) by pausing the read stream until the write buffer drains.",
+      "difficulty": "Hard",
+      "tags": ["streams", "performance"]
+    },
+    {
+      "id": "node-42",
+      "q": "Explain `res.send()` vs `res.json()` vs `res.end()`.",
+      "a": "- **`res.send()`**: General purpose. Sets content-type automatically (HTML, Text, JSON based on body).\n- **`res.json()`**: Specifically for JSON. Converts object to JSON string and sets `Content-Type: application/json`.\n- **`res.end()`**: Ends the response process without sending data (mostly). Used in core Node HTTP, less common in Express.",
+      "difficulty": "Easy",
+      "tags": ["express", "http"]
+    },
+    {
+      "id": "node-43",
+      "q": "What is Middleware chaining?",
+      "a": "The mechanism where multiple middleware functions are executed in sequence. Each middleware calls `next()` to pass control to the next one.\n\n```javascript\napp.get('/', authMiddleware, validationMiddleware, controller);\n```",
+      "difficulty": "Easy",
+      "tags": ["express", "middleware"]
+    },
+    {
+      "id": "node-44",
+      "q": "How to debug a Node.js application?",
+      "a": "1.  **`console.log`**.\n2.  **Node Inspector**: Run with `node --inspect index.js` and open Chrome DevTools.\n3.  **VS Code Debugger**: Built-in debugging support.\n4.  **`debug` module**: Use the `debug` npm package for namespaced logging.",
+      "difficulty": "Medium",
+      "tags": ["debugging", "tools"]
+    },
+    {
+      "id": "node-45",
+      "q": "What is `process.argv`?",
+      "a": "An array containing the command-line arguments passed when the Node.js process was launched.\n1.  Path to Node executable.\n2.  Path to JS file.\n3.  ...Arguments.\n\n```bash\nnode app.js --user=admin\n// process.argv[2] is '--user=admin'\n```",
+      "difficulty": "Easy",
+      "tags": ["process", "cli"]
+    },
+    {
+      "id": "node-46",
+      "q": "What are Microservices?",
+      "a": "An architecture where an application is structured as a collection of small, autonomous services, modeled around a business domain. Node.js is popular for microservices due to its lightweight nature and fast I/O.",
+      "difficulty": "Medium",
+      "tags": ["architecture", "system-design"]
+    },
+    {
+      "id": "node-47",
+      "q": "What is `npx`?",
+      "a": "**Node Package Execute**. A tool (bundled with npm > 5.2) to execute binaries from packages without installing them globally.\n\n```bash\nnpx create-react-app my-app\n```",
+      "difficulty": "Easy",
+      "tags": ["npm", "tools"]
+    },
+    {
+      "id": "node-48",
+      "q": "What is `process.env`?",
+      "a": "An object containing the user environment. Used to access environment variables.\n\n```javascript\nconst port = process.env.PORT || 3000;\n```",
+      "difficulty": "Easy",
+      "tags": ["configuration", "process"]
+    },
+    {
+      "id": "node-49",
+      "q": "What is the difference between `readChunk` and `readFile`?",
+      "a": "- **`readFile`**: Reads the entire file into memory (Buffer). Bad for large files.\n- **Streams (Chunks)**: Reads file piece by piece. Memory efficient.",
+      "difficulty": "Medium",
+      "tags": ["fs", "performance"]
+    },
+    {
+      "id": "node-50",
+      "q": "How does `setImmediate` differ from `setTimeout(..., 0)`?",
+      "a": "Order depends on context.\n- Inside I/O callbacks, `setImmediate` is **always** executed before `setTimeout(..., 0)`.\n- In the main module, the order is non-deterministic (bound by performance/process startup).",
+      "difficulty": "Hard",
+      "tags": ["event-loop", "timers"]
+    },
+    {
+      "id": "node-51",
+      "q": "What is the `cluster` module used for?",
+      "a": "To enable multi-threading (via multi-processing) in Node.js. It allows a master process to fork worker processes that share the same server port, utilizing all CPU cores.",
+      "difficulty": "Medium",
+      "tags": ["scaling", "core"]
+    }
+  ]
+}

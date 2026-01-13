@@ -2,6 +2,7 @@ export interface Topic {
   slug: string;
   name: string;
   color: string;
+  count?: number;
 }
 
 export interface Question {

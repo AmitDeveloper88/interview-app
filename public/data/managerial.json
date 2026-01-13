@@ -1,0 +1,193 @@
+{
+  "questions": [
+    {
+      "id": "mgr-01",
+      "q": "How do you ensure your team delivers high-quality code within deadlines?",
+      "a": "Balancing quality and speed requires a multi-faceted approach:\n\n1.  **Clear Requirements & Planning:** Ensure stories are well-defined with acceptance criteria before the sprint begins.\n2.  **Code Reviews:** Enforce mandatory code reviews to catch bugs, ensure style consistency, and share knowledge. Use automated linters and formatters.\n3.  **Automated Testing:** Implement CI/CD pipelines that run unit and integration tests on every commit.\n4.  **Tech Debt Management:** Allocate 10-20% of sprint time to refactoring and addressing tech debt to prevent velocity slowdowns.\n5.  **Prioritization:** If deadlines are at risk, negotiate scope with product managers rather than cutting corners on quality (e.g., MVP vs. full feature).\n6.  **Pair Programming:** Encourage pairing on complex tasks to reduce defects and knowledge silos.",
+      "difficulty": "Medium",
+      "tags": ["Leadership", "Process", "Quality Assurance"]
+    },
+    {
+      "id": "mgr-02",
+      "q": "Describe a situation where you had to mentor a junior developer. How did you handle it?",
+      "a": "In a previous project, a junior developer was struggling with complex state management in React.\n\n**Approach:**\n1.  **Empathy & Patience:** I created a safe space for them to ask questions without fear of judgment.\n2.  **Guided Discovery:** Instead of giving the solution, I asked leading questions to help them arrive at the answer (e.g., \"What happens to the component when this state changes?\").\n3.  **Pair Programming:** We spent time coding together where I navigated and they drove, helping them build muscle memory.\n4.  **Code Review Feedback:** I provided constructive feedback on PRs, explaining *why* a change was needed, not just *what* to change.\n5.  **Documentation:** I pointed them to specific resources and official documentation to build their self-reliance.\n\n**Result:** Within a month, they were confidently handling state management tasks and even started helping other new joiners.",
+      "difficulty": "Easy",
+      "tags": ["Mentorship", "Soft Skills"]
+    },
+    {
+      "id": "mgr-03",
+      "q": "Can you explain the SOLID principles and how you apply them in your designs?",
+      "a": "**SOLID** stands for:\n\n*   **S - Single Responsibility Principle (SRP):** A class/module should have one reason to change. *Example:* Separate API fetching logic from UI components.\n*   **O - Open/Closed Principle (OCP):** Open for extension, closed for modification. *Example:* Using higher-order components or composition to add functionality without changing the original component.\n*   **L - Liskov Substitution Principle (LSP):** Subtypes must be substitutable for their base types. *Example:* Ensure a subclass doesn't break the contract of the parent class.\n*   **I - Interface Segregation Principle (ISP):** Clients shouldn't depend on interfaces they don't use. *Example:* Breaking a large monolithic interface into smaller, specific ones.\n*   **D - Dependency Inversion Principle (DIP):** Depend on abstractions, not concretions. *Example:* Dependency injection or using interfaces for services so implementations can be swapped (e.g., for testing).",
+      "difficulty": "Hard",
+      "tags": ["Architecture", "Design Patterns", "SOLID"]
+    },
+    {
+      "id": "mgr-04",
+      "q": "Explain common design patterns in JavaScript.",
+      "a": "JavaScript uses several patterns to solve common problems:\n\n1.  **Module Pattern:** Encapsulating private and public members (often via closures or ES6 Modules).\n2.  **Observer Pattern:** Publish/Subscribe model. Used heavily in event handling (DOM events) and state management (Redux).\n3.  **Singleton Pattern:** Ensures a class has only one instance. Useful for database connections or a global config object.\n4.  **Factory Pattern:** A function that returns an object, useful when object creation logic is complex.\n5.  **Prototype Pattern:** Creating objects based on a template of an existing object through cloning (JS's built-in prototypal inheritance).\n6.  **Decorator Pattern:** Wrapping an object to extend its behavior dynamically (e.g., Higher-Order Components in React).",
+      "difficulty": "Medium",
+      "tags": ["Design Patterns", "JavaScript"]
+    },
+    {
+      "id": "mgr-05",
+      "q": "How do you decide which tech stack is suitable for a specific project?",
+      "a": "I evaluate based on several factors:\n\n1.  **Project Requirements:** Is it a real-time app (Node.js/Socket.io)? A data-heavy enterprise app (Java/Spring)? A high-performance system (Go/Rust)?\n2.  **Team Expertise:** What is the team already proficient in? Learning a new stack carries a velocity cost.\n3.  **Ecosystem & Community:** Is the technology mature? Are there libraries for common needs (auth, validation)?\n4.  **Scalability & Performance:** Will this stack handle the expected load? (e.g., SQL for structured relational data vs. NoSQL for unstructured/massive scale).\n5.  **Time to Market:** Some stacks (like MERN or Rails) allow for very rapid prototyping.\n6.  **Maintainability:** Long-term support and ease of hiring developers for that stack.",
+      "difficulty": "Medium",
+      "tags": ["Architecture", "Decision Making"]
+    },
+    {
+      "id": "mgr-06",
+      "q": "What is the difference between Development, FT, UAT, Pre-prod, and Production environments?",
+      "a": "*   **Development (Dev):** Where developers write and test code. Often runs locally or on a shared dev server. Unstable, changes frequently.\n*   **FT (Functional Testing) / QA:** Where testers/QA verify that new features work as expected. Stable enough for testing but may contain bugs.\n*   **UAT (User Acceptance Testing):** A mirror of production where actual users or the client test the system to validate business requirements. Focus is on usability and workflows.\n*   **Pre-Prod / Staging:** An exact replica of production (infrastructure, data volume) used for final load testing and verification before release. Catches environment-specific issues.\n*   **Production (Prod):** The live environment accessible to end-users. Reliability and uptime are critical here.",
+      "difficulty": "Easy",
+      "tags": ["DevOps", "Process"]
+    },
+    {
+      "id": "mgr-07",
+      "q": "How do you ensure 100% code coverage in your projects? Is it always necessary?",
+      "a": "**Ensuring High Coverage:**\n*   Use tools like Jest or Istanbul with thresholds in CI/CD pipelines (failing builds if coverage drops).\n*   Write tests alongside code (TDD).\n*   Mock external dependencies.\n\n**Is 100% Necessary?**\n*   **No, not always.** 100% coverage doesn't guarantee 100% bug-free code. It can lead to writing trivial tests just to satisfy the metric.\n*   **Focus on Value:** I prioritize testing critical business logic, edge cases, and complex algorithms. UI components or simple getters/setters might have lower priority.\n*   **Diminishing Returns:** The effort to go from 90% to 100% often outweighs the benefit. A target of 80-90% is usually a healthy balance.",
+      "difficulty": "Medium",
+      "tags": ["Testing", "Quality Assurance"]
+    },
+    {
+      "id": "mgr-08",
+      "q": "Can you explain the difference between unit testing, integration testing, and functional testing?",
+      "a": "*   **Unit Testing:** Testing individual components or functions in isolation (e.g., testing a helper function `calculateTax(price)`). Fast, easy to debug.\n*   **Integration Testing:** Testing how different modules work together (e.g., testing that an API endpoint correctly queries the database and returns the result). Verifies the interfaces between units.\n*   **Functional (E2E) Testing:** Testing the application from the user's perspective (e.g., using Selenium/Cypress to click 'Login' and verify the dashboard appears). Slowest but simulates real usage.",
+      "difficulty": "Easy",
+      "tags": ["Testing"]
+    },
+    {
+      "id": "mgr-09",
+      "q": "How do you secure sensitive data in a MERN stack application?",
+      "a": "1.  **Environment Variables:** Store secrets (API keys, DB URIs) in `.env` files, never in source control.\n2.  **HTTPS:** Enforce SSL/TLS for all data in transit.\n3.  **Hashing Passwords:** Use robust algorithms like **bcrypt** or **Argon2** to hash passwords before storing in MongoDB.\n4.  **JWT Security:** Sign tokens with a strong secret, set short expiration times, and prefer HttpOnly cookies over localStorage to prevent XSS.\n5.  **Input Validation:** Sanitize all user inputs (using libraries like Joi or Zod) to prevent NoSQL injection and XSS.\n6.  **Helmet.js:** Use Helmet middleware in Express to set secure HTTP headers (HSTS, Content Security Policy).",
+      "difficulty": "Medium",
+      "tags": ["Security", "MERN"]
+    },
+    {
+      "id": "mgr-10",
+      "q": "Describe your experience working in an Agile/Scrum environment.",
+      "a": "I have extensive experience with Scrum workflows:\n*   **Sprints:** typically 2-week cycles.\n*   **Roles:** Working with a Product Owner (defining 'what'), Scrum Master (facilitating process), and the Dev Team (executing 'how').\n*   **Artifacts:** Managing the Product Backlog, Sprint Backlog, and producing a potentially shippable Increment.\n*   **Values:** Emphasizing transparency, inspection, and adaptation. I focus on delivering iterative value and reacting to change rather than strictly following a rigid plan.",
+      "difficulty": "Easy",
+      "tags": ["Agile", "Process"]
+    },
+    {
+      "id": "mgr-11",
+      "q": "Explain the meetings like sprint planning, daily standup, backlog, sprint review, sprint retrospective.",
+      "a": "*   **Sprint Planning:** Team selects items from the Product Backlog for the upcoming sprint and defines how to complete them (estimating effort).\n*   **Daily Standup (Scrum):** A short (15-min) sync to discuss what was done yesterday, what will be done today, and any blockers.\n*   **Backlog Refinement (Grooming):** Reviewing future tickets, clarifying requirements, and estimating effort to keep the backlog healthy.\n*   **Sprint Review:** Demoing the completed work to stakeholders at the end of the sprint to gather feedback.\n*   **Sprint Retrospective:** The team reflects on the *process*—what went well, what didn't, and actionable improvements for the next sprint.",
+      "difficulty": "Easy",
+      "tags": ["Agile", "Process"]
+    },
+    {
+      "id": "mgr-12",
+      "q": "How do you document your code and project architecture for your team?",
+      "a": "1.  **Code Comments:** For complex logic (explaining *why*, not *what*).\n2.  **README:** A comprehensive guide on setting up the project, running tests, and deployment steps.\n3.  **API Documentation:** Using tools like **Swagger/OpenAPI** for backend endpoints.\n4.  **Architecture Diagrams:** Using tools like Lucidchart or Excalidraw to map out system design, data flow, and infrastructure.\n5.  **Wiki/Confluence:** Storing high-level decisions, coding standards, and onboarding guides.\n6.  **Self-Documenting Code:** Writing clean code with meaningful variable/function names reduces the need for excessive comments.",
+      "difficulty": "Medium",
+      "tags": ["Documentation", "Communication"]
+    },
+    {
+      "id": "mgr-13",
+      "q": "How do you onboard new developers to your team and projects?",
+      "a": "1.  **Onboarding Doc:** A step-by-step guide to environment setup (IDE, keys, dependencies).\n2.  **Code Walkthrough:** A high-level tour of the architecture and key modules.\n3.  **First Good Issue:** Assigning a low-complexity task (e.g., a small bug fix or UI tweak) to get them familiar with the deployment flow (commit, PR, merge).\n4.  **Mentorship:** Assigning a 'buddy' for the first few weeks to answer questions.\n5.  **Process Intro:** Explaining our Agile rituals, coding standards, and communication channels.",
+      "difficulty": "Easy",
+      "tags": ["Leadership", "Onboarding"]
+    },
+    {
+      "id": "mgr-14",
+      "q": "What tools do you use to track project progress and manage tasks?",
+      "a": "*   **Jira:** For comprehensive Agile management (epics, stories, extensive reporting).\n*   **Trello / Asana:** For lighter-weight task tracking or Kanban boards.\n*   **GitHub Projects / GitLab Boards:** For keeping code and tasks in the same ecosystem.\n*   **Linear:** For a fast, developer-focused issue tracking experience.\n*   **Confluence/Notion:** For documentation and knowledge sharing alongside the tasks.",
+      "difficulty": "Easy",
+      "tags": ["Tools", "Management"]
+    },
+    {
+      "id": "mgr-15",
+      "q": "What are the key considerations when designing RESTful APIs?",
+      "a": "1.  **Resource Naming:** Use nouns (e.g., `/users`, `/orders`) and HTTP verbs (GET, POST, PUT, DELETE).\n2.  **Versioning:** Always version APIs (e.g., `/api/v1/resource`) to handle breaking changes without disrupting clients.\n3.  **Status Codes:** Use correct HTTP codes (200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Server Error).\n4.  **Pagination:** Implement pagination for list endpoints to improve performance.\n5.  **Filtering & Sorting:** Allow clients to filter/sort data via query params (e.g., `?status=active&sort=date`).\n6.  **Security:** Implement authentication (JWT) and rate limiting.",
+      "difficulty": "Medium",
+      "tags": ["API Design", "Backend"]
+    },
+    {
+      "id": "mgr-16",
+      "q": "What is your approach to deploying and scaling a MERN stack application?",
+      "a": "**Deployment:**\n*   **Frontend:** Deploy React to CDNs (Vercel, Netlify, AWS CloudFront) for speed.\n*   **Backend:** Containerize Node.js apps using **Docker** and deploy to cloud services (AWS ECS, DigitalOcean App Platform, Heroku).\n*   **CI/CD:** Use GitHub Actions or Jenkins to automate testing and deployment.\n\n**Scaling:**\n*   **Horizontal Scaling:** Run multiple instances of the Node.js server behind a **Load Balancer** (Nginx/AWS ALB).\n*   **Database:** Use MongoDB Atlas for auto-scaling. Implement **Sharding** for massive data and **Replication** for high availability.\n*   **Caching:** Use **Redis** to cache frequent API responses or session data to offload the database.",
+      "difficulty": "Hard",
+      "tags": ["DevOps", "Scaling", "MERN"]
+    },
+    {
+      "id": "mgr-17",
+      "q": "How would you handle a situation where the application is experiencing a memory leak?",
+      "a": "1.  **Identify:** Use monitoring tools (New Relic, Datadog) to observe memory usage trends (e.g., steady increase without garbage collection release).\n2.  **Reproduce:** Try to reproduce the leak in a staging environment under load.\n3.  **Profile:** Use **Node.js Inspector** or Chrome DevTools to take **Heap Snapshots**. Compare snapshots over time to find objects that aren't being garbage collected.\n4.  **Common Culprits:** Look for global variables, uncleared intervals/timers, closure references, or event listeners that weren't removed.\n5.  **Fix & Verify:** Refactor the code to release references, deploy the fix, and monitor to ensure memory stabilizes.",
+      "difficulty": "Hard",
+      "tags": ["Debugging", "Performance"]
+    },
+    {
+      "id": "mgr-18",
+      "q": "A feature you implemented in React is causing performance issues. How would you debug it?",
+      "a": "1.  **React DevTools Profiler:** Record a session to see which components are re-rendering and how long they take.\n2.  **Unnecessary Re-renders:** Look for components rendering when props haven't changed. Fix with `React.memo`, `useMemo`, or `useCallback`.\n3.  **Large DOM Updates:** If rendering huge lists, implement **Virtualization** (e.g., `react-window`) to render only visible items.\n4.  **Bundle Size:** Check if large libraries are being imported unnecessarily. Use code-splitting (`React.lazy`) to load components only when needed.\n5.  **State Management:** Ensure state updates are optimized and not triggering global re-renders (e.g., moving state down or using Context effectively).",
+      "difficulty": "Medium",
+      "tags": ["React", "Performance", "Debugging"]
+    },
+    {
+      "id": "mgr-19",
+      "q": "What steps would you take if your database suddenly becomes a bottleneck in your application?",
+      "a": "1.  **Analyze Queries:** Check the database logs for slow queries. Use `explain()` in MongoDB to see if indexes are being used.\n2.  **Indexing:** Add missing indexes to frequently queried fields.\n3.  **Caching:** Implement Redis to cache read-heavy data and reduce DB hits.\n4.  **Optimize Schema:** Check if data modeling fits the access patterns (e.g., embedding vs. referencing).\n5.  **Vertical Scaling:** Temporarily increase server resources (RAM/CPU).\n6.  **Read Replicas:** Offload read operations to secondary replicas if the load is read-heavy.",
+      "difficulty": "Hard",
+      "tags": ["Database", "Performance"]
+    },
+    {
+      "id": "mgr-20",
+      "q": "If your team is stuck on a critical bug, how would you guide them to a solution?",
+      "a": "1.  **Calm the Chaos:** First, ensure everyone stays calm. Panic leads to mistakes.\n2.  **Isolate the Issue:** Encourage a divide-and-conquer approach to narrow down the problem scope.\n3.  **Rubber Ducking:** Ask them to explain the code and the problem to me step-by-step. Often, the solution appears during the explanation.\n4.  **Review Changes:** Look at recent commits. What changed since it last worked?\n5.  **Provide Fresh Eyes:** Sometimes a developer is too close to the code. I'd offer a fresh perspective or suggest a break.\n6.  **Facilitate, Don't Dictate:** If I know the answer, I guide them to it rather than just typing it out, to ensure learning happens.",
+      "difficulty": "Medium",
+      "tags": ["Leadership", "Problem Solving"]
+    },
+    {
+      "id": "mgr-21",
+      "q": "What is your approach to conducting code reviews?",
+      "a": "1.  **Constructive Tone:** Always critique the code, not the person. Be polite and helpful.\n2.  **Focus on Logic & Architecture:** Don't nitpick formatting (let linters handle that). Focus on bugs, security, maintainability, and performance.\n3.  **Test Coverage:** Check if the new code includes tests and if existing tests pass.\n4.  **Clarity:** Is the code readable? Are variable names descriptive?\n5.  **Small Batches:** Encourage small PRs. Large PRs are hard to review effectively.\n6.  **Praise:** Highlight good code or clever solutions, not just errors.",
+      "difficulty": "Medium",
+      "tags": ["Process", "Code Quality"]
+    },
+    {
+      "id": "mgr-22",
+      "q": "How do you optimize MongoDB queries for better performance?",
+      "a": "1.  **Indexes:** The most critical factor. Create compound indexes for queries involving multiple fields.\n2.  **Projection:** Return only the fields you need (`{ name: 1, _id: 0 }`) to reduce network overhead.\n3.  **Avoid $regex:** Case-insensitive regex searches at start of string are slow (scan full index/collection). Use text indexes instead.\n4.  **Limit & Skip:** Always limit results. For pagination, avoid large `skip` values (range-based pagination is faster).\n5.  **Lean:** In Mongoose, use `.lean()` for read-only operations to skip hydrating full Mongoose documents.",
+      "difficulty": "Hard",
+      "tags": ["MongoDB", "Performance"]
+    },
+    {
+      "id": "mgr-23",
+      "q": "How do you manage error handling in an Express.js application?",
+      "a": "1.  **Centralized Error Middleware:** Use a global error handling middleware at the end of the app (`app.use((err, req, res, next) => ...)`).\n2.  **Async/Await:** Use `try/catch` blocks in async route handlers. Pass errors to `next(err)`.\n3.  **Custom Error Classes:** Create custom classes like `AppError` extending `Error` to standardize status codes and messages.\n4.  **Unhandled Rejections:** Listen for `unhandledRejection` and `uncaughtException` process events to log fatal errors and restart the process gracefully.\n5.  **Logging:** Log errors (stack traces) to a service like Winston or Morgan, but never send stack traces to the client in production.",
+      "difficulty": "Medium",
+      "tags": ["Express", "Node.js", "Error Handling"]
+    },
+    {
+      "id": "mgr-24",
+      "q": "Explain how you would secure an Express.js API.",
+      "a": "1.  **Authentication & Authorization:** Use JWT/OAuth for verifying identity and Role-Based Access Control (RBAC) for permissions.\n2.  **Helmet:** Set secure HTTP headers.\n3.  **Rate Limiting:** Use `express-rate-limit` to prevent brute-force and DDoS attacks.\n4.  **CORS:** Configure Cross-Origin Resource Sharing strictly to allow only trusted domains.\n5.  **Data Validation:** Validate all incoming body/query data.\n6.  **NoSQL Injection Prevention:** Sanitize inputs against injection attacks.\n7.  **HTTPS Only:** Ensure the API is only accessible over HTTPS.",
+      "difficulty": "Medium",
+      "tags": ["Security", "Express"]
+    },
+    {
+      "id": "mgr-25",
+      "q": "How do you optimize React applications for performance?",
+      "a": "1.  **Code Splitting:** Use `React.lazy` and `Suspense` to load bundles on demand.\n2.  **Memoization:** Use `React.memo`, `useMemo`, and `useCallback` to prevent unnecessary re-renders.\n3.  **Virtualization:** Use libraries like `react-window` for long lists.\n4.  **Image Optimization:** Use modern formats (WebP), lazy loading, and proper sizing.\n5.  **Debouncing/Throttling:** Limit the rate of event handlers (e.g., search inputs, scroll events).\n6.  **Server-Side Rendering (SSR):** Use Next.js for faster First Contentful Paint (FCP) and better SEO.",
+      "difficulty": "Medium",
+      "tags": ["React", "Performance"]
+    },
+    {
+      "id": "mgr-26",
+      "q": "How do you secure a Node.js application?",
+      "a": "1.  **Dependencies:** Regularly audit `npm` packages (`npm audit`) to fix vulnerabilities.\n2.  **Secrets Management:** Never commit secrets. Use environment variables.\n3.  **Process Management:** Run as a non-root user in Docker containers.\n4.  **Request Validation:** Validate all input early.\n5.  **Security Headers:** Use Helmet.\n6.  **Logging & Monitoring:** Implement robust logging to detect suspicious activities.",
+      "difficulty": "Medium",
+      "tags": ["Node.js", "Security"]
+    },
+    {
+      "id": "mgr-27",
+      "q": "How would you handle database sharding and replication in MongoDB?",
+      "a": "**Replication (High Availability):**\n*   Set up a **Replica Set** with a Primary node (writes/reads) and multiple Secondary nodes (replicas).\n*   If the Primary fails, an election occurs, and a Secondary becomes the new Primary automatically.\n\n**Sharding (Horizontal Scaling):**\n*   Used when data exceeds the storage/throughput capacity of a single server.\n*   **Shard Key:** Choose a high-cardinality shard key (e.g., `userId` or `region`) to distribute data evenly across shards.\n*   **Router (mongos):** Routes client queries to the correct shard based on the key.\n*   **Config Servers:** Store metadata about the cluster state.\n*   *Strategy:* I would start with vertical scaling and replication. I would only introduce sharding when absolutely necessary due to its operational complexity.",
+      "difficulty": "Hard",
+      "tags": ["MongoDB", "Database", "Scaling"]
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "questions": [
+    {
+      "id": "code-01",
+      "q": "Implement Bubble Sort in JavaScript.",
+      "a": "```javascript\n// Function to sort an array using Bubble Sort\nfunction bubbleSort(arr) {\n    let n = arr.length;\n\n    for (let i = 0; i < n - 1; i++) {\n        for (let j = 0; j < n - i - 1; j++) {\n            \n            // Compare current element with the next element\n            if (arr[j] > arr[j + 1]) {\n                \n                // ES6 destructuring to swap elements\n                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];\n            }\n        }\n    }\n    \n    return arr;\n}\n\n// Example array to sort\nlet numbers = [5, 2, 9, 1, 5, 6];\nconsole.log(bubbleSort(numbers)); // Output: [1, 2, 5, 5, 6, 9]\n```",
+      "difficulty": "Easy",
+      "tags": ["sorting", "algorithms", "arrays"]
+    },
+    {
+      "id": "code-02",
+      "q": "Implement the 'merge' function for Merge Sort (Merge two sorted arrays).",
+      "a": "```javascript\nfunction merge(arr1, arr2) {\n  // Initialize an empty array to store the result\n  let mergedArray = [];\n\n  // Pointers for both arrays\n  let i = 0; // pointer for arr1\n  let j = 0; // pointer for arr2\n\n  // Loop until elements remain in both arrays\n  while (i < arr1.length && j < arr2.length) {\n    if (arr1[i] < arr2[j]) {\n      // If arr1 element is smaller, push it to mergedArray\n      mergedArray.push(arr1[i]);\n      i++;\n    } else {\n      // If arr2 element is smaller or equal, push it to mergedArray\n      mergedArray.push(arr2[j]);\n      j++;\n    }\n  }\n\n  // If elements remain in arr1, push them\n  while (i < arr1.length) {\n    mergedArray.push(arr1[i]);\n    i++;\n  }\n\n  // If elements remain in arr2, push them\n  while (j < arr2.length) {\n    mergedArray.push(arr2[j]);\n    j++;\n  }\n\n  return mergedArray;\n}\n\n// Example\nconst res = merge([3, 27, 38, 43], [9, 10, 17, 82]);\nconsole.log(res); // Output: [3, 9, 10, 17, 27, 38, 43, 82]\n```",
+      "difficulty": "Medium",
+      "tags": ["sorting", "algorithms", "arrays"]
+    },
+    {
+      "id": "code-03",
+      "q": "Calculate the frequency of each character in a string.",
+      "a": "```javascript\nfunction frequency(str) {\n    let outputObj = {};\n\n    for (let i = 0; i < str.length; i++) {\n        if (!outputObj.hasOwnProperty(str[i])) {\n            outputObj[str[i]] = 1;\n        } else {\n            outputObj[str[i]]++;\n        }\n    }\n\n    return outputObj;\n}\n\nconsole.log(frequency(\"eminenceinnovation.com\"));\n```",
+      "difficulty": "Easy",
+      "tags": ["strings", "objects", "frequency"]
+    },
+    {
+      "id": "code-04",
+      "q": "Compress an input string using character counts (Run Length Encoding).",
+      "a": "```javascript\nfunction compressString(input) {\n    let result = \"\";\n    let count = 1;\n\n    for (let i = 1; i <= input.length; i++) {\n        // Compare current char with previous char\n        if (input[i] === input[i - 1]) {\n            count++;\n        } else {\n            // Append previous char and its count\n            result += input[i - 1] + count;\n            count = 1;\n        }\n    }\n\n    return result;\n}\n\n// Test\nconst input = \"aabbccabbb\";\nconst output = compressString(input);\nconsole.log(output); // Output: a2b2c2a1b3\n```",
+      "difficulty": "Medium",
+      "tags": ["strings", "algorithms"]
+    },
+    {
+      "id": "code-05",
+      "q": "Efficiently merge two sorted arrays (One-liner approach).",
+      "a": "```javascript\nfunction mergeSortedArrays(arr1, arr2) {\n  // Merge using spread operator and sort\n  return [...arr1, ...arr2].sort((a, b) => a - b);\n}\n\n// Note: This approach has a time complexity of O((N+M) log(N+M)) due to sorting,\n// whereas the two-pointer approach is O(N+M).\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "sorting", "built-in-methods"]
+    },
+    {
+      "id": "code-06",
+      "q": "Sort array of fruits by the second character (and remove duplicates).",
+      "a": "```javascript\nfunction removeDuplicate(fruitsArray) {\n  // Remove duplicates by creating a new array with unique values\n  let temp = [];\n  for (let item of fruitsArray) {\n    if (!temp.includes(item)) {\n      temp.push(item);\n    }\n  }\n  \n  console.log('Removed Duplicates:', temp);\n  \n  // Sort by the second character of each fruit name\n  let sortedArray = temp.sort((a, b) => {\n    // Check if strings have at least 2 characters\n    if (a.length < 2 || b.length < 2) {\n      return a.localeCompare(b); // Fallback to regular string comparison\n    }\n    \n    // Compare by the second character (index 1)\n    return a.charAt(1).localeCompare(b.charAt(1));\n  });\n  \n  console.log('Sorted by second character:', sortedArray);\n  \n  return sortedArray;\n}\n\n// Test with the provided array\nconst fruits = [\"banana\", \"apple\", \"orange\", \"grape\", \"kiwi\", \"banana\", \"banana\"];\nremoveDuplicate(fruits);\n```",
+      "difficulty": "Medium",
+      "tags": ["arrays", "sorting", "strings"]
+    },
+    {
+      "id": "code-07",
+      "q": "Validate an IPv4 address without using regular expressions.",
+      "a": "```javascript\n/**\n * Validates an IPv4 address without using regular expressions\n * @param {string} ipAddress - The IP address to validate\n * @returns {boolean} - Returns true if the IP address is valid, false otherwise\n */\nfunction isValidIPv4(ipAddress) {\n  // Check if input is a string\n  if (typeof ipAddress !== 'string') {\n    return false;\n  }\n  \n  // Split the IP address by dots\n  const octets = ipAddress.split('.');\n  \n  // A valid IPv4 address must have exactly 4 parts (octets)\n  if (octets.length !== 4) {\n    return false;\n  }\n  \n  // Check each octet\n  for (const octet of octets) {\n    // Check if the octet is empty\n    if (octet.length === 0) {\n      return false;\n    }\n    \n    // Check for leading zeros (except for single '0')\n    if (octet.length > 1 && octet.startsWith('0')) {\n      return false;\n    }\n    \n    // Check if the octet contains only digits\n    for (const char of octet) {\n      if (char < '0' || char > '9') {\n        return false;\n      }\n    }\n    \n    // Convert the octet to number and validate range (0-255)\n    const num = parseInt(octet, 10);\n    if (isNaN(num) || num < 0 || num > 255) {\n      return false;\n    }\n  }\n  \n  return true;\n}\n\n// Example usage:\nconsole.log(isValidIPv4('192.168.1.1'));       // true\nconsole.log(isValidIPv4('255.255.255.255'));   // true\nconsole.log(isValidIPv4('0.0.0.0'));           // true\nconsole.log(isValidIPv4('256.256.256.256'));   // false (values > 255)\nconsole.log(isValidIPv4('192.168.1'));         // false (not enough octets)\nconsole.log(isValidIPv4('192.168.1.1.1'));     // false (too many octets)\nconsole.log(isValidIPv4('192.168.01.1'));      // false (leading zeros)\nconsole.log(isValidIPv4('192.168.1.abc'));     // false (not numeric)\nconsole.log(isValidIPv4('...'));               // false (empty octets)\n```",
+      "difficulty": "Hard",
+      "tags": ["validation", "strings", "algorithms"]
+    },
+    {
+      "id": "code-08",
+      "q": "Check if two strings are anagrams (without using sort).",
+      "a": "```javascript\nfunction anagram(str1, str2){\n  if(str1.length !== str2.length ){\n    return false\n  }\n  let result = false;\n  let obj1 = {};\n  let obj2 = {};\n\n  for (let x of str1){\n    if(obj1[x]) {\n      obj1[x]++;\n    } else {\n      obj1[x] = 1;\n    }\n  }\n\n  for (let x of str2){\n    if(obj2[x]) {\n      obj2[x]++;\n    } else {\n      obj2[x] = 1;\n    }\n  }\n\n  for (let x in obj1){\n    if(obj1[x] !== obj2[x]){\n      return false;\n    }\n  }\n\n  return true;\n}\n\nconsole.log(anagram('secure', 'rescue'));\n```",
+      "difficulty": "Medium",
+      "tags": ["strings", "objects", "anagrams"]
+    },
+    {
+      "id": "code-09",
+      "q": "Extract text from a numbered list string.",
+      "a": "```javascript\n// Input String\nconst input = \"1.Love conquers all 2.Time flies quickly 3.Dreams inspire hope 4.Knowledge empowers growth\";\n\n// Solution using regex to split by digit followed by dot\nconst output = input.split(/\\d+\\./).filter(s => s.trim().length > 0).map(s => s.trim());\n\nconsole.log(output);\n// Output: [\"Love conquers all\", \"Time flies quickly\", \"Dreams inspire hope\", \"Knowledge empowers growth\"]\n```",
+      "difficulty": "Easy",
+      "tags": ["regex", "strings", "parsing"]
+    },
+    {
+      "id": "code-10",
+      "q": "Find pairs in an array that sum to a target (Brute Force).",
+      "a": "```javascript\nfunction findPairsBruteForce(arr, target) {\n  const pairs = [];\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = i + 1; j < arr.length; j++) {\n      if (arr[i] + arr[j] === target) {\n        pairs.push([arr[i], arr[j]]);\n      }\n    }\n  }\n  return pairs;\n}\n\nconst input1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];\nconst input2 = 10;\nconsole.log(findPairsBruteForce(input1, input2)); \n// Output: [[1,9], [2,8], [3,7], [4,6]]\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "algorithms", "sum-pairs"]
+    },
+    {
+      "id": "code-11",
+      "q": "Group values by key from an array of objects.",
+      "a": "```javascript\nfunction add(arr){\n     let result = {};\n\n     for (let x of arr) {\n          if (result[x.key] !== undefined) {\n               result[x.key].push(x.value)\n          } else {\n               result[x.key] = [x.value]\n          }\n         \n     }\n\n     return result;\n}\n\nconst inp = [\n     { key: \"a\", value: 10 },\n     { key: \"c\", value: 30 },\n     { key: \"a\", value: 50 },\n     { key: \"b\", value: 20 },\n     { key: \"e\", value: 35 },\n     { key: \"b\", value: 45 },\n     { key: \"b\", value: 40 },\n]\n\n// Expected Output:\n// {\n//      a: [10, 50],\n//      c: [30],\n//      b: [20, 45, 40],\n//      e: [35]\n// }\n\nconsole.log(add(inp));\n```",
+      "difficulty": "Medium",
+      "tags": ["objects", "grouping", "arrays"]
+    },
+    {
+      "id": "code-12",
+      "q": "Implement Run Length Encoding with count preceding the character.",
+      "a": "```javascript\nfunction runLengthEncoding(str) {\n    if (!str) return '';\n    \n    let result = '';\n    let count = 1;\n    \n    for (let i = 1; i <= str.length; i++) {\n        if (str[i] === str[i-1]) {\n            count++;\n        } else {\n            result += count + str[i-1];\n            count = 1;\n        }\n    }\n    \n    return result;\n}\n\nconsole.log(runLengthEncoding('aaabbbacccddd')); // Output: 3a3b1a3c3d\n```",
+      "difficulty": "Medium",
+      "tags": ["strings", "algorithms", "recursion"]
+    },
+    {
+      "id": "code-13",
+      "q": "Increment each element in an array recursively (without loops).",
+      "a": "```javascript\nfunction recursiveIncrement(arr, index = 0) {\n    // Base case: if index reaches array length, return\n    if (index === arr.length) {\n        return arr;\n    }\n    \n    // Increment current element\n    arr[index] = arr[index] + 1;\n    \n    // Recursive call for next element\n    return recursiveIncrement(arr, index + 1);\n}\n\nconst nums = [1, 2, 3, 4, 5];\nconsole.log(recursiveIncrement(nums)); // Output: [2, 3, 4, 5, 6]\n```",
+      "difficulty": "Medium",
+      "tags": ["recursion", "arrays"]
+    },
+    {
+      "id": "code-14",
+      "q": "Count occurrences of a value (e.g., 5) in a nested array recursively.",
+      "a": "```javascript\nfunction countValue(arr, val) {\n    let count = 0;\n    \n    for (let item of arr) {\n        if (Array.isArray(item)) {\n            // Recursive call for nested arrays\n            count += countValue(item, val);\n        } else if (item === val) {\n            count++;\n        }\n    }\n    \n    return count;\n}\n\nconst nestedArray = [1, 5, [5, 2], [3, [5, 5], 4], 5];\nconsole.log(countValue(nestedArray, 5)); // Output: 5\n```",
+      "difficulty": "Hard",
+      "tags": ["recursion", "arrays", "nested"]
+    },
+    {
+      "id": "code-15",
+      "q": "Implement a closure-based groupBy function.",
+      "a": "```javascript\nfunction groupBy(key) {\n    return function(array) {\n        return array.reduce((acc, obj) => {\n            const property = obj[key];\n            if (!acc[property]) {\n                acc[property] = [];\n            }\n            acc[property].push(obj);\n            return acc;\n        }, {});\n    };\n}\n\nconst data = [\n    { category: 'fruit', name: 'apple' },\n    { category: 'fruit', name: 'banana' },\n    { category: 'vegetable', name: 'carrot' }\n];\n\nconst groupByCategory = groupBy('category');\nconsole.log(groupByCategory(data));\n// Output:\n// {\n//   fruit: [{ category: 'fruit', name: 'apple' }, { category: 'fruit', name: 'banana' }],\n//   vegetable: [{ category: 'vegetable', name: 'carrot' }]\n// }\n```",
+      "difficulty": "Medium",
+      "tags": ["closures", "objects", "functional-programming"]
+    },
+    {
+      "id": "code-16",
+      "q": "Check if a string is a palindrome.",
+      "a": "```javascript\nfunction isPalindrome(str) {\n  // Remove non-alphanumeric characters and convert to lowercase\n  const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  \n  // Reverse the cleaned string\n  const reversed = cleanStr.split('').reverse().join('');\n  \n  return cleanStr === reversed;\n}\n\nconsole.log(isPalindrome(\"A man, a plan, a canal: Panama\")); // true\nconsole.log(isPalindrome(\"hello\")); // false\n```",
+      "difficulty": "Easy",
+      "tags": ["strings", "algorithms"]
+    },
+    {
+      "id": "code-17",
+      "q": "Calculate the factorial of a number (Recursive).",
+      "a": "```javascript\nfunction factorial(n) {\n  if (n === 0 || n === 1) {\n    return 1;\n  }\n  return n * factorial(n - 1);\n}\n\nconsole.log(factorial(5)); // 120\n```",
+      "difficulty": "Easy",
+      "tags": ["recursion", "math"]
+    },
+    {
+      "id": "code-18",
+      "q": "Generate the nth Fibonacci number.",
+      "a": "```javascript\nfunction fibonacci(n) {\n  if (n <= 1) return n;\n  \n  let a = 0, b = 1;\n  for (let i = 2; i <= n; i++) {\n    let temp = a + b;\n    a = b;\n    b = temp;\n  }\n  return b;\n}\n\nconsole.log(fibonacci(10)); // 55\n```",
+      "difficulty": "Medium",
+      "tags": ["algorithms", "math", "fibonacci"]
+    },
+    {
+      "id": "code-19",
+      "q": "Find the maximum number in an array.",
+      "a": "```javascript\nfunction findMax(arr) {\n  if (arr.length === 0) return null;\n  return Math.max(...arr);\n}\n\n// Alternative without spread operator for very large arrays\nfunction findMaxLoop(arr) {\n  let max = -Infinity;\n  for (let num of arr) {\n    if (num > max) max = num;\n  }\n  return max;\n}\n\nconsole.log(findMax([1, 5, 3, 9, 2])); // 9\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "math"]
+    },
+    {
+      "id": "code-20",
+      "q": "Reverse a string without using built-in reverse().",
+      "a": "```javascript\nfunction reverseString(str) {\n  let reversed = '';\n  for (let i = str.length - 1; i >= 0; i--) {\n    reversed += str[i];\n  }\n  return reversed;\n}\n\nconsole.log(reverseString(\"hello\")); // \"olleh\"\n```",
+      "difficulty": "Easy",
+      "tags": ["strings", "algorithms"]
+    },
+    {
+      "id": "code-21",
+      "q": "Implement FizzBuzz.",
+      "a": "```javascript\nfunction fizzBuzz(n) {\n  for (let i = 1; i <= n; i++) {\n    let output = '';\n    if (i % 3 === 0) output += 'Fizz';\n    if (i % 5 === 0) output += 'Buzz';\n    console.log(output || i);\n  }\n}\n\nfizzBuzz(15);\n// Output: 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz\n```",
+      "difficulty": "Easy",
+      "tags": ["algorithms", "logic"]
+    },
+    {
+      "id": "code-22",
+      "q": "Remove duplicates from an array.",
+      "a": "```javascript\n// Using Set (ES6)\nfunction removeDuplicates(arr) {\n  return [...new Set(arr)];\n}\n\n// Using Filter\nfunction removeDuplicatesFilter(arr) {\n  return arr.filter((item, index) => arr.indexOf(item) === index);\n}\n\nconsole.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5])); // [1, 2, 3, 4, 5]\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "sets", "es6"]
+    },
+    {
+      "id": "code-23",
+      "q": "Flatten a nested array of any depth.",
+      "a": "```javascript\n// Using ES6 flat()\nfunction flattenES6(arr) {\n  return arr.flat(Infinity);\n}\n\n// Recursive implementation\nfunction flattenRecursive(arr) {\n  return arr.reduce((acc, val) => \n    Array.isArray(val) ? acc.concat(flattenRecursive(val)) : acc.concat(val), \n  []);\n}\n\nconsole.log(flattenRecursive([1, [2, [3, 4], 5]])); // [1, 2, 3, 4, 5]\n```",
+      "difficulty": "Medium",
+      "tags": ["arrays", "recursion"]
+    },
+    {
+      "id": "code-24",
+      "q": "Capitalize the first letter of each word in a string.",
+      "a": "```javascript\nfunction capitalizeWords(str) {\n  return str.split(' ')\n    .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n    .join(' ');\n}\n\nconsole.log(capitalizeWords(\"hello world from javascript\")); \n// \"Hello World From Javascript\"\n```",
+      "difficulty": "Easy",
+      "tags": ["strings", "formatting"]
+    },
+    {
+      "id": "code-25",
+      "q": "Find the longest word in a sentence.",
+      "a": "```javascript\nfunction findLongestWord(str) {\n  const words = str.split(' ');\n  let longest = '';\n  \n  for (let word of words) {\n    if (word.length > longest.length) {\n      longest = word;\n    }\n  }\n  return longest;\n}\n\nconsole.log(findLongestWord(\"The quick brown fox jumped over the lazy dog\")); \n// \"jumped\"\n```",
+      "difficulty": "Easy",
+      "tags": ["strings", "algorithms"]
+    },
+    {
+      "id": "code-26",
+      "q": "Check if a number is prime.",
+      "a": "```javascript\nfunction isPrime(num) {\n  if (num <= 1) return false;\n  if (num <= 3) return true;\n  \n  // Check divisibility up to square root\n  for (let i = 2; i <= Math.sqrt(num); i++) {\n    if (num % i === 0) return false;\n  }\n  return true;\n}\n\nconsole.log(isPrime(17)); // true\nconsole.log(isPrime(25)); // false\n```",
+      "difficulty": "Medium",
+      "tags": ["math", "algorithms"]
+    },
+    {
+      "id": "code-27",
+      "q": "Find the intersection of two arrays.",
+      "a": "```javascript\nfunction intersection(arr1, arr2) {\n  const set1 = new Set(arr1);\n  return arr2.filter(item => set1.has(item));\n}\n\nconsole.log(intersection([1, 2, 3, 4], [3, 4, 5, 6])); // [3, 4]\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "sets"]
+    },
+    {
+      "id": "code-28",
+      "q": "Implement a Debounce function.",
+      "a": "```javascript\nfunction debounce(func, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => {\n      func.apply(this, args);\n    }, delay);\n  };\n}\n\n// Usage\nconst log = debounce(() => console.log('Debounced!'), 1000);\nlog();\nlog();\nlog(); // Only this one runs after 1s\n```",
+      "difficulty": "Medium",
+      "tags": ["functional-programming", "async"]
+    },
+    {
+      "id": "code-29",
+      "q": "Implement a Throttle function.",
+      "a": "```javascript\nfunction throttle(func, limit) {\n  let inThrottle;\n  return function(...args) {\n    if (!inThrottle) {\n      func.apply(this, args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n}\n\n// Usage\nconst log = throttle(() => console.log('Throttled!'), 1000);\nlog(); // Runs\nlog(); // Ignored\n```",
+      "difficulty": "Medium",
+      "tags": ["functional-programming", "async"]
+    },
+    {
+      "id": "code-30",
+      "q": "Implement a deep clone function.",
+      "a": "```javascript\nfunction deepClone(obj) {\n  if (obj === null || typeof obj !== 'object') return obj;\n  \n  // Handle Date and RegExp\n  if (obj instanceof Date) return new Date(obj);\n  if (obj instanceof RegExp) return new RegExp(obj);\n  \n  // Handle Array and Object\n  const clone = Array.isArray(obj) ? [] : {};\n  \n  for (let key in obj) {\n    if (Object.prototype.hasOwnProperty.call(obj, key)) {\n      clone[key] = deepClone(obj[key]);\n    }\n  }\n  return clone;\n}\n\nconst original = { a: 1, b: { c: 2 } };\nconst copy = deepClone(original);\nconsole.log(copy); // { a: 1, b: { c: 2 } }\n```",
+      "difficulty": "Hard",
+      "tags": ["objects", "recursion"]
+    },
+    {
+      "id": "code-31",
+      "q": "Implement Array.prototype.map polyfill.",
+      "a": "```javascript\nArray.prototype.myMap = function(callback) {\n  const result = [];\n  for (let i = 0; i < this.length; i++) {\n    // Check if index exists (handle sparse arrays)\n    if (i in this) {\n      result.push(callback(this[i], i, this));\n    }\n  }\n  return result;\n};\n\nconsole.log([1, 2, 3].myMap(x => x * 2)); // [2, 4, 6]\n```",
+      "difficulty": "Medium",
+      "tags": ["polyfills", "arrays"]
+    },
+    {
+      "id": "code-32",
+      "q": "Implement Array.prototype.filter polyfill.",
+      "a": "```javascript\nArray.prototype.myFilter = function(callback) {\n  const result = [];\n  for (let i = 0; i < this.length; i++) {\n    if (i in this && callback(this[i], i, this)) {\n      result.push(this[i]);\n    }\n  }\n  return result;\n};\n\nconsole.log([1, 2, 3, 4].myFilter(x => x % 2 === 0)); // [2, 4]\n```",
+      "difficulty": "Medium",
+      "tags": ["polyfills", "arrays"]
+    },
+    {
+      "id": "code-33",
+      "q": "Implement Array.prototype.reduce polyfill.",
+      "a": "```javascript\nArray.prototype.myReduce = function(callback, initialValue) {\n  let accumulator = initialValue;\n  let startIndex = 0;\n\n  // If no initialValue provided, take first element as accumulator\n  if (initialValue === undefined) {\n    if (this.length === 0) throw new TypeError('Reduce of empty array with no initial value');\n    accumulator = this[0];\n    startIndex = 1;\n  }\n\n  for (let i = startIndex; i < this.length; i++) {\n    if (i in this) {\n      accumulator = callback(accumulator, this[i], i, this);\n    }\n  }\n  return accumulator;\n};\n\nconsole.log([1, 2, 3].myReduce((acc, curr) => acc + curr, 0)); // 6\n```",
+      "difficulty": "Hard",
+      "tags": ["polyfills", "arrays"]
+    },
+    {
+      "id": "code-34",
+      "q": "Implement a function to flatten an object.",
+      "a": "```javascript\nfunction flattenObject(obj, prefix = '') {\n  let result = {};\n  for (let key in obj) {\n    if (typeof obj[key] === 'object' && obj[key] !== null) {\n      Object.assign(result, flattenObject(obj[key], prefix + key + '.'));\n    } else {\n      result[prefix + key] = obj[key];\n    }\n  }\n  return result;\n}\n\nconst nested = { a: 1, b: { c: 2, d: { e: 3 } } };\nconsole.log(flattenObject(nested)); \n// { \"a\": 1, \"b.c\": 2, \"b.d.e\": 3 }\n```",
+      "difficulty": "Medium",
+      "tags": ["objects", "recursion"]
+    },
+    {
+      "id": "code-35",
+      "q": "Implement a Curry function.",
+      "a": "```javascript\nfunction curry(func) {\n  return function curried(...args) {\n    if (args.length >= func.length) {\n      return func.apply(this, args);\n    } else {\n      return function(...nextArgs) {\n        return curried.apply(this, args.concat(nextArgs));\n      };\n    }\n  };\n}\n\nfunction sum(a, b, c) { return a + b + c; }\nconst curriedSum = curry(sum);\nconsole.log(curriedSum(1)(2)(3)); // 6\n```",
+      "difficulty": "Hard",
+      "tags": ["functional-programming", "closures"]
+    },
+    {
+      "id": "code-36",
+      "q": "Implement Promise.all polyfill.",
+      "a": "```javascript\nfunction myPromiseAll(promises) {\n  return new Promise((resolve, reject) => {\n    let results = [];\n    let completed = 0;\n    \n    if (promises.length === 0) resolve([]);\n    \n    promises.forEach((promise, index) => {\n      Promise.resolve(promise).then(value => {\n        results[index] = value;\n        completed++;\n        if (completed === promises.length) resolve(results);\n      }).catch(err => reject(err));\n    });\n  });\n}\n\nmyPromiseAll([Promise.resolve(1), Promise.resolve(2)])\n  .then(console.log); // [1, 2]\n```",
+      "difficulty": "Hard",
+      "tags": ["promises", "async", "polyfills"]
+    },
+    {
+      "id": "code-37",
+      "q": "Find the missing number in an array of 1 to N.",
+      "a": "```javascript\nfunction findMissingNumber(arr) {\n  const n = arr.length + 1;\n  const expectedSum = (n * (n + 1)) / 2;\n  const actualSum = arr.reduce((acc, curr) => acc + curr, 0);\n  return expectedSum - actualSum;\n}\n\nconsole.log(findMissingNumber([1, 2, 4, 5, 6])); // 3\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "math"]
+    },
+    {
+      "id": "code-38",
+      "q": "Check if brackets are balanced.",
+      "a": "```javascript\nfunction isValidParentheses(s) {\n  const stack = [];\n  const map = { '(': ')', '{': '}', '[': ']' };\n  \n  for (let char of s) {\n    if (map[char]) {\n      stack.push(char);\n    } else {\n      const last = stack.pop();\n      if (char !== map[last]) return false;\n    }\n  }\n  return stack.length === 0;\n}\n\nconsole.log(isValidParentheses(\"{[]}\")); // true\nconsole.log(isValidParentheses(\"([)]\")); // false\n```",
+      "difficulty": "Medium",
+      "tags": ["stacks", "algorithms"]
+    },
+    {
+      "id": "code-39",
+      "q": "Rotate an array k times.",
+      "a": "```javascript\nfunction rotateArray(arr, k) {\n  k = k % arr.length;\n  // Splice modifies original array or use slice for new array\n  // Method 1: Pop and Unshift (Slow for large k)\n  // Method 2: Slice and Concat\n  const end = arr.slice(arr.length - k);\n  const start = arr.slice(0, arr.length - k);\n  return end.concat(start);\n}\n\nconsole.log(rotateArray([1, 2, 3, 4, 5], 2)); // [4, 5, 1, 2, 3]\n```",
+      "difficulty": "Medium",
+      "tags": ["arrays", "algorithms"]
+    },
+    {
+      "id": "code-40",
+      "q": "Move all zeros to the end of the array.",
+      "a": "```javascript\nfunction moveZeroes(nums) {\n  let index = 0;\n  // Move non-zero elements to front\n  for (let i = 0; i < nums.length; i++) {\n    if (nums[i] !== 0) {\n      nums[index] = nums[i];\n      index++;\n    }\n  }\n  // Fill remaining with zeros\n  for (let i = index; i < nums.length; i++) {\n    nums[i] = 0;\n  }\n  return nums;\n}\n\nlet arr = [0, 1, 0, 3, 12];\nmoveZeroes(arr);\nconsole.log(arr); // [1, 3, 12, 0, 0]\n```",
+      "difficulty": "Easy",
+      "tags": ["arrays", "algorithms"]
+    }
+  ]
+}

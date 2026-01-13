@@ -1,0 +1,369 @@
+{
+  "slug": "ts",
+  "questions": [
+    {
+      "id": "ts-01",
+      "q": "What is TypeScript?",
+      "a": "TypeScript is an **open-source programming language** developed by Microsoft. It is a strict **syntactical superset of JavaScript** that adds **static typing**. It compiles down to plain JavaScript, which can run in any browser or JavaScript engine.",
+      "difficulty": "Easy",
+      "tags": ["basics", "intro"]
+    },
+    {
+      "id": "ts-02",
+      "q": "What are the benefits of using TypeScript?",
+      "a": "1.  **Static Typing**: Catches errors at compile-time rather than runtime.\n2.  **Better Tooling**: Enhanced IDE support (IntelliSense, autocompletion, refactoring).\n3.  **Readability**: Types serve as documentation.\n4.  **Modern JS Features**: Supports ES6+ features and polyfills them for older browsers.",
+      "difficulty": "Easy",
+      "tags": ["basics", "benefits"]
+    },
+    {
+      "id": "ts-03",
+      "q": "What is the difference between `interface` and `type`?",
+      "a": "Both define shapes of objects, but:\n- **Interfaces**: Can be **merged** (declaration merging), better for defining object shapes/contracts, can be implemented by classes.\n- **Types**: Can define **unions**, **intersections**, primitives, tuples, and more complex types. Cannot be merged.\n\nUse interfaces for public APIs/objects, types for unions/complex compositions.",
+      "difficulty": "Medium",
+      "tags": ["basics", "comparison"]
+    },
+    {
+      "id": "ts-04",
+      "q": "What is the `any` type?",
+      "a": "`any` disables type checking for a variable. It allows you to assign any value to it and access any property/method without errors. It essentially reverts TypeScript back to JavaScript behavior and should be avoided when possible.",
+      "difficulty": "Easy",
+      "tags": ["types", "basics"]
+    },
+    {
+      "id": "ts-05",
+      "q": "What is the `unknown` type?",
+      "a": "`unknown` is the **type-safe counterpart of `any`**. You can assign anything to `unknown`, but you **cannot** perform operations on it (like calling methods or accessing properties) without first checking/narrowing its type.",
+      "difficulty": "Medium",
+      "tags": ["types", "safety"]
+    },
+    {
+      "id": "ts-06",
+      "q": "What is the `never` type?",
+      "a": "`never` represents values that **never occur**. \n- It is the return type of functions that throw an exception or have infinite loops.\n- It is used in conditional types to prune unwanted cases.\n- It is the bottom type (subtype of all types).",
+      "difficulty": "Medium",
+      "tags": ["types", "advanced"]
+    },
+    {
+      "id": "ts-07",
+      "q": "What is the `void` type?",
+      "a": "`void` represents the absence of a value. It is commonly used as the return type of functions that do not return a value.",
+      "difficulty": "Easy",
+      "tags": ["types", "basics"]
+    },
+    {
+      "id": "ts-08",
+      "q": "What are Generics in TypeScript?",
+      "a": "Generics allow you to create **reusable components** (functions, classes, interfaces) that work with a variety of types rather than a single one. They act as variables for types.\n\n```typescript\nfunction identity<T>(arg: T): T {\n  return arg;\n}\n```",
+      "difficulty": "Medium",
+      "tags": ["generics", "basics"]
+    },
+    {
+      "id": "ts-09",
+      "q": "What are Union Types?",
+      "a": "Union types allow a variable to hold values of multiple specified types. They are defined using the `|` (pipe) symbol.\n\n```typescript\nlet id: string | number;\n```",
+      "difficulty": "Easy",
+      "tags": ["types", "union"]
+    },
+    {
+      "id": "ts-10",
+      "q": "What are Intersection Types?",
+      "a": "Intersection types combine multiple types into one. The resulting object has **all** the properties of the combined types. Defined using `&`.\n\n```typescript\ntype Employee = Person & Job;\n```",
+      "difficulty": "Medium",
+      "tags": ["types", "intersection"]
+    },
+    {
+      "id": "ts-11",
+      "q": "What are Enums?",
+      "a": "Enums (Enumerations) allow you to define a set of named constants. TypeScript supports numeric and string enums.\n\n```typescript\nenum Direction {\n  Up,    // 0\n  Down,  // 1\n  Left,  // 2\n  Right  // 3\n}\n```",
+      "difficulty": "Easy",
+      "tags": ["types", "enums"]
+    },
+    {
+      "id": "ts-12",
+      "q": "What is Type Assertion?",
+      "a": "Type assertion tells the compiler to treat a value as a specific type, overriding its inferred type. It's like type casting in other languages but performs no special checking or restructuring of data.\n\nSyntax: `value as Type` or `<Type>value`.",
+      "difficulty": "Easy",
+      "tags": ["types", "syntax"]
+    },
+    {
+      "id": "ts-13",
+      "q": "What is Type Inference?",
+      "a": "Type Inference is the ability of the TypeScript compiler to automatically deduce the type of a variable or expression when no explicit type is provided.\n\n```typescript\nlet x = 10; // inferred as number\n```",
+      "difficulty": "Easy",
+      "tags": ["basics", "compiler"]
+    },
+    {
+      "id": "ts-14",
+      "q": "What are Literal Types?",
+      "a": "Literal types allow you to specify exact values a string, number, or boolean must have.\n\n```typescript\ntype Alignment = 'left' | 'right' | 'center';\n```",
+      "difficulty": "Easy",
+      "tags": ["types", "literals"]
+    },
+    {
+      "id": "ts-15",
+      "q": "What are Tuples?",
+      "a": "Tuples are typed arrays with a **fixed number of elements** whose types are known, but need not be the same.\n\n```typescript\nlet x: [string, number] = ['hello', 10];\n```",
+      "difficulty": "Easy",
+      "tags": ["types", "tuples"]
+    },
+    {
+      "id": "ts-16",
+      "q": "What is `keyof` operator?",
+      "a": "The `keyof` operator takes an object type and produces a string or numeric literal union of its keys.\n\n```typescript\ntype Point = { x: number; y: number };\ntype P = keyof Point; // \"x\" | \"y\"\n```",
+      "difficulty": "Medium",
+      "tags": ["operators", "advanced"]
+    },
+    {
+      "id": "ts-17",
+      "q": "What is the `typeof` operator in TypeScript context?",
+      "a": "In TypeScript, `typeof` can be used in a type context to refer to the **type** of a variable or property.\n\n```typescript\nconst user = { name: 'Alice', age: 30 };\ntype User = typeof user; // { name: string; age: number; }\n```",
+      "difficulty": "Medium",
+      "tags": ["operators", "basics"]
+    },
+    {
+      "id": "ts-18",
+      "q": "What are Type Guards?",
+      "a": "Type Guards are expressions that perform a runtime check that guarantees the type in some scope. \n- `typeof`\n- `instanceof`\n- Custom type predicates (`parameter is Type`)",
+      "difficulty": "Medium",
+      "tags": ["types", "guards"]
+    },
+    {
+      "id": "ts-19",
+      "q": "What is a User-Defined Type Guard?",
+      "a": "A function whose return type is a **type predicate**.\n\n```typescript\nfunction isString(test: any): test is string {\n  return typeof test === 'string';\n}\n```",
+      "difficulty": "Medium",
+      "tags": ["types", "guards"]
+    },
+    {
+      "id": "ts-20",
+      "q": "What are Mapped Types?",
+      "a": "Mapped types allow you to create new types based on old ones by transforming properties. \n\n```typescript\ntype Readonly<T> = {\n  readonly [P in keyof T]: T[P];\n};\n```",
+      "difficulty": "Hard",
+      "tags": ["advanced", "mapped-types"]
+    },
+    {
+      "id": "ts-21",
+      "q": "What are Conditional Types?",
+      "a": "Conditional types select one of two possible types based on a condition expressed as a type relationship test.\n\n```typescript\ntype T = SomeType extends OtherType ? TrueType : FalseType;\n```",
+      "difficulty": "Hard",
+      "tags": ["advanced", "conditional-types"]
+    },
+    {
+      "id": "ts-22",
+      "q": "What is `Partial<T>`?",
+      "a": "`Partial<T>` is a utility type that constructs a type with all properties of `T` set to optional.",
+      "difficulty": "Medium",
+      "tags": ["utility-types", "basics"]
+    },
+    {
+      "id": "ts-23",
+      "q": "What is `Pick<T, K>`?",
+      "a": "`Pick<T, K>` constructs a type by picking the set of properties `K` from `T`.",
+      "difficulty": "Medium",
+      "tags": ["utility-types"]
+    },
+    {
+      "id": "ts-24",
+      "q": "What is `Omit<T, K>`?",
+      "a": "`Omit<T, K>` constructs a type by picking all properties from `T` and then removing `K`.",
+      "difficulty": "Medium",
+      "tags": ["utility-types"]
+    },
+    {
+      "id": "ts-25",
+      "q": "What is `Record<K, T>`?",
+      "a": "`Record<K, T>` constructs an object type whose property keys are `K` and whose property values are `T`. Useful for mapping properties of one type to another.",
+      "difficulty": "Medium",
+      "tags": ["utility-types"]
+    },
+    {
+      "id": "ts-26",
+      "q": "What is `ReturnType<T>`?",
+      "a": "`ReturnType<T>` constructs a type consisting of the return type of function `T`.",
+      "difficulty": "Medium",
+      "tags": ["utility-types"]
+    },
+    {
+      "id": "ts-27",
+      "q": "What is `Exclude<T, U>`?",
+      "a": "`Exclude<T, U>` constructs a type by excluding from `T` all union members that are assignable to `U`.",
+      "difficulty": "Hard",
+      "tags": ["utility-types"]
+    },
+    {
+      "id": "ts-28",
+      "q": "What are Template Literal Types?",
+      "a": "Template literal types build on string literal types, and have the ability to expand into many strings via unions.\n\n```typescript\ntype Greeting = `Hello, ${string}`;\n```",
+      "difficulty": "Hard",
+      "tags": ["advanced", "literals"]
+    },
+    {
+      "id": "ts-29",
+      "q": "What is `strict` mode in tsconfig?",
+      "a": "Setting `\"strict\": true` in `tsconfig.json` enables a wide range of type checking behavior that results in stronger guarantees of program correctness. It enables `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, etc.",
+      "difficulty": "Medium",
+      "tags": ["configuration", "best-practices"]
+    },
+    {
+      "id": "ts-30",
+      "q": "What is `noImplicitAny`?",
+      "a": "A compiler option that raises an error on expressions and declarations with an implied `any` type. It forces you to explicitly type variables when inference fails.",
+      "difficulty": "Medium",
+      "tags": ["configuration"]
+    },
+    {
+      "id": "ts-31",
+      "q": "What is `strictNullChecks`?",
+      "a": "When enabled, `null` and `undefined` are not in the domain of every type. They are distinct types. You must explicitly handle them (e.g., union `string | null`).",
+      "difficulty": "Medium",
+      "tags": ["configuration", "safety"]
+    },
+    {
+      "id": "ts-32",
+      "q": "What is the `readonly` modifier?",
+      "a": "`readonly` allows you to mark properties of a class or interface as immutable. They can only be assigned during initialization.",
+      "difficulty": "Easy",
+      "tags": ["basics", "modifiers"]
+    },
+    {
+      "id": "ts-33",
+      "q": "What are Abstract Classes?",
+      "a": "Abstract classes are base classes from which other classes may be derived. They may not be instantiated directly. They can contain implementation details and abstract methods (which must be implemented by derived classes).",
+      "difficulty": "Medium",
+      "tags": ["oop", "classes"]
+    },
+    {
+      "id": "ts-34",
+      "q": "What are Decorators?",
+      "a": "Decorators are a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter. They use the form `@expression`. They are often used for meta-programming (e.g., in Angular or NestJS).",
+      "difficulty": "Hard",
+      "tags": ["advanced", "decorators"]
+    },
+    {
+      "id": "ts-35",
+      "q": "How do you handle modules in TypeScript?",
+      "a": "TypeScript supports ES Modules (`import`/`export`). \n- `export` to expose entities.\n- `import` to use them.\nIt also supports CommonJS for Node.js environments.",
+      "difficulty": "Easy",
+      "tags": ["modules", "basics"]
+    },
+    {
+      "id": "ts-36",
+      "q": "What is Declaration Merging?",
+      "a": "The compiler merges two separate declarations declared with the same name into a single definition. This is most commonly seen with interfaces.",
+      "difficulty": "Hard",
+      "tags": ["advanced", "interfaces"]
+    },
+    {
+      "id": "ts-37",
+      "q": "What are Ambient Declarations (`.d.ts` files)?",
+      "a": "Ambient declarations allow you to define types for code that exists at runtime but not at compile time (e.g., third-party JS libraries). They use the `declare` keyword and are often found in `.d.ts` files.",
+      "difficulty": "Medium",
+      "tags": ["types", "files"]
+    },
+    {
+      "id": "ts-38",
+      "q": "What is `infer` keyword?",
+      "a": "The `infer` keyword is used within conditional types to declare a type variable to be inferred. \n\n```typescript\ntype Unpack<T> = T extends (infer U)[] ? U : T;\n```",
+      "difficulty": "Hard",
+      "tags": ["advanced", "inference"]
+    },
+    {
+      "id": "ts-39",
+      "q": "What is `this` parameter in TypeScript functions?",
+      "a": "You can explicitly type `this` in a function by adding it as the first parameter. It is a fake parameter that is erased during compilation but used for type checking.\n\n```typescript\nfunction f(this: void) { ... }\n```",
+      "difficulty": "Medium",
+      "tags": ["functions", "advanced"]
+    },
+    {
+      "id": "ts-40",
+      "q": "What is `const` assertions?",
+      "a": "Const assertions (`as const`) tell the compiler to infer the narrowest possible type (literals) and make properties readonly.\n\n```typescript\nconst args = [8, 5] as const; // readonly [8, 5]\n```",
+      "difficulty": "Medium",
+      "tags": ["types", "assertions"]
+    },
+    {
+      "id": "ts-41",
+      "q": "What is Non-null Assertion Operator (`!`)?",
+      "a": "A post-fix expression operator `!` that asserts that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact.",
+      "difficulty": "Medium",
+      "tags": ["operators", "safety"]
+    },
+    {
+      "id": "ts-42",
+      "q": "What is the `satisfies` operator?",
+      "a": "Introduced in TS 4.9, `satisfies` validates that an expression matches some type, without changing the resulting type of that expression (preserving inference).",
+      "difficulty": "Medium",
+      "tags": ["operators", "advanced"]
+    },
+    {
+      "id": "ts-43",
+      "q": "What is the difference between `module` and `namespace`?",
+      "a": "- **Modules**: External modules (ES6 imports/exports). Recommended for modern code.\n- **Namespaces**: Internal modules (using `namespace` keyword). Used to organize code within a file or across files in older TS projects.",
+      "difficulty": "Medium",
+      "tags": ["modules", "comparison"]
+    },
+    {
+      "id": "ts-44",
+      "q": "How to make object keys optional in TypeScript?",
+      "a": "Use the `?` modifier in the interface or type definition.\n\n```typescript\ninterface Config {\n  url: string;\n  timeout?: number;\n}\n```",
+      "difficulty": "Easy",
+      "tags": ["interfaces", "basics"]
+    },
+    {
+      "id": "ts-45",
+      "q": "What is Duck Typing?",
+      "a": "Duck Typing ek concept hai jo TypeScript (aur JavaScript) me structural typing par based hota hai.\n\n### Simple definition\n> \"Agar koi object kisi type jaise behave karta hai, to usse usi type ke roop me treat kiya ja sakta hai — chahe uska actual type kuch bhi ho.\"\n\nMatlab:\n👉 **\"If it looks like a duck, swims like a duck, and quacks like a duck — it’s a duck.\"**\n\n### Duck Typing in TypeScript\nTypeScript me **type checking structure (shape)** ke basis par hoti hai, **name** ke basis par nahi.\n\n### Example 1: Basic Duck Typing\n\n```ts\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst person = {\n  name: \"Rahul\",\n  age: 25,\n  city: \"Delhi\"\n};\n\n// Yeh valid hai\nconst user: User = person;\n```\n\n**Why valid?**\n* `User` interface me `name` aur `age` chahiye\n* `person` ke paas yeh dono fields hain\n* Extra field (`city`) matter nahi karti\n\n➡️ **Structure match ho gaya = TypeScript accept kar lega**\n\n### Example 2: Function parameters\n\n```ts\ninterface Logger {\n  log(message: string): void;\n}\n\nfunction printLog(logger: Logger) {\n  logger.log(\"Hello World\");\n}\n\nconst consoleLogger = {\n  log(msg: string) {\n    console.log(msg);\n  }\n};\n\nprintLog(consoleLogger); // ✅ valid\n```\n\n**Reason:**\n* `printLog` ko bas `log(string)` function chahiye\n* `consoleLogger` ke paas exactly wahi method hai\n\n➡️ **Actual type important nahi, behavior important hai**\n\n### Example 3: Class vs Object (No inheritance required)\n\n```ts\nclass FileLogger {\n  log(message: string) {\n    console.log(\"File:\", message);\n  }\n}\n\nprintLog(new FileLogger()); // ✅ valid\n```\n\n`FileLogger` ne `Logger` interface implement nahi kiya.\nPhir bhi kaam kar raha hai.\n➡️ **Yehi Duck Typing hai**\n\n### What Duck Typing is NOT\n❌ **Nominal typing** (Java, C# jaise languages)\n\n```java\n// Java me same structure hone ke baad bhi interface implement karna padta hai\nclass FileLogger implements Logger { }\n```\n\n**TypeScript me:**\n✔️ Interface implement karna **optional** hai\n✔️ Structure match hona kaafi hai\n\n### Benefits of Duck Typing\n* Loose coupling\n* Easy mocking (testing me useful)\n* Less boilerplate code\n* JS ke natural behavior ke close\n\n### Risks / Caution\n\n```ts\ninterface ApiResponse {\n  data: string;\n}\n\nconst response = {\n  data: \"OK\",\n  status: 200\n};\n\nconst res: ApiResponse = response; // ✅ allowed\n```\n\n⚠️ **Problem tab hoti hai jab:**\nRuntime pe object expected behavior follow na kare.\nTypeScript sirf **compile-time** check karta hai.\n\n---\n\n**One-line Interview Answer**\nDuck Typing in TypeScript means type compatibility is determined by an object’s structure and behavior, not by explicit inheritance or type names.",
+      "difficulty": "Medium",
+      "tags": ["concepts", "typing"]
+    },
+    {
+      "id": "ts-46",
+      "q": "What are Recursive Types?",
+      "a": "Types that reference themselves. Useful for defining tree structures or JSON data.\n\n```typescript\ntype Json = string | number | { [key: string]: Json } | Json[];\n```",
+      "difficulty": "Hard",
+      "tags": ["advanced", "types"]
+    },
+    {
+      "id": "ts-47",
+      "q": "What is Optional Chaining (`?.`)?",
+      "a": "Allows you to access nested properties without worrying if an intermediate property is null or undefined. If it is, the expression short-circuits to `undefined`.",
+      "difficulty": "Easy",
+      "tags": ["operators", "syntax"]
+    },
+    {
+      "id": "ts-48",
+      "q": "What is Nullish Coalescing (`??`)?",
+      "a": "A logical operator that returns the right-hand side operand when the left-hand side is `null` or `undefined`, and otherwise returns the left-hand side. Differs from `||` which checks for falsy values.",
+      "difficulty": "Easy",
+      "tags": ["operators", "syntax"]
+    },
+    {
+      "id": "ts-49",
+      "q": "How to debug TypeScript code?",
+      "a": "TypeScript code is transpiled to JS. You can debug using:\n1.  **Source Maps**: Allow browsers/debuggers to map JS code back to original TS code.\n2.  **VS Code**: Has built-in debugging support for Node.js and Chrome.",
+      "difficulty": "Easy",
+      "tags": ["debugging", "tooling"]
+    },
+    {
+      "id": "ts-50",
+      "q": "What is `tsconfig.json`?",
+      "a": "The root file of a TypeScript project. It specifies the root files and the compiler options required to compile the project (e.g., target JS version, module system, strictness).",
+      "difficulty": "Easy",
+      "tags": ["configuration"]
+    },
+    {
+      "id": "ts-51",
+      "q": "What is `Awaited<T>`?",
+      "a": "A utility type that models the operation of `await`. It recursively unwraps Promises to get the resolved type.\n\n```typescript\ntype A = Awaited<Promise<string>>; // string\n```",
+      "difficulty": "Medium",
+      "tags": ["utility-types", "async"]
+    },
+    {
+      "id": "ts-52",
+      "q": "How to define a function signature in an interface?",
+      "a": "```typescript\ninterface Greeter {\n  (message: string): void;\n}\n```",
+      "difficulty": "Medium",
+      "tags": ["interfaces", "functions"]
+    }
+  ]
+}
