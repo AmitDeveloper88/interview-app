@@ -85,7 +85,7 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
   return (
     <div className="space-y-6">
       {/* Filters Bar */}
-      <div className="sticky top-28 z-20 rounded-lg bg-white p-4 shadow-md dark:bg-zinc-800">
+      <div className="sticky top-12 z-20 rounded-lg bg-white p-4 shadow-md dark:bg-zinc-800">
         <div className="flex flex-col gap-4 md:flex-row md:items-center">
           {/* Search */}
           <div className="relative flex-1">

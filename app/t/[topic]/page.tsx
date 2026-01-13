@@ -63,14 +63,19 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
   return (
     <main className="min-h-screen bg-zinc-50 dark:bg-zinc-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="sticky top-0 z-30 mb-2 bg-zinc-50/95 py-4 backdrop-blur transition-all dark:bg-zinc-900/95 border-b border-zinc-200 dark:border-zinc-800">
+        {/* Sticky Back Link */}
+        <div className="sticky top-0 z-30 bg-zinc-50/95 py-3 backdrop-blur transition-all dark:bg-zinc-900/95">
           <Link
             href="/"
             className="inline-flex items-center text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
           >
             ← Back to topics
           </Link>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+        </div>
+
+        {/* Non-sticky Title */}
+        <div className="mb-8 border-b border-zinc-200 pb-4 dark:border-zinc-800">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
             {topic.name} Interview Questions
           </h1>
           <div className={`mt-2 h-1 w-20 ${borderMap[topic.color] || 'bg-blue-500'}`} />
