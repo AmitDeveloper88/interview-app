@@ -1,0 +1,425 @@
+{
+  "slug": "dsa",
+  "questions": [
+    {
+      "id": "dsa-01",
+      "q": "Two Sum: Given an array of integers and a target, return the indices of the two numbers whose sum equals the target.",
+      "a": "Use a **hash map** to store each visited number and its index. For every element, check whether `target - current` is already in the map. This gives an **O(n)** solution and is the expected interview answer in JavaScript.",
+      "difficulty": "Easy",
+      "tags": ["array", "hashmap", "leetcode"]
+    },
+    {
+      "id": "dsa-02",
+      "q": "Contains Duplicate: Determine whether an array contains any duplicate values.",
+      "a": "Use a **Set** and compare its size with the array length, or iterate while checking if a value has already been seen. A clean JavaScript solution runs in **O(n)** time with **O(n)** extra space.",
+      "difficulty": "Easy",
+      "tags": ["array", "set", "leetcode"]
+    },
+    {
+      "id": "dsa-03",
+      "q": "Valid Anagram: Check whether two strings are anagrams of each other.",
+      "a": "Count character frequencies with an object or `Map`, then decrement using the second string. If all counts end at zero, the strings are anagrams. Sorting also works but frequency counting is better at **O(n)**.",
+      "difficulty": "Easy",
+      "tags": ["string", "hashmap", "frequency"]
+    },
+    {
+      "id": "dsa-04",
+      "q": "Group Anagrams: Group words that are anagrams into separate arrays.",
+      "a": "Use the **sorted version** of each word as the grouping key. Store groups inside a `Map<string, string[]>`. This is one of the most common JavaScript interview problems involving hashing and strings.",
+      "difficulty": "Medium",
+      "tags": ["string", "hashmap", "grouping"]
+    },
+    {
+      "id": "dsa-05",
+      "q": "Top K Frequent Elements: Return the `k` most frequent numbers in an array.",
+      "a": "Count frequencies with a map, then use **bucket sort** or a **min heap**. Bucket sort is often preferred in interviews because it can achieve **O(n)** time when the value range is manageable.",
+      "difficulty": "Medium",
+      "tags": ["array", "hashmap", "heap"]
+    },
+    {
+      "id": "dsa-06",
+      "q": "Product of Array Except Self: Return an array where each position contains the product of all other elements without using division.",
+      "a": "Build prefix products from the left and suffix products from the right, then combine them. This avoids division and gives **O(n)** time with **O(1)** extra space excluding the output array.",
+      "difficulty": "Medium",
+      "tags": ["array", "prefix-suffix", "leetcode"]
+    },
+    {
+      "id": "dsa-07",
+      "q": "Maximum Subarray: Find the contiguous subarray with the largest sum.",
+      "a": "Apply **Kadane's Algorithm**. Track the best running sum ending at the current index and the global maximum. This is a classic interview favorite with **O(n)** time.",
+      "difficulty": "Medium",
+      "tags": ["array", "dynamic-programming", "kadane"]
+    },
+    {
+      "id": "dsa-08",
+      "q": "Maximum Product Subarray: Find the contiguous subarray with the largest product.",
+      "a": "Track both the current **maximum product** and **minimum product** because a negative number can flip them. Update both values at each step. This is a common extension of Kadane-style reasoning.",
+      "difficulty": "Medium",
+      "tags": ["array", "dynamic-programming", "product"]
+    },
+    {
+      "id": "dsa-09",
+      "q": "Best Time to Buy and Sell Stock: Find the maximum profit from one buy and one sell.",
+      "a": "Track the **lowest price seen so far** and the best profit at each step. This yields a simple **O(n)** scan and is a very standard coding-round problem.",
+      "difficulty": "Easy",
+      "tags": ["array", "greedy", "leetcode"]
+    },
+    {
+      "id": "dsa-10",
+      "q": "Container With Most Water: Given heights, find the maximum water container area.",
+      "a": "Use **two pointers** from both ends. Move the smaller height inward because the smaller side limits the area. This reduces the brute-force **O(n^2)** approach to **O(n)**.",
+      "difficulty": "Medium",
+      "tags": ["two-pointers", "array", "greedy"]
+    },
+    {
+      "id": "dsa-11",
+      "q": "3Sum: Find all unique triplets in an array that sum to zero.",
+      "a": "Sort the array, then fix one element and use a **two-pointer scan** for the remaining pair. Skip duplicates carefully. This is a high-frequency interview problem and the expected answer is **O(n^2)**.",
+      "difficulty": "Medium",
+      "tags": ["array", "sorting", "two-pointers"]
+    },
+    {
+      "id": "dsa-12",
+      "q": "Trapping Rain Water: Calculate how much water can be trapped between bars.",
+      "a": "Use two pointers with `leftMax` and `rightMax`, or precompute prefix and suffix maxima. The optimized two-pointer solution is **O(n)** time and **O(1)** extra space.",
+      "difficulty": "Hard",
+      "tags": ["array", "two-pointers", "prefix-suffix"]
+    },
+    {
+      "id": "dsa-13",
+      "q": "Longest Substring Without Repeating Characters: Return the length of the longest substring with unique characters.",
+      "a": "Use a **sliding window** with a map of last seen indices. Move the left pointer whenever a repeated character is found inside the current window. This is a core string interview pattern.",
+      "difficulty": "Medium",
+      "tags": ["string", "sliding-window", "hashmap"]
+    },
+    {
+      "id": "dsa-14",
+      "q": "Longest Repeating Character Replacement: Replace at most `k` characters to make the longest repeating-character substring.",
+      "a": "Use a sliding window and track the count of the most frequent character inside the window. If `windowSize - maxFreq > k`, shrink from the left. This puzzle shows up often in interview prep sheets.",
+      "difficulty": "Medium",
+      "tags": ["string", "sliding-window", "frequency"]
+    },
+    {
+      "id": "dsa-15",
+      "q": "Minimum Window Substring: Find the smallest substring of `s` that contains all characters of `t`.",
+      "a": "Use a variable-size **sliding window** with frequency counts for required characters. Expand right until valid, then shrink left to minimize. This is a strong interview-crack-level problem.",
+      "difficulty": "Hard",
+      "tags": ["string", "sliding-window", "hashmap"]
+    },
+    {
+      "id": "dsa-16",
+      "q": "Valid Palindrome: Check whether a string is a palindrome after removing non-alphanumeric characters and ignoring case.",
+      "a": "Use **two pointers** from both ends and skip invalid characters while comparing lowercase values. This is a simple but common screening problem.",
+      "difficulty": "Easy",
+      "tags": ["string", "two-pointers", "palindrome"]
+    },
+    {
+      "id": "dsa-17",
+      "q": "Longest Palindromic Substring: Return the longest palindromic substring in a string.",
+      "a": "Expand around every character and every gap between characters to handle odd and even lengths. The center-expansion solution is **O(n^2)** and is often enough for interviews.",
+      "difficulty": "Medium",
+      "tags": ["string", "palindrome", "expand-around-center"]
+    },
+    {
+      "id": "dsa-18",
+      "q": "Palindromic Substrings: Count how many substrings of a string are palindromes.",
+      "a": "Expand around each center and count every valid palindrome found. This is closely related to longest palindromic substring and is a nice follow-up interview puzzle.",
+      "difficulty": "Medium",
+      "tags": ["string", "palindrome", "counting"]
+    },
+    {
+      "id": "dsa-19",
+      "q": "Encode and Decode Strings: Design a way to serialize and deserialize a list of strings.",
+      "a": "Store each string with its **length prefix** and a separator, then parse using the length while decoding. This avoids problems with embedded delimiters and is a classic system-style coding question.",
+      "difficulty": "Medium",
+      "tags": ["string", "design", "serialization"]
+    },
+    {
+      "id": "dsa-20",
+      "q": "Reverse Linked List: Reverse a singly linked list iteratively.",
+      "a": "Keep `prev`, `curr`, and `next` pointers, reversing each link one by one. This is one of the most fundamental linked-list interview questions.",
+      "difficulty": "Easy",
+      "tags": ["linked-list", "pointers", "leetcode"]
+    },
+    {
+      "id": "dsa-21",
+      "q": "Merge Two Sorted Lists: Merge two sorted linked lists into one sorted list.",
+      "a": "Use a **dummy node** and compare the heads of both lists while building the merged result. This pattern appears often in linked-list and merge-sort discussions.",
+      "difficulty": "Easy",
+      "tags": ["linked-list", "merge", "sorting"]
+    },
+    {
+      "id": "dsa-22",
+      "q": "Linked List Cycle: Detect whether a linked list contains a cycle.",
+      "a": "Use **Floyd's tortoise and hare** algorithm with slow and fast pointers. If they meet, there is a cycle. This is the expected interview solution with **O(1)** space.",
+      "difficulty": "Easy",
+      "tags": ["linked-list", "two-pointers", "cycle-detection"]
+    },
+    {
+      "id": "dsa-23",
+      "q": "Reorder List: Reorder a linked list into `L0 -> Ln -> L1 -> Ln-1 ...`.",
+      "a": "Find the middle, reverse the second half, then merge the two halves alternately. This combines multiple linked-list techniques and is a strong medium-level interview problem.",
+      "difficulty": "Medium",
+      "tags": ["linked-list", "reverse", "merge"]
+    },
+    {
+      "id": "dsa-24",
+      "q": "Remove Nth Node From End of List: Delete the nth node from the end in one pass.",
+      "a": "Use a **dummy node** and maintain two pointers `n` steps apart. When the fast pointer reaches the end, slow will be just before the node to remove.",
+      "difficulty": "Medium",
+      "tags": ["linked-list", "two-pointers", "one-pass"]
+    },
+    {
+      "id": "dsa-25",
+      "q": "Merge K Sorted Lists: Merge multiple sorted linked lists into one sorted list.",
+      "a": "Use a **min heap** to repeatedly take the smallest current node, or apply divide and conquer merging. Heap-based solutions are common in JS using a custom priority queue.",
+      "difficulty": "Hard",
+      "tags": ["linked-list", "heap", "divide-and-conquer"]
+    },
+    {
+      "id": "dsa-26",
+      "q": "Invert Binary Tree: Swap left and right children for every node in a binary tree.",
+      "a": "Use simple recursion or iterative BFS/DFS. This is a straightforward tree traversal question and often appears in screening rounds.",
+      "difficulty": "Easy",
+      "tags": ["tree", "dfs", "bfs"]
+    },
+    {
+      "id": "dsa-27",
+      "q": "Maximum Depth of Binary Tree: Find the maximum depth of a binary tree.",
+      "a": "Use recursion to return `1 + max(leftDepth, rightDepth)`, or BFS level traversal. This is one of the most basic tree interview problems.",
+      "difficulty": "Easy",
+      "tags": ["tree", "dfs", "recursion"]
+    },
+    {
+      "id": "dsa-28",
+      "q": "Same Tree: Check whether two binary trees are structurally identical with the same values.",
+      "a": "Traverse both trees together. If both nodes are null, return true; if only one is null or values differ, return false; otherwise compare both children recursively.",
+      "difficulty": "Easy",
+      "tags": ["tree", "recursion", "comparison"]
+    },
+    {
+      "id": "dsa-29",
+      "q": "Subtree of Another Tree: Determine whether one binary tree is a subtree of another.",
+      "a": "At each node in the main tree, check whether the subtree rooted there matches the target tree using a helper for exact tree comparison. This is a classic recursive interview question.",
+      "difficulty": "Easy",
+      "tags": ["tree", "recursion", "subtree"]
+    },
+    {
+      "id": "dsa-30",
+      "q": "Lowest Common Ancestor of a BST: Find the lowest common ancestor of two nodes in a binary search tree.",
+      "a": "Use the BST ordering rule. If both targets are smaller, go left; if both are larger, go right; otherwise the current node is the answer.",
+      "difficulty": "Medium",
+      "tags": ["tree", "bst", "lca"]
+    },
+    {
+      "id": "dsa-31",
+      "q": "Binary Tree Level Order Traversal: Return nodes level by level.",
+      "a": "Use **BFS** with a queue and process nodes layer by layer. This is one of the most common tree traversal coding questions.",
+      "difficulty": "Medium",
+      "tags": ["tree", "bfs", "queue"]
+    },
+    {
+      "id": "dsa-32",
+      "q": "Validate Binary Search Tree: Check whether a binary tree is a valid BST.",
+      "a": "Pass down valid `min` and `max` bounds during recursion, or perform inorder traversal and ensure values are strictly increasing. Bounds-based recursion is very interview-friendly.",
+      "difficulty": "Medium",
+      "tags": ["tree", "bst", "validation"]
+    },
+    {
+      "id": "dsa-33",
+      "q": "Kth Smallest Element in a BST: Return the kth smallest node value.",
+      "a": "Perform **inorder traversal**, because inorder on a BST visits nodes in sorted order. Count visited nodes until reaching `k`.",
+      "difficulty": "Medium",
+      "tags": ["tree", "bst", "inorder"]
+    },
+    {
+      "id": "dsa-34",
+      "q": "Construct Binary Tree from Preorder and Inorder Traversal.",
+      "a": "Use preorder to identify the root and inorder to split left and right subtrees. A map from value to inorder index helps reduce repeated searches.",
+      "difficulty": "Medium",
+      "tags": ["tree", "recursion", "construction"]
+    },
+    {
+      "id": "dsa-35",
+      "q": "Binary Tree Maximum Path Sum: Find the maximum path sum across any path in the tree.",
+      "a": "Use DFS. For each node, compute the best gain from left and right children, ignoring negative contributions, and update a global maximum with `node.val + leftGain + rightGain`.",
+      "difficulty": "Hard",
+      "tags": ["tree", "dfs", "hard"]
+    },
+    {
+      "id": "dsa-36",
+      "q": "Clone Graph: Deep copy an undirected graph.",
+      "a": "Use DFS or BFS with a map from original node to cloned node. This avoids duplicating work and handles cycles safely.",
+      "difficulty": "Medium",
+      "tags": ["graph", "dfs", "bfs"]
+    },
+    {
+      "id": "dsa-37",
+      "q": "Number of Islands: Count how many islands are present in a 2D grid.",
+      "a": "Scan the grid, and every time you find land, run DFS or BFS to mark the entire connected component visited. This is one of the most asked grid problems.",
+      "difficulty": "Medium",
+      "tags": ["graph", "grid", "dfs"]
+    },
+    {
+      "id": "dsa-38",
+      "q": "Pacific Atlantic Water Flow: Return cells that can flow to both oceans.",
+      "a": "Instead of starting from every cell, run DFS or BFS **from the ocean borders inward** and mark reachable cells for each ocean. Intersect the two visited sets at the end.",
+      "difficulty": "Medium",
+      "tags": ["graph", "matrix", "dfs"]
+    },
+    {
+      "id": "dsa-39",
+      "q": "Course Schedule: Determine whether all courses can be finished given prerequisites.",
+      "a": "Model the courses as a directed graph and detect cycles using DFS states or **topological sorting** with indegrees. A cycle means the schedule is impossible.",
+      "difficulty": "Medium",
+      "tags": ["graph", "topological-sort", "cycle-detection"]
+    },
+    {
+      "id": "dsa-40",
+      "q": "Course Schedule II: Return one valid course order if possible.",
+      "a": "Use **Kahn's Algorithm** for topological sorting. Start with all zero-indegree nodes, pop from a queue, and reduce indegrees of neighbors.",
+      "difficulty": "Medium",
+      "tags": ["graph", "topological-sort", "queue"]
+    },
+    {
+      "id": "dsa-41",
+      "q": "Graph Valid Tree: Check whether an undirected graph forms a valid tree.",
+      "a": "A valid tree must have exactly `n - 1` edges and be fully connected with no cycles. Use DFS, BFS, or union-find to verify the conditions.",
+      "difficulty": "Medium",
+      "tags": ["graph", "union-find", "dfs"]
+    },
+    {
+      "id": "dsa-42",
+      "q": "Word Ladder: Find the length of the shortest transformation sequence from begin word to end word.",
+      "a": "Use **BFS** because it naturally finds the shortest number of transformations. Preprocessing wildcard patterns or generating neighbor words efficiently is key to passing large tests.",
+      "difficulty": "Hard",
+      "tags": ["graph", "bfs", "string"]
+    },
+    {
+      "id": "dsa-43",
+      "q": "Find Minimum in Rotated Sorted Array: Return the minimum element in a rotated sorted array.",
+      "a": "Use **binary search**. Compare the middle value with the right boundary to decide whether the minimum lies on the left or right side.",
+      "difficulty": "Medium",
+      "tags": ["binary-search", "array", "leetcode"]
+    },
+    {
+      "id": "dsa-44",
+      "q": "Search in Rotated Sorted Array: Search for a target in a rotated sorted array.",
+      "a": "Apply binary search while determining which half is sorted at each step. Then decide whether the target lies inside that half or the other half.",
+      "difficulty": "Medium",
+      "tags": ["binary-search", "array", "rotated-array"]
+    },
+    {
+      "id": "dsa-45",
+      "q": "Koko Eating Bananas: Find the minimum eating speed needed to finish piles within `h` hours.",
+      "a": "Binary-search the answer space on eating speed. For each trial speed, compute the total hours needed and adjust the search boundaries accordingly.",
+      "difficulty": "Medium",
+      "tags": ["binary-search", "search-on-answer", "leetcode"]
+    },
+    {
+      "id": "dsa-46",
+      "q": "Search a 2D Matrix: Determine whether a target exists in a row-wise sorted matrix.",
+      "a": "Treat the matrix like a flattened sorted array and perform binary search using index math to map a middle position back to row and column.",
+      "difficulty": "Medium",
+      "tags": ["binary-search", "matrix", "array"]
+    },
+    {
+      "id": "dsa-47",
+      "q": "Time Based Key-Value Store: Design a structure that stores values with timestamps and retrieves the latest value at or before a timestamp.",
+      "a": "Store a sorted list of `[timestamp, value]` for each key, then use **binary search** to find the rightmost timestamp less than or equal to the query timestamp.",
+      "difficulty": "Medium",
+      "tags": ["binary-search", "design", "hashmap"]
+    },
+    {
+      "id": "dsa-48",
+      "q": "Median of Two Sorted Arrays: Find the median of two sorted arrays in logarithmic time.",
+      "a": "Use binary search on partitions of the smaller array so that the combined left half and right half are balanced. This is a well-known hard interview problem.",
+      "difficulty": "Hard",
+      "tags": ["binary-search", "array", "hard"]
+    },
+    {
+      "id": "dsa-49",
+      "q": "Combination Sum: Return all unique combinations of numbers that add up to a target, where each number can be reused.",
+      "a": "Use **backtracking**. At each step, choose the current candidate again or move to the next one. Track the running sum and stop when it exceeds the target.",
+      "difficulty": "Medium",
+      "tags": ["backtracking", "recursion", "combinations"]
+    },
+    {
+      "id": "dsa-50",
+      "q": "Subsets: Return all possible subsets of a given array.",
+      "a": "Use backtracking or iterative subset building. At each index, branch into including the element or excluding it. This is a standard recursion puzzle.",
+      "difficulty": "Medium",
+      "tags": ["backtracking", "recursion", "subsets"]
+    },
+    {
+      "id": "dsa-51",
+      "q": "Permutations: Return all permutations of a list of distinct numbers.",
+      "a": "Use backtracking with a `used` array or in-place swapping. This is a classic interview recursion problem and a good way to explain DFS state trees.",
+      "difficulty": "Medium",
+      "tags": ["backtracking", "permutations", "dfs"]
+    },
+    {
+      "id": "dsa-52",
+      "q": "Word Search: Determine whether a word exists in a 2D board by moving horizontally or vertically.",
+      "a": "Run DFS from each starting cell and mark visited cells during the current path so they are not reused. Backtrack after exploring each direction.",
+      "difficulty": "Medium",
+      "tags": ["backtracking", "grid", "dfs"]
+    },
+    {
+      "id": "dsa-53",
+      "q": "Generate Parentheses: Generate all valid combinations of `n` pairs of parentheses.",
+      "a": "Use backtracking with counts of open and close brackets used so far. Add `(` if open count is below `n`, and add `)` only if close count is less than open count.",
+      "difficulty": "Medium",
+      "tags": ["backtracking", "string", "recursion"]
+    },
+    {
+      "id": "dsa-54",
+      "q": "Daily Temperatures: For each day, return how many days you must wait until a warmer temperature.",
+      "a": "Use a **monotonic decreasing stack** of indices. When a warmer temperature appears, resolve all previous colder days from the stack.",
+      "difficulty": "Medium",
+      "tags": ["stack", "monotonic-stack", "array"]
+    },
+    {
+      "id": "dsa-55",
+      "q": "Valid Parentheses: Determine whether a string of brackets is valid.",
+      "a": "Use a **stack** and push opening brackets. For every closing bracket, ensure it matches the latest opening bracket. This is a foundational coding question.",
+      "difficulty": "Easy",
+      "tags": ["stack", "string", "basics"]
+    },
+    {
+      "id": "dsa-56",
+      "q": "Min Stack: Design a stack that supports retrieving the minimum element in constant time.",
+      "a": "Maintain a second stack that tracks the minimum value at each level, or store pairs of `[value, currentMin]`. Both `push` and `pop` remain **O(1)**.",
+      "difficulty": "Medium",
+      "tags": ["stack", "design", "constant-time"]
+    },
+    {
+      "id": "dsa-57",
+      "q": "Evaluate Reverse Polish Notation: Evaluate an expression given in postfix notation.",
+      "a": "Use a stack. Push numbers, and whenever an operator appears, pop the top two operands, apply the operation, and push the result back.",
+      "difficulty": "Medium",
+      "tags": ["stack", "math", "expression"]
+    },
+    {
+      "id": "dsa-58",
+      "q": "Car Fleet: Count how many car fleets arrive at the destination.",
+      "a": "Sort cars by starting position from nearest to farthest from the destination, compute each car's arrival time, and use a monotonic idea to merge cars into fleets.",
+      "difficulty": "Medium",
+      "tags": ["stack", "sorting", "greedy"]
+    },
+    {
+      "id": "dsa-59",
+      "q": "Largest Rectangle in Histogram: Find the largest rectangle area in a histogram.",
+      "a": "Use a **monotonic increasing stack** to find the width where each bar is the limiting height. This is a famous hard stack problem asked in strong interviews.",
+      "difficulty": "Hard",
+      "tags": ["stack", "monotonic-stack", "hard"]
+    },
+    {
+      "id": "dsa-60",
+      "q": "Longest Consecutive Sequence: Find the length of the longest consecutive integer sequence in an unsorted array.",
+      "a": "Put all numbers in a `Set`, then only start counting from numbers that do not have a predecessor. This avoids repeated work and gives **O(n)** time.",
+      "difficulty": "Medium",
+      "tags": ["array", "set", "sequence"]
+    }
+  ]
+}

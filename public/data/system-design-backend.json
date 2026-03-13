@@ -1,0 +1,390 @@
+{
+  "slug": "system-design-backend",
+  "questions": [
+    {
+      "id": "sdb-01",
+      "q": "Design a URL shortener like Bitly.",
+      "a": "Clarify traffic, custom aliases, expiration, analytics, and redirect latency. A strong design includes an API layer, ID generator, mapping store, cache for hot URLs, and async analytics pipeline. Discuss collision avoidance, key size, read-heavy optimization, and database sharding.",
+      "difficulty": "Medium",
+      "tags": ["url-shortener", "database", "cache"]
+    },
+    {
+      "id": "sdb-02",
+      "q": "Design a distributed rate limiter for backend APIs.",
+      "a": "Compare fixed window, sliding window, leaky bucket, and token bucket. Use Redis or a similar fast store for distributed counters, expiration, and atomic updates. Mention per-user and per-IP limits, fairness, bursts, failure fallback, and observability.",
+      "difficulty": "Medium",
+      "tags": ["rate-limiter", "redis", "api"]
+    },
+    {
+      "id": "sdb-03",
+      "q": "Design a notification service for email, SMS, and push.",
+      "a": "Separate ingestion, template rendering, queueing, provider dispatch, retries, and status tracking. Good answers include provider adapters, dead-letter queues, idempotency keys, user preference handling, and delivery analytics.",
+      "difficulty": "Medium",
+      "tags": ["notifications", "queue", "workers"]
+    },
+    {
+      "id": "sdb-04",
+      "q": "Design a file upload service for large files.",
+      "a": "Use direct-to-object-storage uploads with pre-signed URLs, multipart upload, resumability, metadata persistence, and background scanning. Mention large-file retries, chunk validation, CDN integration, and access control.",
+      "difficulty": "Medium",
+      "tags": ["file-upload", "object-storage", "cdn"]
+    },
+    {
+      "id": "sdb-05",
+      "q": "Design a chat backend for one-to-one and group messaging.",
+      "a": "Break the system into connection service, message write path, fan-out, persistence, delivery acknowledgments, and unread state. Cover ordering, offline delivery, retries, read receipts, and conversation partitioning.",
+      "difficulty": "Hard",
+      "tags": ["chat", "websocket", "messaging"]
+    },
+    {
+      "id": "sdb-06",
+      "q": "Design a social media news feed backend.",
+      "a": "Explain post write path, follower graph, feed generation, ranking, caching, and pagination. Discuss fan-out on write versus fan-out on read, celebrity-user issues, and latency versus storage tradeoffs.",
+      "difficulty": "Hard",
+      "tags": ["news-feed", "cache", "ranking"]
+    },
+    {
+      "id": "sdb-07",
+      "q": "Design an e-commerce cart and checkout backend.",
+      "a": "Split responsibilities into cart, pricing, inventory, order, payment, and notification services. A strong answer covers stock reservation, idempotent checkout, saga orchestration, retries, and anti-oversell protection.",
+      "difficulty": "Hard",
+      "tags": ["ecommerce", "checkout", "payments"]
+    },
+    {
+      "id": "sdb-08",
+      "q": "Design a ride-booking backend like Uber/Ola.",
+      "a": "Focus on rider service, driver service, location updates, matching engine, trip state machine, pricing, and notifications. Mention geospatial indexing, surge pricing, event streams, and trip consistency.",
+      "difficulty": "Hard",
+      "tags": ["ride-booking", "geospatial", "matching"]
+    },
+    {
+      "id": "sdb-09",
+      "q": "Design a distributed job queue system.",
+      "a": "Discuss producers, queue broker, workers, visibility timeout, retries, DLQ, scheduling, and autoscaling. Strong answers include idempotent job processing, deduplication, ordering semantics, and monitoring.",
+      "difficulty": "Medium",
+      "tags": ["job-queue", "workers", "retries"]
+    },
+    {
+      "id": "sdb-10",
+      "q": "Design an API gateway for microservices.",
+      "a": "Include routing, authentication, rate limiting, request aggregation, logging, retries, circuit breakers, and service discovery. Cover how to keep the gateway thin and avoid making it a bottleneck.",
+      "difficulty": "Medium",
+      "tags": ["api-gateway", "microservices", "auth"]
+    },
+    {
+      "id": "sdb-11",
+      "q": "Design a search autocomplete backend.",
+      "a": "Use prefix indexing, tries, or a search engine for suggestion retrieval. Mention ranking by popularity, typo tolerance, caching hot prefixes, periodic rebuilding, and tight latency requirements.",
+      "difficulty": "Medium",
+      "tags": ["autocomplete", "search", "trie"]
+    },
+    {
+      "id": "sdb-12",
+      "q": "Design a video streaming backend.",
+      "a": "Separate upload, transcoding, metadata, storage, authorization, playback manifest generation, and CDN delivery. Mention adaptive bitrate streaming, pre-signed URLs, abuse prevention, and analytics.",
+      "difficulty": "Hard",
+      "tags": ["video-streaming", "cdn", "transcoding"]
+    },
+    {
+      "id": "sdb-13",
+      "q": "Design an authentication and session management service.",
+      "a": "Cover signup, login, token/session issuance, refresh strategy, revocation, password resets, MFA, and device/session tracking. Compare stateless JWT and stateful sessions and mention secure cookie handling.",
+      "difficulty": "Medium",
+      "tags": ["auth", "session", "security"]
+    },
+    {
+      "id": "sdb-14",
+      "q": "Design a password reset workflow.",
+      "a": "Generate short-lived, single-use reset tokens stored securely or signed with strict expiry. Include rate limiting, audit logs, email delivery, invalidation of old tokens, and session revocation after password change.",
+      "difficulty": "Easy",
+      "tags": ["auth", "security", "email"]
+    },
+    {
+      "id": "sdb-15",
+      "q": "Design a backend for live comments on a stream.",
+      "a": "Use WebSockets or SSE for low-latency delivery, moderate messages asynchronously, and store a durable comment log for replay. Discuss ordering, fan-out, spam protection, and room partitioning.",
+      "difficulty": "Medium",
+      "tags": ["live-comments", "websocket", "moderation"]
+    },
+    {
+      "id": "sdb-16",
+      "q": "Design a backend for collaborative document editing.",
+      "a": "Discuss real-time sync, conflict resolution using OT or CRDTs, document snapshots, operation logs, and presence tracking. Mention persistence, autosave, and scaling by document room.",
+      "difficulty": "Hard",
+      "tags": ["collaboration", "realtime", "crdt"]
+    },
+    {
+      "id": "sdb-17",
+      "q": "Design a metrics collection backend like Prometheus-lite.",
+      "a": "Explain data ingestion, label/index storage, time-series compression, retention, downsampling, and query APIs. Mention cardinality explosion, batching, and pull versus push tradeoffs.",
+      "difficulty": "Hard",
+      "tags": ["metrics", "time-series", "monitoring"]
+    },
+    {
+      "id": "sdb-18",
+      "q": "Design a centralized logging backend.",
+      "a": "Break the system into log shippers, ingestion pipeline, parsing/enrichment, indexing, storage tiers, and query UI. Cover retention, backpressure, partitioning, and cost control.",
+      "difficulty": "Medium",
+      "tags": ["logging", "search", "observability"]
+    },
+    {
+      "id": "sdb-19",
+      "q": "Design a metrics alerting system.",
+      "a": "Include alert rule storage, periodic evaluation, deduplication, suppression, escalation, and notification delivery. Strong answers discuss noisy alerts, grouping, and high availability of the evaluator.",
+      "difficulty": "Medium",
+      "tags": ["alerting", "monitoring", "rules-engine"]
+    },
+    {
+      "id": "sdb-20",
+      "q": "Design a distributed cache service.",
+      "a": "Talk about key partitioning, replication, eviction policies, TTLs, cache invalidation, and consistency with backing stores. Mention hot keys, rebalancing, and cache stampede protection.",
+      "difficulty": "Hard",
+      "tags": ["cache", "redis", "distributed-systems"]
+    },
+    {
+      "id": "sdb-21",
+      "q": "Design a leader election service.",
+      "a": "Use consensus-based coordination or lease-based leadership through a reliable store. Explain heartbeats, fencing tokens, split-brain prevention, and failover time.",
+      "difficulty": "Hard",
+      "tags": ["leader-election", "consensus", "distributed-systems"]
+    },
+    {
+      "id": "sdb-22",
+      "q": "Design a service discovery system.",
+      "a": "Discuss service registration, health checks, client-side versus server-side discovery, DNS-based discovery, and stale endpoint handling. Mention consistency and failure detection tradeoffs.",
+      "difficulty": "Medium",
+      "tags": ["service-discovery", "microservices", "infrastructure"]
+    },
+    {
+      "id": "sdb-23",
+      "q": "Design a feature flag service.",
+      "a": "Core parts are flag definition, targeting rules, rollout percentages, evaluation SDKs, caching, and audit history. Mention low-latency reads, eventual consistency, and kill switches.",
+      "difficulty": "Medium",
+      "tags": ["feature-flags", "config", "rollout"]
+    },
+    {
+      "id": "sdb-24",
+      "q": "Design a distributed configuration management service.",
+      "a": "Cover config versioning, safe rollout, watches/push updates, rollback, access control, and audit logs. Discuss caching and what happens if clients cannot reach the config service.",
+      "difficulty": "Medium",
+      "tags": ["config", "versioning", "infrastructure"]
+    },
+    {
+      "id": "sdb-25",
+      "q": "Design a payment processing backend.",
+      "a": "Split into order creation, payment intent, gateway integration, retries, webhook handling, ledger entries, and reconciliation. Mention idempotency, fraud checks, PCI scope reduction, and partial failures.",
+      "difficulty": "Hard",
+      "tags": ["payments", "ledger", "idempotency"]
+    },
+    {
+      "id": "sdb-26",
+      "q": "Design a ledger service for financial transactions.",
+      "a": "Use immutable double-entry records, account balances derived from postings, idempotent transaction APIs, and strong auditability. Cover consistency, replay, reconciliation, and backfills.",
+      "difficulty": "Hard",
+      "tags": ["ledger", "finance", "consistency"]
+    },
+    {
+      "id": "sdb-27",
+      "q": "Design an invoice generation backend.",
+      "a": "Include billing rules, invoice generation jobs, PDF rendering, tax calculation integration, storage, and notification. Mention versioned invoices, corrections, and scheduled billing cycles.",
+      "difficulty": "Medium",
+      "tags": ["billing", "invoice", "pdf"]
+    },
+    {
+      "id": "sdb-28",
+      "q": "Design a subscription billing system.",
+      "a": "Discuss plans, recurring cycles, trial periods, upgrades, downgrades, proration, payment retries, and dunning workflows. Strong answers include entitlements and invoice history.",
+      "difficulty": "Hard",
+      "tags": ["subscription", "billing", "payments"]
+    },
+    {
+      "id": "sdb-29",
+      "q": "Design a webhook delivery platform.",
+      "a": "Store outbound events durably, sign payloads, retry on failure with exponential backoff, and expose delivery history. Mention deduplication, replay tooling, and protecting receivers from bursts.",
+      "difficulty": "Medium",
+      "tags": ["webhooks", "retries", "events"]
+    },
+    {
+      "id": "sdb-30",
+      "q": "Design an event bus for microservices.",
+      "a": "Talk about topic partitioning, consumer groups, ordering guarantees, schema evolution, replay, and retention. Compare at-least-once versus exactly-once semantics and discuss idempotent consumers.",
+      "difficulty": "Hard",
+      "tags": ["event-bus", "kafka", "microservices"]
+    },
+    {
+      "id": "sdb-31",
+      "q": "Design a pub/sub messaging backend.",
+      "a": "Include publishers, topics, subscriptions, durable message storage, pull or push delivery, ack handling, retries, and filtering. Mention fan-out scale and backpressure.",
+      "difficulty": "Medium",
+      "tags": ["pubsub", "messaging", "queue"]
+    },
+    {
+      "id": "sdb-32",
+      "q": "Design a cron scheduling service.",
+      "a": "Support time-based job definitions, persistent schedules, distributed execution, leader election, retries, and exactly-once or at-least-once guarantees. Mention clock skew and missed execution recovery.",
+      "difficulty": "Medium",
+      "tags": ["scheduler", "cron", "jobs"]
+    },
+    {
+      "id": "sdb-33",
+      "q": "Design an email delivery backend.",
+      "a": "Separate template management, send APIs, queueing, provider integrations, retries, bounce tracking, and suppression lists. Discuss rate limiting, warm-up, and analytics.",
+      "difficulty": "Medium",
+      "tags": ["email", "delivery", "queue"]
+    },
+    {
+      "id": "sdb-34",
+      "q": "Design an SMS delivery backend.",
+      "a": "Cover provider abstraction, retries, delivery receipts, opt-out handling, throttling, regional routing, and fraud prevention. Mention compliance and cost-aware fallback provider selection.",
+      "difficulty": "Medium",
+      "tags": ["sms", "delivery", "provider"]
+    },
+    {
+      "id": "sdb-35",
+      "q": "Design a push notification backend for mobile apps.",
+      "a": "Include device token registration, provider integration, targeting, retries, collapse keys, preference filters, and analytics. Mention invalid token cleanup and batching.",
+      "difficulty": "Medium",
+      "tags": ["push-notifications", "mobile", "delivery"]
+    },
+    {
+      "id": "sdb-36",
+      "q": "Design a backend for user activity tracking and analytics.",
+      "a": "Use an event ingestion API, durable queue, stream processors, warehouse or analytics store, and aggregation jobs. Cover schema evolution, sampling, deduplication, and privacy concerns.",
+      "difficulty": "Medium",
+      "tags": ["analytics", "events", "pipeline"]
+    },
+    {
+      "id": "sdb-37",
+      "q": "Design a recommendation backend.",
+      "a": "Discuss event collection, feature generation, candidate generation, ranking, caching, and feedback loops. Mention online versus offline computation and freshness tradeoffs.",
+      "difficulty": "Hard",
+      "tags": ["recommendation", "ranking", "analytics"]
+    },
+    {
+      "id": "sdb-38",
+      "q": "Design a backend for product search.",
+      "a": "Include indexing, faceted filters, typo tolerance, ranking, inventory and price freshness, and query caching. Mention denormalized search documents and incremental reindexing.",
+      "difficulty": "Hard",
+      "tags": ["search", "indexing", "ecommerce"]
+    },
+    {
+      "id": "sdb-39",
+      "q": "Design a backend for order tracking.",
+      "a": "Model order states, shipment events, notifications, and a timeline API. Discuss event sourcing versus current-state storage, idempotent updates, and integration with external logistics systems.",
+      "difficulty": "Medium",
+      "tags": ["orders", "tracking", "state-machine"]
+    },
+    {
+      "id": "sdb-40",
+      "q": "Design a backend for inventory management.",
+      "a": "Handle stock updates, reservations, reconciliation, warehousing, and oversell prevention. Strong answers cover strong consistency for critical operations, event streams, and audit trails.",
+      "difficulty": "Hard",
+      "tags": ["inventory", "consistency", "warehouse"]
+    },
+    {
+      "id": "sdb-41",
+      "q": "Design a backend for coupon and promotion management.",
+      "a": "Include rule definitions, eligibility checks, redemption limits, concurrency protection, expiration, and abuse prevention. Mention caching and auditability for business disputes.",
+      "difficulty": "Medium",
+      "tags": ["coupon", "promotion", "rules-engine"]
+    },
+    {
+      "id": "sdb-42",
+      "q": "Design a backend for user profile storage and retrieval.",
+      "a": "Discuss profile write/read APIs, schema evolution, privacy fields, indexing, caching, and searchability. Mention separating frequently changing counters from core profile data.",
+      "difficulty": "Easy",
+      "tags": ["profile", "database", "api"]
+    },
+    {
+      "id": "sdb-43",
+      "q": "Design a backend for session-based real-time presence.",
+      "a": "Track online users with heartbeats, expiring keys, and fan-out updates for interested clients. Cover disconnect detection, multi-device state, and eventual consistency.",
+      "difficulty": "Medium",
+      "tags": ["presence", "realtime", "websocket"]
+    },
+    {
+      "id": "sdb-44",
+      "q": "Design a backend for document storage and sharing like Google Drive-lite.",
+      "a": "Split the problem into metadata service, object storage, permission model, sharing links, versioning, and sync notifications. Mention large files, preview generation, and ACL enforcement.",
+      "difficulty": "Hard",
+      "tags": ["document-storage", "sharing", "permissions"]
+    },
+    {
+      "id": "sdb-45",
+      "q": "Design a backend for image processing and thumbnail generation.",
+      "a": "Accept uploads, enqueue processing jobs, generate variants, store metadata, and serve through CDN. Good answers mention deduplication, retries, and async processing for user responsiveness.",
+      "difficulty": "Medium",
+      "tags": ["image-processing", "queue", "cdn"]
+    },
+    {
+      "id": "sdb-46",
+      "q": "Design a backend for audit logging.",
+      "a": "Store immutable append-only events with actor, action, entity, timestamp, and metadata. Discuss searchability, retention, tamper resistance, and access control for sensitive audit data.",
+      "difficulty": "Medium",
+      "tags": ["audit-log", "compliance", "security"]
+    },
+    {
+      "id": "sdb-47",
+      "q": "Design a backend for API key management.",
+      "a": "Support key creation, hashing at rest, scope restrictions, rotation, revocation, usage limits, and analytics. Mention secure display-once flows and service-to-service authentication patterns.",
+      "difficulty": "Medium",
+      "tags": ["api-keys", "security", "auth"]
+    },
+    {
+      "id": "sdb-48",
+      "q": "Design a backend for multi-tenant SaaS data isolation.",
+      "a": "Compare shared-table, shared-schema, and isolated-database approaches. Cover tenant-aware auth, noisy-neighbor protection, migration strategy, and per-tenant configuration.",
+      "difficulty": "Hard",
+      "tags": ["multi-tenant", "saas", "data-isolation"]
+    },
+    {
+      "id": "sdb-49",
+      "q": "Design a backend for content moderation workflow.",
+      "a": "Use ingestion, moderation queue, automated classifiers, human review tooling, action history, and appeal flows. Mention false positives, SLA tiers, and policy versioning.",
+      "difficulty": "Medium",
+      "tags": ["moderation", "workflow", "queue"]
+    },
+    {
+      "id": "sdb-50",
+      "q": "Design a backend for a support ticketing system.",
+      "a": "Model ticket creation, assignment, comments, SLA tracking, notifications, search, and escalations. Strong answers cover concurrency on updates, audit trails, and integrations with email/chat.",
+      "difficulty": "Medium",
+      "tags": ["ticketing", "workflow", "search"]
+    },
+    {
+      "id": "sdb-51",
+      "q": "Design a backend for a URL crawl and indexing system.",
+      "a": "Break into scheduler, frontier queue, crawler workers, politeness rules, deduplication, content parsing, and indexing. Mention robots.txt, rate limiting per domain, and incremental recrawl.",
+      "difficulty": "Hard",
+      "tags": ["crawler", "indexing", "scheduler"]
+    },
+    {
+      "id": "sdb-52",
+      "q": "Design a backend for a map/reverse-geocoding service.",
+      "a": "Discuss geospatial indexing, tile or region partitioning, query APIs, caching, and offline data updates. Mention precision, latency, and handling hot urban regions.",
+      "difficulty": "Hard",
+      "tags": ["geospatial", "maps", "search"]
+    },
+    {
+      "id": "sdb-53",
+      "q": "Design a backend for leaderboard ranking.",
+      "a": "Use sorted sets or ranking indexes for top-N retrieval, score updates, and pagination around a player. Mention seasonal resets, tie-breaking, and anti-cheat validations.",
+      "difficulty": "Medium",
+      "tags": ["leaderboard", "ranking", "redis"]
+    },
+    {
+      "id": "sdb-54",
+      "q": "Design a backend for OTP generation and verification.",
+      "a": "Generate short-lived codes, throttle requests, hash or protect OTP storage, and support multiple delivery channels. Mention replay prevention, expiration, abuse detection, and auditing.",
+      "difficulty": "Easy",
+      "tags": ["otp", "auth", "security"]
+    },
+    {
+      "id": "sdb-55",
+      "q": "Design a backend for a document approval workflow.",
+      "a": "Include state transitions, reviewers, parallel or sequential approvals, audit history, reminders, and role-based permissions. Mention rejections, versioning, and notifications.",
+      "difficulty": "Medium",
+      "tags": ["workflow", "approval", "state-machine"]
+    }
+  ]
+}

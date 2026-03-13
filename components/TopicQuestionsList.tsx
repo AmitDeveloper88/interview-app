@@ -1,19 +1,18 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Question } from '@/types';
 import QuestionCard from './QuestionCard';
-import { Search, ChevronLeft, ChevronRight, Filter, X } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 interface TopicQuestionsListProps {
   questions: Question[];
   topicName: string;
-  topicColor: string;
 }
 
 const ITEMS_PER_PAGE = 100;
 
-export default function TopicQuestionsList({ questions, topicName, topicColor }: TopicQuestionsListProps) {
+export default function TopicQuestionsList({ questions, topicName }: TopicQuestionsListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('All');
   const [selectedTag, setSelectedTag] = useState<string>('All');
@@ -48,40 +47,6 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
     currentPage * ITEMS_PER_PAGE
   );
 
-  // Reset page when filters change
-  useMemo(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedDifficulty, selectedTag]);
-
-  // Pagination Controls Component
-  const PaginationControls = () => {
-    if (totalPages <= 1) return null;
-    
-    return (
-      <div className="flex items-center justify-center gap-2 py-4">
-        <button
-          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-          disabled={currentPage === 1}
-          className="rounded-md p-2 hover:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        
-        <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-          Page {currentPage} of {totalPages}
-        </span>
-        
-        <button
-          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-          disabled={currentPage === totalPages}
-          className="rounded-md p-2 hover:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
-    );
-  };
-
   return (
     <div className="space-y-6">
       {/* Filters Bar */}
@@ -94,12 +59,18 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
               type="text"
               placeholder={`Search in ${topicName}...`}
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full rounded-md border border-zinc-200 bg-zinc-50 py-2 pl-10 pr-10 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
             />
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery('')}
+                onClick={() => {
+                  setSearchQuery('');
+                  setCurrentPage(1);
+                }}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
               >
                 <X className="h-4 w-4" />
@@ -111,7 +82,10 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
           <div className="flex gap-2">
             <select
               value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value)}
+              onChange={(e) => {
+                setSelectedDifficulty(e.target.value);
+                setCurrentPage(1);
+              }}
               className="rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
             >
               <option value="All">All Difficulties</option>
@@ -122,7 +96,10 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
 
             <select
               value={selectedTag}
-              onChange={(e) => setSelectedTag(e.target.value)}
+              onChange={(e) => {
+                setSelectedTag(e.target.value);
+                setCurrentPage(1);
+              }}
               className="max-w-[150px] rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
             >
               <option value="All">All Tags</option>
@@ -181,7 +158,29 @@ export default function TopicQuestionsList({ questions, topicName, topicColor }:
       </div>
 
       {/* Bottom Pagination Controls */}
-      <PaginationControls />
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 py-4">
+          <button
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="rounded-md p-2 hover:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="rounded-md p-2 hover:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

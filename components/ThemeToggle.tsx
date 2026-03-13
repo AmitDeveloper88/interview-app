@@ -4,17 +4,25 @@ import { useState, useEffect } from 'react';
 import { Moon, Sun } from 'lucide-react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check localStorage or system preference
-    if (localStorage.getItem('app-theme') === 'dark' || (!('app-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setTheme('dark');
+    const storedTheme = localStorage.getItem('app-theme');
+    const initialTheme =
+      storedTheme === 'dark' ||
+      (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ? 'dark'
+        : 'light';
+
+    if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
-      setTheme('light');
       document.documentElement.classList.remove('dark');
     }
+
+    setTheme(initialTheme);
+    setMounted(true);
   }, []);
 
   const toggle = () => {
@@ -34,7 +42,7 @@ export default function ThemeToggle() {
       className="rounded-lg bg-zinc-200 p-2 text-zinc-800 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-600"
       aria-label="Toggle theme"
     >
-      {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+      {!mounted ? <Moon className="h-5 w-5" /> : theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
     </button>
   );
 }

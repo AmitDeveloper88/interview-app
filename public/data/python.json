@@ -1,0 +1,390 @@
+{
+  "slug": "python",
+  "questions": [
+    {
+      "id": "py-01",
+      "q": "What are Python's main built-in data types?",
+      "a": "Common built-in data types include `int`, `float`, `bool`, `str`, `list`, `tuple`, `set`, `dict`, `bytes`, and `NoneType`. Interviewers also expect you to know which ones are mutable and immutable.",
+      "difficulty": "Easy",
+      "tags": ["basics", "types"]
+    },
+    {
+      "id": "py-02",
+      "q": "What is the difference between a list and a tuple in Python?",
+      "a": "A `list` is mutable and can be modified after creation, while a `tuple` is immutable. Tuples are useful for fixed records and can be safer and slightly more memory-efficient.",
+      "difficulty": "Easy",
+      "tags": ["list", "tuple", "basics"]
+    },
+    {
+      "id": "py-03",
+      "q": "What is the difference between `is` and `==` in Python?",
+      "a": "`==` checks whether values are equal, while `is` checks whether two references point to the exact same object in memory. `is` is commonly used for checks like `value is None`.",
+      "difficulty": "Easy",
+      "tags": ["operators", "identity", "comparison"]
+    },
+    {
+      "id": "py-04",
+      "q": "What are Python decorators?",
+      "a": "Decorators are wrappers around functions or methods that extend behavior without changing the original function body directly. They are often used for logging, caching, authorization, retries, and instrumentation.",
+      "difficulty": "Medium",
+      "tags": ["decorators", "functions", "advanced"]
+    },
+    {
+      "id": "py-05",
+      "q": "What is a list comprehension in Python?",
+      "a": "A list comprehension is a compact syntax for building lists, such as `[x * x for x in range(5)]`. It is typically more concise and Pythonic than using a loop for simple transformations.",
+      "difficulty": "Easy",
+      "tags": ["list-comprehension", "syntax", "basics"]
+    },
+    {
+      "id": "py-06",
+      "q": "What is the difference between shallow copy and deep copy?",
+      "a": "A shallow copy creates a new outer object but keeps references to nested objects. A deep copy recursively copies nested objects too. Use `copy.copy()` for shallow copies and `copy.deepcopy()` for deep copies.",
+      "difficulty": "Medium",
+      "tags": ["copy", "memory", "objects"]
+    },
+    {
+      "id": "py-07",
+      "q": "What are mutable and immutable objects in Python?",
+      "a": "Mutable objects can be changed after creation, like `list`, `dict`, and `set`. Immutable objects cannot be changed after creation, like `int`, `str`, `tuple`, and `frozenset`. This matters for hashing, function arguments, and side effects.",
+      "difficulty": "Easy",
+      "tags": ["mutability", "objects", "basics"]
+    },
+    {
+      "id": "py-08",
+      "q": "Why are strings immutable in Python?",
+      "a": "String immutability allows safe sharing, predictable behavior, and optimizations such as hashing and interning. It also makes strings usable as dictionary keys and set members.",
+      "difficulty": "Medium",
+      "tags": ["string", "immutability", "internals"]
+    },
+    {
+      "id": "py-09",
+      "q": "What is the difference between `append()` and `extend()` on a list?",
+      "a": "`append()` adds a single item to the end of a list, while `extend()` adds all elements from another iterable. So `append([1,2])` adds one nested list, but `extend([1,2])` adds two separate elements.",
+      "difficulty": "Easy",
+      "tags": ["list", "methods", "basics"]
+    },
+    {
+      "id": "py-10",
+      "q": "What is the difference between `remove()`, `pop()`, and `del`?",
+      "a": "`remove()` deletes by value, `pop()` deletes by index and returns the removed item, and `del` can delete variables, list items, or slices. Interviewers often want you to mention that `remove()` raises an error if the value is missing.",
+      "difficulty": "Easy",
+      "tags": ["list", "methods", "deletion"]
+    },
+    {
+      "id": "py-11",
+      "q": "How do Python dictionaries work internally?",
+      "a": "Python dictionaries are hash tables. Keys are hashed to determine where values are stored, enabling average-case **O(1)** lookup, insertion, and deletion. Good answers also mention collision handling and the requirement that keys must be hashable.",
+      "difficulty": "Medium",
+      "tags": ["dict", "hashing", "internals"]
+    },
+    {
+      "id": "py-12",
+      "q": "What makes an object hashable in Python?",
+      "a": "An object is hashable if it has a stable hash value during its lifetime and can be compared for equality. Immutable built-in types like strings and tuples of hashable elements are hashable, while lists and dictionaries are not.",
+      "difficulty": "Medium",
+      "tags": ["hashing", "dict", "set"]
+    },
+    {
+      "id": "py-13",
+      "q": "What is the difference between a set and a frozenset?",
+      "a": "A `set` is mutable, while a `frozenset` is immutable. Because `frozenset` is immutable, it is hashable and can be used as a dictionary key or as an element inside another set.",
+      "difficulty": "Easy",
+      "tags": ["set", "frozenset", "basics"]
+    },
+    {
+      "id": "py-14",
+      "q": "What is tuple unpacking in Python?",
+      "a": "Tuple unpacking assigns multiple values in one statement, like `a, b = 1, 2`. It also works with lists and other iterables and is often used for swapping values, returning multiple results, and looping over pairs.",
+      "difficulty": "Easy",
+      "tags": ["tuple", "syntax", "assignment"]
+    },
+    {
+      "id": "py-15",
+      "q": "What are `*args` and `**kwargs`?",
+      "a": "`*args` collects extra positional arguments into a tuple, and `**kwargs` collects extra keyword arguments into a dictionary. They are useful for flexible function APIs and wrapper functions such as decorators.",
+      "difficulty": "Easy",
+      "tags": ["functions", "args", "kwargs"]
+    },
+    {
+      "id": "py-16",
+      "q": "What is the difference between positional and keyword arguments?",
+      "a": "Positional arguments are matched by order, while keyword arguments are matched by parameter name. Keyword arguments improve readability and let callers pass arguments in a different order.",
+      "difficulty": "Easy",
+      "tags": ["functions", "arguments", "basics"]
+    },
+    {
+      "id": "py-17",
+      "q": "Why are default mutable arguments dangerous in Python?",
+      "a": "Default argument values are evaluated once at function definition time, not each time the function is called. So using a mutable default like `[]` can cause state to persist across calls unexpectedly. The safe pattern is to use `None` and create the object inside the function.",
+      "difficulty": "Medium",
+      "tags": ["functions", "defaults", "gotchas"]
+    },
+    {
+      "id": "py-18",
+      "q": "What is a lambda function in Python?",
+      "a": "A lambda is a small anonymous function written in a single expression, such as `lambda x: x * 2`. They are commonly used with `map`, `filter`, `sorted`, and small callback-style operations.",
+      "difficulty": "Easy",
+      "tags": ["lambda", "functions", "syntax"]
+    },
+    {
+      "id": "py-19",
+      "q": "What is the difference between `map()`, `filter()`, and `reduce()`?",
+      "a": "`map()` transforms each item, `filter()` keeps items matching a condition, and `reduce()` combines items into one result. In Python interviews, it is good to mention that list comprehensions are often more readable than `map()` and `filter()` for simple cases.",
+      "difficulty": "Medium",
+      "tags": ["functional", "map", "filter"]
+    },
+    {
+      "id": "py-20",
+      "q": "What are generators in Python?",
+      "a": "Generators are functions that use `yield` to produce values lazily one at a time. They are memory-efficient for large datasets and streams because they do not build the whole result in memory at once.",
+      "difficulty": "Medium",
+      "tags": ["generator", "yield", "memory"]
+    },
+    {
+      "id": "py-21",
+      "q": "What is the difference between an iterable and an iterator?",
+      "a": "An iterable is an object you can loop over, while an iterator is the object that keeps track of iteration state and produces the next item with `next()`. Lists are iterable, and `iter(list_obj)` returns an iterator.",
+      "difficulty": "Medium",
+      "tags": ["iterator", "iterable", "protocol"]
+    },
+    {
+      "id": "py-22",
+      "q": "What does `yield` do in Python?",
+      "a": "`yield` pauses a function and returns a value while preserving its execution state. When resumed, the function continues from where it left off. This is what makes generator functions possible.",
+      "difficulty": "Medium",
+      "tags": ["yield", "generator", "functions"]
+    },
+    {
+      "id": "py-23",
+      "q": "What is the purpose of `enumerate()`?",
+      "a": "`enumerate()` returns pairs of index and value while looping through an iterable. It is cleaner and more Pythonic than manually managing a counter variable.",
+      "difficulty": "Easy",
+      "tags": ["loops", "enumerate", "basics"]
+    },
+    {
+      "id": "py-24",
+      "q": "What is the purpose of `zip()`?",
+      "a": "`zip()` combines multiple iterables element by element. It is useful for parallel iteration and can also be used for transposing simple matrix-like data with unpacking.",
+      "difficulty": "Easy",
+      "tags": ["zip", "iteration", "basics"]
+    },
+    {
+      "id": "py-25",
+      "q": "How does exception handling work in Python?",
+      "a": "Python uses `try`, `except`, `else`, and `finally`. `try` contains risky code, `except` handles errors, `else` runs if no exception occurs, and `finally` runs no matter what, making it useful for cleanup.",
+      "difficulty": "Easy",
+      "tags": ["exceptions", "error-handling", "basics"]
+    },
+    {
+      "id": "py-26",
+      "q": "What is the difference between `raise` and `assert`?",
+      "a": "`raise` is used to explicitly throw exceptions, while `assert` is mainly for internal sanity checks during development. Assertions can be disabled in optimized runs, so they should not be used for essential runtime validation.",
+      "difficulty": "Medium",
+      "tags": ["exceptions", "assert", "debugging"]
+    },
+    {
+      "id": "py-27",
+      "q": "What is a custom exception in Python?",
+      "a": "A custom exception is a user-defined class that usually inherits from `Exception`. It helps make error handling more meaningful and readable by representing domain-specific failure cases.",
+      "difficulty": "Easy",
+      "tags": ["exceptions", "custom-exception", "oop"]
+    },
+    {
+      "id": "py-28",
+      "q": "What is the purpose of `with` in Python?",
+      "a": "The `with` statement is used for context management. It ensures setup and cleanup happen properly, such as opening and closing files or acquiring and releasing locks, even if an exception occurs.",
+      "difficulty": "Easy",
+      "tags": ["with", "context-manager", "files"]
+    },
+    {
+      "id": "py-29",
+      "q": "What is a context manager?",
+      "a": "A context manager is an object that defines `__enter__()` and `__exit__()` and can be used with `with`. It is commonly used for files, database transactions, locks, and temporary resource handling.",
+      "difficulty": "Medium",
+      "tags": ["context-manager", "dunder-methods", "resources"]
+    },
+    {
+      "id": "py-30",
+      "q": "What are dunder methods in Python?",
+      "a": "Dunder methods, or magic methods, are special methods like `__init__`, `__str__`, `__len__`, and `__iter__`. They let custom classes integrate with built-in Python behavior and operators.",
+      "difficulty": "Medium",
+      "tags": ["dunder", "magic-methods", "oop"]
+    },
+    {
+      "id": "py-31",
+      "q": "What is `__init__` in Python?",
+      "a": "`__init__` is the initializer method called after a new object is created. It is used to set up instance attributes and prepare the object for use.",
+      "difficulty": "Easy",
+      "tags": ["__init__", "oop", "basics"]
+    },
+    {
+      "id": "py-32",
+      "q": "What is the difference between instance methods, class methods, and static methods?",
+      "a": "Instance methods take `self` and work with object state. Class methods take `cls` and work with class-level data or alternate constructors. Static methods do not automatically receive `self` or `cls` and are utility functions grouped inside the class.",
+      "difficulty": "Medium",
+      "tags": ["oop", "classmethod", "staticmethod"]
+    },
+    {
+      "id": "py-33",
+      "q": "What is inheritance in Python?",
+      "a": "Inheritance lets one class reuse and extend another class. It supports code reuse and polymorphism, but interviewers also expect you to know when composition may be a cleaner alternative.",
+      "difficulty": "Easy",
+      "tags": ["inheritance", "oop", "basics"]
+    },
+    {
+      "id": "py-34",
+      "q": "What is method overriding?",
+      "a": "Method overriding happens when a child class provides its own version of a method from a parent class. Python resolves which method to call using method resolution order (MRO).",
+      "difficulty": "Easy",
+      "tags": ["oop", "overriding", "inheritance"]
+    },
+    {
+      "id": "py-35",
+      "q": "What is multiple inheritance in Python?",
+      "a": "Multiple inheritance means a class can inherit from more than one parent class. It can be powerful but may also create complexity, so it is important to understand MRO and use it carefully.",
+      "difficulty": "Medium",
+      "tags": ["multiple-inheritance", "oop", "mro"]
+    },
+    {
+      "id": "py-36",
+      "q": "What is MRO in Python?",
+      "a": "MRO stands for Method Resolution Order. It defines the order in which Python looks for methods and attributes in a class hierarchy, especially when multiple inheritance is involved. You can inspect it with `ClassName.__mro__` or `ClassName.mro()`.",
+      "difficulty": "Medium",
+      "tags": ["mro", "oop", "inheritance"]
+    },
+    {
+      "id": "py-37",
+      "q": "What is polymorphism in Python?",
+      "a": "Polymorphism means the same interface can work with different object types. In Python, duck typing is a common form of polymorphism, where behavior matters more than exact class type.",
+      "difficulty": "Easy",
+      "tags": ["polymorphism", "oop", "duck-typing"]
+    },
+    {
+      "id": "py-38",
+      "q": "What is encapsulation in Python?",
+      "a": "Encapsulation means bundling data and related behavior together and controlling access to internals. Python uses naming conventions like `_protected` and `__mangled` rather than strict private access controls.",
+      "difficulty": "Easy",
+      "tags": ["encapsulation", "oop", "basics"]
+    },
+    {
+      "id": "py-39",
+      "q": "What is abstraction in Python?",
+      "a": "Abstraction means exposing essential behavior while hiding implementation details. In Python, abstract base classes from the `abc` module are a common way to model contracts and expected interfaces.",
+      "difficulty": "Medium",
+      "tags": ["abstraction", "abc", "oop"]
+    },
+    {
+      "id": "py-40",
+      "q": "What are abstract base classes in Python?",
+      "a": "Abstract base classes define methods that subclasses are expected to implement. They help enforce structure in larger applications and are built using the `abc` module and `@abstractmethod`.",
+      "difficulty": "Medium",
+      "tags": ["abc", "abstract-class", "oop"]
+    },
+    {
+      "id": "py-41",
+      "q": "What is a Python module?",
+      "a": "A module is a single Python file containing code such as functions, classes, and variables. Modules help organize code and can be imported into other files.",
+      "difficulty": "Easy",
+      "tags": ["module", "imports", "basics"]
+    },
+    {
+      "id": "py-42",
+      "q": "What is a Python package?",
+      "a": "A package is a collection of related modules organized in directories. Packages help structure larger projects and allow dotted imports like `package.submodule`.",
+      "difficulty": "Easy",
+      "tags": ["package", "imports", "project-structure"]
+    },
+    {
+      "id": "py-43",
+      "q": "What is the difference between absolute and relative imports?",
+      "a": "Absolute imports use the full package path, while relative imports use dots to reference nearby modules. Absolute imports are usually clearer and easier to maintain in larger codebases.",
+      "difficulty": "Medium",
+      "tags": ["imports", "package", "modules"]
+    },
+    {
+      "id": "py-44",
+      "q": "What is `__name__ == '__main__'` used for?",
+      "a": "It checks whether a Python file is being run directly rather than imported as a module. This is commonly used to place script-only execution logic, tests, or demos.",
+      "difficulty": "Easy",
+      "tags": ["__main__", "modules", "execution"]
+    },
+    {
+      "id": "py-45",
+      "q": "What is PEP 8?",
+      "a": "PEP 8 is Python's style guide. It covers naming, spacing, line length, imports, and other conventions that improve readability and consistency in Python codebases.",
+      "difficulty": "Easy",
+      "tags": ["pep8", "style", "best-practices"]
+    },
+    {
+      "id": "py-46",
+      "q": "What is the GIL in Python?",
+      "a": "The GIL, or Global Interpreter Lock, allows only one thread to execute Python bytecode at a time in CPython. It simplifies memory management but limits CPU-bound multithreaded performance. It matters much less for I/O-bound workloads.",
+      "difficulty": "Hard",
+      "tags": ["gil", "threading", "internals"]
+    },
+    {
+      "id": "py-47",
+      "q": "What is the difference between multiprocessing and multithreading in Python?",
+      "a": "Multithreading is useful for I/O-bound tasks because threads can wait on network or disk operations. Multiprocessing is better for CPU-bound tasks because separate processes bypass the GIL. The tradeoff is that processes use more memory and have higher communication overhead.",
+      "difficulty": "Medium",
+      "tags": ["threading", "multiprocessing", "concurrency"]
+    },
+    {
+      "id": "py-48",
+      "q": "What is asynchronous programming in Python?",
+      "a": "Asynchronous programming lets a program handle many waiting tasks efficiently without blocking the main flow. In Python, it is commonly done with `async`, `await`, and the `asyncio` library for network-heavy or I/O-heavy applications.",
+      "difficulty": "Medium",
+      "tags": ["asyncio", "async", "concurrency"]
+    },
+    {
+      "id": "py-49",
+      "q": "What do `async` and `await` mean in Python?",
+      "a": "`async` defines a coroutine, and `await` pauses it until another awaitable completes. This allows cooperative multitasking where many tasks can make progress without blocking each other.",
+      "difficulty": "Medium",
+      "tags": ["async", "await", "asyncio"]
+    },
+    {
+      "id": "py-50",
+      "q": "What is `asyncio` in Python?",
+      "a": "`asyncio` is Python's standard library framework for asynchronous I/O and event-loop-based concurrency. It is commonly used in high-concurrency network services, background schedulers, and integrations.",
+      "difficulty": "Medium",
+      "tags": ["asyncio", "event-loop", "concurrency"]
+    },
+    {
+      "id": "py-51",
+      "q": "What is the difference between `@staticmethod` and `@classmethod`?",
+      "a": "`@staticmethod` does not receive the class or instance automatically, so it behaves like a utility function inside the class. `@classmethod` receives `cls` and is useful for alternate constructors and class-level operations.",
+      "difficulty": "Medium",
+      "tags": ["staticmethod", "classmethod", "oop"]
+    },
+    {
+      "id": "py-52",
+      "q": "What is the use of `dataclass` in Python?",
+      "a": "The `dataclasses` module reduces boilerplate when creating classes that mainly store data. It can automatically generate methods like `__init__`, `__repr__`, and comparison helpers.",
+      "difficulty": "Medium",
+      "tags": ["dataclass", "oop", "boilerplate"]
+    },
+    {
+      "id": "py-53",
+      "q": "What is monkey patching in Python?",
+      "a": "Monkey patching means changing or replacing attributes, methods, or classes at runtime. It can be useful in testing or temporary fixes, but it should be used carefully because it can make behavior harder to trace.",
+      "difficulty": "Medium",
+      "tags": ["monkey-patching", "runtime", "advanced"]
+    },
+    {
+      "id": "py-54",
+      "q": "What is serialization in Python?",
+      "a": "Serialization means converting objects into a format that can be stored or transmitted, such as JSON, pickle, or bytes. Interviews often expect you to compare safe text formats like JSON with Python-specific formats like pickle.",
+      "difficulty": "Easy",
+      "tags": ["serialization", "json", "pickle"]
+    },
+    {
+      "id": "py-55",
+      "q": "Why is `pickle` risky for untrusted data?",
+      "a": "Unpickling untrusted data can execute arbitrary code, making it unsafe for data from untrusted sources. That is why APIs usually prefer JSON or other safer serialization formats.",
+      "difficulty": "Medium",
+      "tags": ["pickle", "security", "serialization"]
+    }
+  ]
+}

@@ -85,7 +85,6 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
           <TopicQuestionsList 
             questions={topicData.questions}
             topicName={topic.name}
-            topicColor={topic.color}
           />
         </div>
       </div>

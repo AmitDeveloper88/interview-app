@@ -6,5 +6,8 @@
   { "slug": "express", "name": "Express.js", "color": "orange" },
   { "slug": "js-output", "name": "JS Output Q&A", "color": "purple" },
   { "slug": "coding-round", "name": "Coding Round", "color": "rose" },
-  { "slug": "managerial", "name": "Managerial Round", "color": "indigo" }
+  { "slug": "managerial", "name": "Managerial Round", "color": "indigo" },
+  { "slug": "dsa", "name": "DSA", "color": "gray" },
+  { "slug": "system-design-backend", "name": "System Design Backend", "color": "green" },
+  { "slug": "python", "name": "Python", "color": "blue" }
 ]
